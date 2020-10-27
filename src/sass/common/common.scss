@@ -44,14 +44,14 @@ img {
 
 .container {
   margin: 0 auto;
-  @media screen and (min-width: $mobile-breakpoint) {
-    width: $mobile-width;
+  @media screen and (max-width: $mobile-bp-max) {
+    width: $mobile-w;
   }
-  @media screen and (min-width: $tablet-breakpoint) {
-    width: $tablet-width;
+  @media screen and (min-width: $tablet-bp-min) {
+    width: $tablet-w;
   }
-  @media screen and (min-width: $desktop-breakpoint) {
-    width: $desktop-width;
+  @media screen and (min-width: $desktop-bp-min) {
+    width: $desktop-w;
   }
 }
 
