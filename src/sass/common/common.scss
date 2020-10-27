@@ -1,0 +1,59 @@
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $first-font;
+}
+
+.visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(100%);
+  margin: -1px;
+  font-size: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.br {
+  display: block;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.container {
+  margin: 0 auto;
+  @media screen and (min-width: $mobile-breakpoint) {
+    width: $mobile-width;
+  }
+  @media screen and (min-width: $tablet-breakpoint) {
+    width: $tablet-width;
+  }
+  @media screen and (min-width: $desktop-breakpoint) {
+    width: $desktop-width;
+  }
+}
+
+.display-none {
+  display: none;
+}
