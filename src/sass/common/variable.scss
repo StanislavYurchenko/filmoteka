@@ -12,15 +12,12 @@ $main-color: rgb(119, 193, 187);
 $main-color-alfa-60: rgba(119, 193, 187, 0.6);
 
 // MEDIA mobile
-$mobile-width: 320px;
-$mobile-width-max: 767px;
-$mobile-breakpoint: 340px;
-
+$mobile-bp-max: 767px;
+$mobile-w: 300px;
 // MEDIA tablet
-$tablet-width: 768px;
-$tablet-width-max: 1023px;
-$tablet-breakpoint: 788px;
-
+$tablet-bp-min: 768px;
+$tablet-w: 712px;
+$tablet-bp-max: 1023px;
 // MEDIA desktop
-$desktop-width: 1024px;
-$desktop-breakpoint: 1044px;
+$desktop-bp-min: 1024px;
+$desktop-w: 964px;
