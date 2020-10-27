@@ -1,0 +1,9 @@
+.navigation {
+  display: flex;
+  background-color: $main-color;
+
+  &__list {
+    @include font-settings();
+      display: flex;
+  }
+}
