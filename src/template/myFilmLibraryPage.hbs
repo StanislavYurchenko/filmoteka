@@ -1,0 +1,13 @@
+<ul>
+
+    {{#each this}}
+    <li id='{{id}}'>
+        <a href="#">
+            <img src="https://image.tmdb.org/t/p/w300{{backdrop_path}}" alt="">
+            <p class="rating">{{vote_average}}</p>
+            <p class="movie-title">{{title}}</p>
+        </a>
+    </li>
+    {{/each}}
+
+</ul>
