@@ -1,9 +1,7 @@
 import refs from './refs';
 import homePageTpl from '../template/homePage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-
-// const inputValue = '';
-// refs.form = refs.homePage.querySelector('.form-search');
+import renderFilmList from './initialHomePage';
 
 function updateHomeMarkup() {
   const markup = homePageTpl();
@@ -15,12 +13,74 @@ updateHomeMarkup();
 // const iputRef = document.querySelector('.form-search__input');
 // const btnNextRef = document.querySelector('.button-next');
 // const btnPrevRef = document.querySelector('.button-prev');
+// const pageNum = document.getElementById('page');
 
 // export default updateHomeMarkup;
-
-const inputValue = '';
-let pageNum = 1;
 const apiKey = '81f248d3c9154788229a5419bb33091a';
+
+const films = {
+  inputValue: '',
+  pageNumb: 1,
+
+  fetchFilms() {
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${inputValue}&page=${pageNumb}&include_adult=false`;
+    return fetch(url)
+      .then(res => res.json())
+      .then(({ movies }) => {
+        this.incrementPage();
+
+        return movies;
+      });
+  },
+  resetPage() {
+    this.pageNumb = 1;
+  },
+  incrementPage() {
+    this.pageNumb += 1;
+  },
+  get query() {
+    return this.inputValue;
+  },
+  set query(value) {
+    this.inputValue = value;
+  },
+};
+
+// const inputValue = '';
+// let pageNumb = 1;
+
+// function fetchFilms() {
+//   const url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${inputValue}&page=${pageNumb}&include_adult=false`;
+//   return fetch(url)
+//     .then(res => res.json())
+//     .then(({ movies }) => {
+//       this.incrementPage();
+
+//       return movies;
+//     });
+// }
+
+function searchFilms(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  films.query = form.elements.query.value;
+
+  clearMoviesContainer();
+  films.resetPage();
+  fetchMovies();
+  form.reset();
+}
+
+function fetchMovies() {
+  films.fetchFilms().then(movies => {
+    renderFilmList(homePageTpl, movies, refs.homePage);
+  });
+}
+
+function clearMoviesContainer() {}
+
+refs.form = refs.homePage.querySelector('.form-search');
+refs.form.addEventListener('submit', searchFilms);
 
 // function () {
 
