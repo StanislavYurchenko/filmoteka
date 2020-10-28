@@ -1,7 +1,7 @@
-// import './searchAndPaginationHomePage.js';
-import updateHomeMarkup from './searchAndPaginationHomePage';
+import './searchAndPaginationHomePage.js';
+// import updateHomeMarkup from './searchAndPaginationHomePage';
 
-updateHomeMarkup();
+// updateHomeMarkup();
 import getDetails from '../data/getDetails';
 import getPopular from '../data/getPopular';
 
