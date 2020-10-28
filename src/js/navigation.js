@@ -1,5 +1,7 @@
 import footerTemplate from '../template/footer.hbs';
 import headerTemplate from '../template/header.hbs';
+
+import 'material-design-icons/iconfont/material-icons.css';
 // import './refs';
 // console.log(refs.header);
 console.log(footerTemplate());

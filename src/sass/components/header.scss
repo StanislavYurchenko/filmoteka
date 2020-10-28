@@ -1,10 +1,29 @@
 .logotip {
-  background-color: #fff;
-  //   background-image: url();
+  padding-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &__text {
-    display: none;
+    @include font-settings(
+      $size: 1.25rem,
+      $weight: 500,
+       // Добавить в переменые
+      $color: rgba(55, 44, 72, 0.86)
+    );
+
+    @media (max-width: $mobile-bp-max) {
+      display: none;
+    }
   }
+}
+
+.material-icons-color {
+  color: $font-color;
+}
+
+.material-icons.md-40 {
+  font-size: 40px;
 }
 
 .navigation {
@@ -15,7 +34,7 @@
   &__list {
     display: flex;
     justify-content: center;
-    padding: 12px;
+    padding: 12px 0px;
   }
 
   &__item {
@@ -46,6 +65,7 @@
       content: '';
       width: 0;
       height: 3px;
+      // Добавить в переменые
       background-color: rgba(55, 44, 72, 1);
       transform: translateX(-50%);
       transition: all 200ms linear;
@@ -61,8 +81,4 @@
       width: 100px;
     }
   }
-
-  // @mixin font-settings($size: 1rem, $height: 1.2, $weight: 400, $color: #ffffff)
 }
-
-
