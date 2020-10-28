@@ -25,7 +25,7 @@ const fetchPopularMoviesList = (baseUrl, pageNumber, apiKey) => {
 const formatDataNullImages = (arrData) => {
     const formatDate = arrData.map(el => {
         if (typeof el.backdrop_path === "object") {
-            el.backdrop_path = `./images/bmp.jpg`;
+            el.backdrop_path = `./images/temp.png`;
         } else {
             el.backdrop_path = `https://image.tmdb.org/t/p/w500/${el.backdrop_path}`
         }
