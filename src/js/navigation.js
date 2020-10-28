@@ -3,7 +3,7 @@ import headerTemplate from '../template/header.hbs';
 // import './refs';
 // console.log(refs.header);
 console.log(footerTemplate());
-const footerRef = document.querySelector('#root-home-page');
+const footerRef = document.querySelector('#root-footer');
 const headerRef = document.querySelector('#root-header');
 console.log(footerRef);
 console.log(headerRef);
