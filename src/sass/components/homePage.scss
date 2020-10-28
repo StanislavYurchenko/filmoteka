@@ -100,6 +100,50 @@
   }
 }
 
+.form-search {
+  position: relative;
+  margin: 0 auto;
+  width: 257px;
+
+  &__input {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #818181;
+    width: 100%;
+    padding-left: 40px;
+
+    &::placeholder {
+      font-size: 14.4px;
+      font-family: 'Myriad Pro';
+      color: rgb(0, 0, 0);
+      line-height: 14.4;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    color: #818181;
+  }
+
+  &__requirements {
+    max-height: 200px;
+    padding: 0 30px 20px 50px;
+    // padding: 0 30px 0 50px;
+    color: #999;
+    // max-height: 0;
+    transition: 0.28s;
+    overflow: hidden;
+    color: red;
+    font-style: italic;
+    &.is-hidden {
+      display: none;
+    }
+  }
+}
+
+
 .item-overlov {
   position: absolute;
   top: 0;
@@ -112,4 +156,3 @@
     rgba(35, 31, 32, 0.1) 40%
   );
   border-radius: 0.8rem;
-}
