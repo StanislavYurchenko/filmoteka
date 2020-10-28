@@ -1,5 +1,27 @@
+<form class="form-search">
+    <i class="material-icons form-search__icon">search</i>
+    <input type="search" name="query" autocomplete="off" class="form-search__input"
+        placeholder="Write movie name and click Enter">
+    <p class="requirements form-search__requirements is-hidden">No movies were found. Check your
+        query!</p>
+    <!-- <input type="submit" value="&#128269;"> -->
+</form>
 <ul class="home-page-list">
-    <li class="home-page-list_item"></li>
+    {{#each this}}
+    <li class="home-page-list_item" data-itemId="{{id}}">
+        <div class="item-overlov">
+        </div>
+        {{!-- < span class ="home-page-list_item-rateblock" data-itemRate="item-rate">{{ popularity }}</span> --}}
+        <h2 class="home-page-list_item-title">{{ original_title }} ({{ release_date }})</h2>
+        <img src="https://image.tmdb.org/t/p/w500/{{backdrop_path}}" alt="{{original_title}}"
+            class="home-page-list_item-image">
 
-
+    </li>
+    {{/each}}
 </ul>
+
+<div class="pagination">
+    <button class="button button-prev">Prev</button>
+    <span class="page" id="page"></span>
+    <button class="button button-next">Next</button>
+</div>
