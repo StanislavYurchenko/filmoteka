@@ -5,8 +5,8 @@ import './searchAndPaginationHomePage.js';
 import getDetails from '../data/getDetails';
 import getPopular from '../data/getPopular';
 
-console.log(getDetails);
-console.log(getPopular);
+// console.log(getDetails);
+// console.log(getPopular);
 
 
 import FilmListTemplate from '../template/homePage.hbs'
@@ -37,7 +37,7 @@ const fetchPopularMoviesList = (baseUrl, pageNumber, apiKey) => {
 
 fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
     const arrData = data.results;
-    console.log(arrData)
+    // console.log(arrData)
     renderFilmList(FilmListTemplate, arrData, refs.homePage);
 })
 
