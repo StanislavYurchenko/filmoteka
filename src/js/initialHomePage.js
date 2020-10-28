@@ -21,8 +21,8 @@ let pageNumber = 1;
 
 
 
-const renderFilmList = (template, arrFilms, renderRefsselector) => {
-    renderRefsselector.innerHTML = template(arrFilms);
+const renderFilmList = (template, arrFilms, renderRefSelector) => {
+    renderRefSelector.innerHTML = template(arrFilms);
 }
 
 const fetchPopularMoviesList = (baseUrl, pageNumber, apiKey) => {
@@ -40,3 +40,5 @@ fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
     console.log(arrData)
     renderFilmList(FilmListTemplate, arrData, refs.homePage);
 })
+
+export default { fetchPopularMoviesList, pageNumber, apiKey, renderFilmList, baseUrl }
