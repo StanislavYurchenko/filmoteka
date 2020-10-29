@@ -12,7 +12,6 @@ const buttonWatched = document.querySelector('.details__button-watched');
 const buttonQueue = document.querySelector('.details__button-queue');
 
 
-<<<<<<< HEAD
 const filmsQueueInLocalStorage = JSON.parse(localStorage.getItem('filmsQueue')).find(movie => movie.original_title === getDetails.original_title);
 const filmsWatchedInLocalStorage = JSON.parse(localStorage.getItem('filmsWatched')).find(movie => movie.original_title === getDetails.original_title);
 
@@ -27,23 +26,8 @@ const filmsWatchedInLocalStorage = JSON.parse(localStorage.getItem('filmsWatched
     } else {
         buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
     };
-=======
-// const monitorButtonStatusText = () => {
 
-    // if(localStorage.getItem(filmsQueue.find(movie => movie.original_title === selectFilm.original_title)) === selectFilm.original_title) {
-    //     buttonQueue.textContent = 'Delete from queue';
-    // } else {
-    //     buttonQueue.textContent = 'Add to queue';
-    // };
-
-    // if(localStorage.getItem(filmsWatched.find(movie => movie.original_title === selectFilm.original_title)) === selectFilm.original_title) {
-    //     buttonWatched.textContent = 'Delete from watched';
-    // } else {
-    //     buttonWatched.textContent = 'Add to watched';
-    // };
->>>>>>> dev
-
-// };
+};
 
 const drawQueueFilmList = () => {
     const toQueueArray = [];
@@ -62,13 +46,8 @@ const drawQueueFilmList = () => {
         toQueueArray.splice(indexOfTheMovieToBeDeleted, 1);
     };
 
-<<<<<<< HEAD
     localStorage.setItem('filmsQueue', JSON.stringify(toQueueArray));
     monitorButtonStatusText();
-=======
-    localStorage.setItem(filmsQueue, JSON.stringify(toWatchedArray));
-    // monitorButtonStatusText();
->>>>>>> dev
 };
 
 const drawWatchedFilmList = () => {
@@ -88,19 +67,14 @@ const drawWatchedFilmList = () => {
         toWatchedArray.splice(indexOfTheMovieToBeDeleted, 1);
     };
 
-<<<<<<< HEAD
     localStorage.setItem('filmsWatched', JSON.stringify(toWatchedArray));
     monitorButtonStatusText();
-=======
-    localStorage.setItem(filmsWatched, JSON.stringify(toWatchedArray));
-    // monitorButtonStatusText();
->>>>>>> dev
 };
 
 const showDetails = (selectFilm) => {
     const temp = detailsFilms(getDetails);
     refs.detailsPage.innerHTML = temp;
-    // monitorButtonStatusText();
+    monitorButtonStatusText();
 };
 
 export { showDetails, drawQueueFilmList, drawWatchedFilmList };
