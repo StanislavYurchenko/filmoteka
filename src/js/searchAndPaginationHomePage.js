@@ -1,72 +1,78 @@
 import refs from './refs';
-import homePageTpl from '../template/homePage.hbs';
+import homePageTpl from '../template/homePageContent.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-import renderFilmList from './initialHomePage';
+// import renderFilmList from './initialHomePage';
 
 let formRef = null;
+const reg = 'https://api.themoviedb.org/3/search/movie?api_key=81f248d3c9154788229a5419bb33091a&language=en-US&query=strong&page=1&include_adult=false';
+// const orig = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`;
 
-function updateHomeMarkup() {
-  const markup = homePageTpl();
-  refs.homePage.insertAdjacentHTML('beforeend', markup);
-  formRef = document.querySelector('.form-search');
-  console.log(formRef);
-  formRef.addEventListener('submit', searchFilms);
+const renderForm = (template) => {
+     refs.homePage.insertAdjacentHTML('beforeend',  template());
 }
-updateHomeMarkup();
+
+
+const renderNavigate = (template) => {
+  refs.homePage.insertAdjacentHTML('beforeend', template())
+}
+
+
+
+function usersSearch() {
+  // const markup = homePageTpl();
+  // refs.homePage.insertAdjacentHTML('beforeend', markup);
+  // formRef = document.querySelector('.form-search');
+  // console.log(formRef);
+  // formRef.addEventListener('submit', searchFilms);
+  formRef = refs.homePage.querySelector('form');
+  formRef.addEventListener('submit', searchFilms);
+
+}
+
 
 function searchFilms(event) {
   event.preventDefault();
   const formData = new FormData(formRef);
   const userInput = formData.get('query');
   console.log(userInput);
-  // console.log(formFef);
-  films.resetPage();
-  films.query = event.target.query.value;
-  console.log(event);
-  clearMoviesContainer();
+
+  if (!userInput) return
+  films.inputValue = userInput;
+
+
   fetchMovies();
 }
 
 function fetchMovies() {
   films.fetchFilms().then(data => {
-    renderFilmList(homePageTpl, data.results, refs.homePage);
+    
+    refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(data);
+    
+
     films.incrementPage();
+    console.log('data',data);
+    
   });
+
 }
 
-// const formRef = document.querySelector('.form-search');
-// formRef.addEventListener('submit', searchFilms);
-// const iputRef = document.querySelector('.form-search__input');
-// const btnNextRef = document.querySelector('.button-next');
-// const btnPrevRef = document.querySelector('.button-prev');
-// const pageNum = document.getElementById('page');
-
-// export default updateHomeMarkup;
 const apiKey = '81f248d3c9154788229a5419bb33091a';
+
+
 
 const films = {
   inputValue: '',
   pageNumb: 1,
-
   async fetchFilms() {
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`,
-      );
+      const response = await fetch( `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`);
+      
       const data = await response.json();
       return data.results;
     } catch (error) {
+      console.log('error',error);
       throw error;
     }
-    // const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`;
-    // return fetch(url)
-    //   .then(res => res.json())
-    //   .then(({ movies }) => {
-    //     // console.log(movies);
-    //     this.incrementPage();
-
-    //     return movies;
-    //   });
   },
   resetPage() {
     this.pageNumb = 1;
@@ -96,7 +102,7 @@ const films = {
 //     });
 // }
 
-function clearMoviesContainer() {}
+// function clearMoviesContainer() {}
 
 // refs.form = document.querySelector('.form-search');
 // refs.form.addEventListener('submit', searchFilms);
@@ -133,3 +139,5 @@ function clearMoviesContainer() {}
 
 //   pageNum.innerHTML = page;
 // }
+
+export {usersSearch, renderForm, renderNavigate};
