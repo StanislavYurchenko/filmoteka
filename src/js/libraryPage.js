@@ -40,4 +40,4 @@ function drawWatchedFilmList() {
 
 export { drawQueueFilmList, drawWatchedFilmList };
 drawQueueFilmList();
-drawWatchedFilmList();
+// drawWatchedFilmList();

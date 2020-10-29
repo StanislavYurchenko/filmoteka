@@ -17,35 +17,44 @@ const baseUrl = 'https://api.themoviedb.org';
 let pageNumber = 1;
 
 const renderFilmList = (template, arrFilms, renderRefSelector) => {
-    renderRefSelector.innerHTML = template(arrFilms);
+  renderRefSelector.innerHTML = template(arrFilms);
 };
 
 const fetchPopularMoviesList = (baseUrl, pageNumber, apiKey) => {
-    return fetch(`${baseUrl}/3/search/movie?api_key=${apiKey}&language=en-US&query=strong&page=${pageNumber}&include_adult=false`).then(res => res.json());
-}
+  return fetch(
+    `${baseUrl}/3/search/movie?api_key=${apiKey}&language=en-US&query=strong&page=${pageNumber}&include_adult=false`,
+  ).then(res => res.json());
+};
 
-const formatDataNullImages = (arrData) => {
-    const formatDate = arrData.map(el => {
-        if (typeof el.backdrop_path === "object") {
-            el.backdrop_path = `./images/temp.png`;
-        } else {
-            el.backdrop_path = `https://image.tmdb.org/t/p/w500/${el.backdrop_path}`
-        }
-        return el
-    })
-    return formatDate;
-}
+const formatDataNullImages = arrData => {
+  const formatDate = arrData.map(el => {
+    if (typeof el.backdrop_path === 'object') {
+      el.backdrop_path = `./images/temp.png`;
+    } else {
+      el.backdrop_path = `https://image.tmdb.org/t/p/w500/${el.backdrop_path}`;
+    }
+    return el;
+  });
+  return formatDate;
+};
 
 fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
-    const arrData = data.results;
-<<<<<<< HEAD
-    renderFilmList(FilmListTemplate, formatDataNullImages(arrData), refs.homePage);
-=======
-    // console.log(arrData)
-    renderFilmList(FilmListTemplate, arrData, refs.homePage);
->>>>>>> 2eb27f697105588442c06631c5d7371d5d2a46e9
-})
+  const arrData = data.results;
 
+  renderFilmList(
+    FilmListTemplate,
+    formatDataNullImages(arrData),
+    refs.homePage,
+  );
+  // console.log(arrData)
+  // renderFilmList(FilmListTemplate, arrData, refs.homePage);
+});
 
-
-export default { fetchPopularMoviesList, pageNumber, apiKey, renderFilmList, baseUrl, formatDataNullImages }
+export default {
+  fetchPopularMoviesList,
+  pageNumber,
+  apiKey,
+  renderFilmList,
+  baseUrl,
+  formatDataNullImages,
+};
