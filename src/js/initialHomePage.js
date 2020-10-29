@@ -5,6 +5,8 @@
 // import getDetails from '../data/getDetails';
 // import getPopular from '../data/getPopular';
 
+// console.log(getDetails);
+// console.log(getPopular);
 
 import FilmListTemplate from '../template/homePage.hbs';
 import refs from './refs.js';
@@ -36,7 +38,12 @@ const formatDataNullImages = (arrData) => {
 
 fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
     const arrData = data.results;
+<<<<<<< HEAD
     renderFilmList(FilmListTemplate, formatDataNullImages(arrData), refs.homePage);
+=======
+    // console.log(arrData)
+    renderFilmList(FilmListTemplate, arrData, refs.homePage);
+>>>>>>> 2eb27f697105588442c06631c5d7371d5d2a46e9
 })
 
 
