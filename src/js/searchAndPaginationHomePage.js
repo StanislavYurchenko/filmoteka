@@ -31,6 +31,7 @@ function usersSearch() {
 
 
 function searchFilms(event) {
+  console.log('searchFilms');
   event.preventDefault();
   const formData = new FormData(formRef);
   const userInput = formData.get('query');
@@ -44,6 +45,7 @@ function searchFilms(event) {
 }
 
 function fetchMovies() {
+  console.log('fetchMovies');
   films.fetchFilms().then(data => {
     
     refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(data);

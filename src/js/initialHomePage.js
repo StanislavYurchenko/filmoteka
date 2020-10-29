@@ -2,8 +2,8 @@
 // import updateHomeMarkup from './searchAndPaginationHomePage';
 
 // updateHomeMarkup();
-import getDetails from '../data/getDetails';
-import getPopular from '../data/getPopular';
+// import getDetails from '../data/getDetails';
+// import getPopular from '../data/getPopular';
 
 // console.log(getDetails);
 // console.log(getPopular);
@@ -12,10 +12,8 @@ import formTemplate from '../template/homePageForm.hbs';
 import filmListTemplate from '../template/homePageContent.hbs';
 import navigateTemplate from '../template/homePageNav.hbs';
 import refs from './refs.js';
-
 const apiKey = '81f248d3c9154788229a5419bb33091a';
 const genres = null;
-
 const baseUrl = 'https://api.themoviedb.org';
 
 let pageNumber = 1;
