@@ -73,6 +73,6 @@ refs.homeList.addEventListener('click', event => {
 
 });
 
-console.log(refs);
+// console.log(refs);
 
 export {activeHomePage, selectFilm}
