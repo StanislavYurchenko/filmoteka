@@ -13,8 +13,7 @@
         </div>
         {{!-- < span class ="home-page-list_item-rateblock" data-itemRate="item-rate">{{ popularity }}</span> --}}
         <h2 class="home-page-list_item-title">{{ original_title }} ({{ release_date }})</h2>
-        <img src="https://image.tmdb.org/t/p/w500/{{backdrop_path}}" alt="{{original_title}}"
-            class="home-page-list_item-image">
+        <img src="{{backdrop_path}}" alt="{{original_title}}" class="home-page-list_item-image">
 
     </li>
     {{/each}}
