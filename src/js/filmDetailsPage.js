@@ -8,21 +8,21 @@ const buttonWatched = document.querySelector('.details__button-watched');
 const buttonQueue = document.querySelector('.details__button-queue');
 
 
-const monitorButtonStatusText = () => {
+// const monitorButtonStatusText = () => {
 
-    if(localStorage.getItem(filmsQueue.find(movie => movie.original_title === selectFilm.original_title)) === selectFilm.original_title) {
-        buttonQueue.textContent = 'Delete from queue';
-    } else {
-        buttonQueue.textContent = 'Add to queue';
-    };
+    // if(localStorage.getItem(filmsQueue.find(movie => movie.original_title === selectFilm.original_title)) === selectFilm.original_title) {
+    //     buttonQueue.textContent = 'Delete from queue';
+    // } else {
+    //     buttonQueue.textContent = 'Add to queue';
+    // };
 
-    if(localStorage.getItem(filmsWatched.find(movie => movie.original_title === selectFilm.original_title)) === selectFilm.original_title) {
-        buttonWatched.textContent = 'Delete from watched';
-    } else {
-        buttonWatched.textContent = 'Add to watched';
-    };
+    // if(localStorage.getItem(filmsWatched.find(movie => movie.original_title === selectFilm.original_title)) === selectFilm.original_title) {
+    //     buttonWatched.textContent = 'Delete from watched';
+    // } else {
+    //     buttonWatched.textContent = 'Add to watched';
+    // };
 
-};
+// };
 
 const drawQueueFilmList = () => {
     const toQueueArray = [];
@@ -42,7 +42,7 @@ const drawQueueFilmList = () => {
     };
 
     localStorage.setItem(filmsQueue, JSON.stringify(toWatchedArray));
-    monitorButtonStatusText();
+    // monitorButtonStatusText();
 };
 
 const drawWatchedFilmList = () => {
@@ -63,13 +63,13 @@ const drawWatchedFilmList = () => {
     };
 
     localStorage.setItem(filmsWatched, JSON.stringify(toWatchedArray));
-    monitorButtonStatusText();
+    // monitorButtonStatusText();
 };
 
 const showDetails = (selectFilm) => {
     const temp = detailsFilms(getDetails);
     refs.detailsPage.innerHTML = temp;
-    monitorButtonStatusText();
+    // monitorButtonStatusText();
 };
 
-export default { showDetails, drawQueueFilmList, drawWatchedFilmList };
+export { showDetails, drawQueueFilmList, drawWatchedFilmList };
