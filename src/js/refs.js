@@ -5,5 +5,6 @@ const refs = {
   myFilmLibraryPage: document.querySelector('#root-my-film-library-page'),
   detailsPage: document.querySelector('#root-details-page'),
   form: null,
+  libraryList: document.querySelector('.library-list'),
 }
 export default refs;
