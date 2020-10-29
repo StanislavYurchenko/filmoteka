@@ -8,5 +8,6 @@ const refs = {
   libraryList: document.querySelector('.library-list'),
   linkHome: null,
   linkMyLibrary: null,
+  linkLogo: null,
 };
 export default refs;
