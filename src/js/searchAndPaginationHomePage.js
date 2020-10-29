@@ -6,6 +6,7 @@ import renderFilmList from './initialHomePage';
 let formRef = null;
 
 function updateHomeMarkup() {
+  console.log('updateHomeMarkup');
   const markup = homePageTpl();
   refs.homePage.insertAdjacentHTML('beforeend', markup);
   formRef = document.querySelector('.form-search');
@@ -15,6 +16,7 @@ function updateHomeMarkup() {
 updateHomeMarkup();
 
 function searchFilms(event) {
+  console.log('searchFilms');
   event.preventDefault();
   const formData = new FormData(formRef);
   const userInput = formData.get('query');
@@ -28,8 +30,13 @@ function searchFilms(event) {
 }
 
 function fetchMovies() {
+  console.log('fetchMovies');
   films.fetchFilms().then(data => {
     renderFilmList(homePageTpl, data.results, refs.homePage);
+    console.log(
+      'test',
+      renderFilmList(homePageTpl, data.results, refs.homePage),
+    );
     films.incrementPage();
   });
 }
@@ -53,8 +60,8 @@ const films = {
       const response = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`,
       );
-      const data = await response.json();
-      return data.results;
+      const { results } = await response.json();
+      return { results };
     } catch (error) {
       throw error;
     }
