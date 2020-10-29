@@ -24,7 +24,7 @@ const drawQueueFilmList = () => {
     const toQueueArray = [];
     const movie = localStorage.getItem(filmsQueue.find(movie => movie.original_title === selectFilm.original_title));
 
-    if(localStorage.getItem(filmsQueue) && !movie) {
+    if(localStorage.getItem(filmsQueue) && movie && (movie !== selectFilm.original_title)) {
         toQueueArray.push(movie);
     } else {
         if(toQueueArray.length === 0) return;
@@ -40,7 +40,7 @@ const drawWatchedFilmList = () => {
     const toWatchedArray = [];
     const movie = localStorage.getItem(filmsWatched.find(movie => movie.original_title === selectFilm.original_title));
 
-    if(localStorage.getItem(filmsWatched) && !movie) {
+    if(localStorage.getItem(filmsWatched) && movie && (movie !== selectFilm.original_title)) {
         toWatchedArray.push(movie);
     } else {
         if(toWatchedArray.length === 0) return;
@@ -59,7 +59,7 @@ const showDetails = (selectFilm) => {
     const buttonWatched = document.querySelector('.details__button-watched');
     const buttonQueue = document.querySelector('.details__button-queue');
     
-    monitorButtonStatusText(selectFilm.original_title);
+    monitorButtonStatusText();
 };
 
 export { showDetails, drawQueueFilmList, drawWatchedFilmList, buttonWatched, buttonQueue };
