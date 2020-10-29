@@ -8,7 +8,7 @@ const reg = 'https://api.themoviedb.org/3/search/movie?api_key=81f248d3c91547882
 // const orig = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`;
 
 const renderForm = (template) => {
-  refs.homePage.insertAdjacentHTML('beforeend', template());
+  refs.homePage.insertAdjacentHTML('afterbegin', template());
 }
 
 
