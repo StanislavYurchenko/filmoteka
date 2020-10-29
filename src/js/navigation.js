@@ -4,7 +4,8 @@ import refs from './refs';
 import 'material-design-icons/iconfont/material-icons.css';
 import {showDetails} from './filmDetailsPage';
 import {drawQueueFilmList} from './libraryPage'
-
+// const a = showDetails();
+// console.log(a);
 
 const selectFilm = {};
 
@@ -20,7 +21,7 @@ const activeLibraryPage = () => {
     refs.homePage.classList.add('notActivePage');
 }
 
-const activeDetailsPage = (moviid, itsLibraryFilm) => {
+const activeDetailsPage = (movied, itsLibraryFilm) => {
     refs.homePage.classList.add('notActivePage');
     refs.myFilmLibraryPage.classList.add('notActivePage');
     refs.detailsPage.classList.remove('notActivePage');
@@ -53,6 +54,6 @@ refs.linkMyLibrary.addEventListener('click', event => {
   drawQueueFilmList();
 });
 
-
+console.log(refs);
 
 export {activeHomePage, selectFilm}
