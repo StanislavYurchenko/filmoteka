@@ -10,6 +10,7 @@ const buttonQueue = document.querySelector('.details__button-queue');
 
 // const monitorButtonStatusText = () => {
 
+<<<<<<< HEAD
 //     if(localStorage.getItem(filmsQueue.find(movie => movie.original_title === selectFilm.original_title)) === selectFilm.original_title) {
 //         buttonQueue.textContent = 'Delete from queue';
 //     } else {
@@ -21,6 +22,19 @@ const buttonQueue = document.querySelector('.details__button-queue');
 //     } else {
 //         buttonWatched.textContent = 'Add to watched';
 //     };
+=======
+    // if(localStorage.getItem(filmsQueue.find(movie => movie.original_title === selectFilm.original_title)) === selectFilm.original_title) {
+    //     buttonQueue.textContent = 'Delete from queue';
+    // } else {
+    //     buttonQueue.textContent = 'Add to queue';
+    // };
+
+    // if(localStorage.getItem(filmsWatched.find(movie => movie.original_title === selectFilm.original_title)) === selectFilm.original_title) {
+    //     buttonWatched.textContent = 'Delete from watched';
+    // } else {
+    //     buttonWatched.textContent = 'Add to watched';
+    // };
+>>>>>>> 4515e48c3a294c3ab7111ec0b7b5133e9228e6da
 
 // };
 
@@ -73,6 +87,5 @@ const showDetails = (selectFilm) => {
     // monitorButtonStatusText();
 };
 
+
 export  { showDetails, drawQueueFilmList, drawWatchedFilmList };
-
-
