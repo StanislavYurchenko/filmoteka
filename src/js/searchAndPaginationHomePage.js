@@ -3,13 +3,39 @@ import homePageTpl from '../template/homePage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
 import renderFilmList from './initialHomePage';
 
+let formRef = null;
+
 function updateHomeMarkup() {
   const markup = homePageTpl();
   refs.homePage.insertAdjacentHTML('beforeend', markup);
+  formRef = document.querySelector('.form-search');
+  console.log(formRef);
+  formRef.addEventListener('submit', searchFilms);
 }
 updateHomeMarkup();
 
-// refs.form = refs.homePage.querySelector('.form-search');
+function searchFilms(event) {
+  event.preventDefault();
+  const formData = new FormData(formRef);
+  const userInput = formData.get('query');
+  console.log(userInput);
+  // console.log(formFef);
+  films.resetPage();
+  films.query = event.target.query.value;
+  console.log(event);
+  clearMoviesContainer();
+  fetchMovies();
+}
+
+function fetchMovies() {
+  films.fetchFilms().then(data => {
+    renderFilmList(homePageTpl, data.results, refs.homePage);
+    films.incrementPage();
+  });
+}
+
+// const formRef = document.querySelector('.form-search');
+// formRef.addEventListener('submit', searchFilms);
 // const iputRef = document.querySelector('.form-search__input');
 // const btnNextRef = document.querySelector('.button-next');
 // const btnPrevRef = document.querySelector('.button-prev');
@@ -22,15 +48,25 @@ const films = {
   inputValue: '',
   pageNumb: 1,
 
-  fetchFilms() {
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${inputValue}&page=${pageNumb}&include_adult=false`;
-    return fetch(url)
-      .then(res => res.json())
-      .then(({ movies }) => {
-        this.incrementPage();
+  async fetchFilms() {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`,
+      );
+      const data = await response.json();
+      return data.results;
+    } catch (error) {
+      throw error;
+    }
+    // const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`;
+    // return fetch(url)
+    //   .then(res => res.json())
+    //   .then(({ movies }) => {
+    //     // console.log(movies);
+    //     this.incrementPage();
 
-        return movies;
-      });
+    //     return movies;
+    //   });
   },
   resetPage() {
     this.pageNumb = 1;
@@ -60,27 +96,10 @@ const films = {
 //     });
 // }
 
-function searchFilms(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  films.query = form.elements.query.value;
-
-  clearMoviesContainer();
-  films.resetPage();
-  fetchMovies();
-  form.reset();
-}
-
-function fetchMovies() {
-  films.fetchFilms().then(movies => {
-    renderFilmList(homePageTpl, movies, refs.homePage);
-  });
-}
-
 function clearMoviesContainer() {}
 
-refs.form = refs.homePage.querySelector('.form-search');
-refs.form.addEventListener('submit', searchFilms);
+// refs.form = document.querySelector('.form-search');
+// refs.form.addEventListener('submit', searchFilms);
 
 // function () {
 
