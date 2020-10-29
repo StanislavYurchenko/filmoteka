@@ -1,0 +1,24 @@
+<div class="details__container">
+    <img src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="foto {{original_title}}">
+    <div class="details__content-container">
+        <h2 class="details__title">{{original_title}}({{release_date}})</h2>
+        <ul class="details__list">
+            <li class="details__item">vote/votes <span>{{vote_average}}/{{vote_count}}</span></li>
+            <li class="details__item">popularity <span>{{popularity}}</span></li>
+            <li class="details__item">original_title <span>{{original_title}}</span></li>
+            <li class="details__item">genre 
+                {{#each genres}} 
+                <span>{{this.name}}</span>
+                {{/each}}
+            </li>
+        </ul>
+
+        <h2 class="__about">About</h2>
+        <p class="details__about-text">{{overview}}</p>
+
+        <div class="details__button-container">
+            <button class="details__button-watched"><i class="material-icons details__icons">videocam</i></button>
+            <button class="details__button-queue"><i class="material-icons details__icons">event_busy</i></button>
+        </div>
+    </div>
+</div>
