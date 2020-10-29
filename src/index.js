@@ -18,7 +18,7 @@ renderNavigate(navigateTemplate);
 // render movies
 fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
     const arrData = data.results;
-    renderFilmList(filmListTemplate, arrData, refs.homePage);
+    renderFilmList(filmListTemplate, arrData);
 });
 
 //render query
