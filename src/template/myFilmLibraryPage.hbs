@@ -1,13 +1,9 @@
-<ul>
+{{#each this}}
+<li id='{{id}}' class='library-item'>
 
-    {{#each this}}
-    <li id='{{id}}'>
-        <a href="#">
-            <img src="https://image.tmdb.org/t/p/w300{{backdrop_path}}" alt="">
-            <p class="rating">{{vote_average}}</p>
-            <p class="movie-title">{{title}}</p>
-        </a>
-    </li>
-    {{/each}}
+    <img src="https://image.tmdb.org/t/p/w300{{backdrop_path}}" alt="{{title}}" class="library-item__image">
+    <p class="library-item__title"> {{title}} </p>
+    <p class="library-item__rating"> {{vote_average}} </p>
 
-</ul>
+</li>
+{{/each}}

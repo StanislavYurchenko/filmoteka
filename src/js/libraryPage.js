@@ -1,29 +1,42 @@
 import myFilmLibraryPage from '../template/myFilmLibraryPage.hbs';
-import refs from './refs'
+import refs from './refs';
+import { notice } from './pnotify';
 
-fetch('https://api.themoviedb.org/3/search/movie?api_key=81f248d3c9154788229a5419bb33091a&language=en-US&query=hello&page=1&include_adult=false').then(res => res.json()).then(movies => {
-    const { results } = movies;
-    console.log(results);
-    console.log(movies);
-    const markup = myFilmLibraryPage(results);
-    refs.myFilmLibraryPage.insertAdjacentHTML('beforeend', markup);
-}); 
+// fetch(
+//   'https://api.themoviedb.org/3/search/movie?api_key=81f248d3c9154788229a5419bb33091a&language=en-US&query=bad&page=1&include_adult=false',
+// )
+//   .then(res => res.json())
+//   .then(movies => {
+//     const { results } = movies;
+//     localStorage.setItem('filmsQueue', JSON.stringify(results));
+//     localStorage.setItem('filmsWatched', JSON.stringify(results));
+//   });
 
-// function createLibraryCardFunc(imgPath, filmTitle, movieId, voteAverage) {
-//     const myLibrary=[],
-//     const markup = myFilmLibraryPage([{}, {}, {}])
-    
-// }
+function createLibraryCardFunc(parsedLocalStorage, message) {
+  if (!parsedLocalStorage) {
+    notice(message);
+    return;
+  }
+  const fragment = myFilmLibraryPage(parsedLocalStorage);
+  refs.libraryList.innerHTML = '';
+  refs.libraryList.insertAdjacentHTML('beforeend', fragment);
+}
 
 function drawQueueFilmList() {
-    let fragment;
-    let readLocalStorage = localStorage.getItem('filmsQueue');
-    const parsedLocalStorage = JSON.parse(readLocalStorage)
-    if (!parsedLocalStorage) {
-        alert('You do not have to queue movies to watch. Add them.')
-    }
+  const message = 'You do not have to queue movies to watch. Add them.';
+  let readLocalStorage = localStorage.getItem('filmsQueue');
+  const parsedLocalStorage = JSON.parse(readLocalStorage);
 
- };
-function drawWatchedFilmList() { };
+  createLibraryCardFunc(parsedLocalStorage, message);
+}
 
-drawQueueFilmList();
+function drawWatchedFilmList() {
+  const message = 'You do not have watched movies. Add them';
+  let readLocalStorage = localStorage.getItem('filmsWatched');
+  const parsedLocalStorage = JSON.parse(readLocalStorage);
+
+  createLibraryCardFunc(parsedLocalStorage, message);
+}
+
+// drawQueueFilmList();
+// drawWatchedFilmList();
