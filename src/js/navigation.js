@@ -54,6 +54,25 @@ refs.linkMyLibrary.addEventListener('click', event => {
   drawQueueFilmList();
 });
 
+refs.homeList.addEventListener('click', event => {
+  console.log('homeList');
+  const {target, currentTarget} = event;
+  currentTarget.children.forEach(item =>{
+
+    
+
+  } )
+
+  console.dir( target);
+  console.dir(currentTarget);
+
+
+ 
+
+
+
+});
+
 console.log(refs);
 
 export {activeHomePage, selectFilm}
