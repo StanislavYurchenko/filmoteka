@@ -55,6 +55,11 @@ const toggleToQueue = () => {
 const toggleToWatched = () => {
   const toWatchedArray = [];
   const moviesToWatchedFromLocalStorage = JSON.parse(localStorage.getItem('filmsWatched'));
+  console.log(typeof localStorage
+    .getItem('filmsWatched'));
+  const movie = localStorage
+    .getItem('filmsWatched')
+    .find(movie => movie.original_title === selectFilm.original_title);
 
 
   if (moviesToWatchedFromLocalStorage && moviesToWatchedFromLocalStorage.length && findMoveInArray(moviesToWatchedFromLocalStorage)) {
@@ -69,14 +74,14 @@ const toggleToWatched = () => {
   monitorButtonStatusText();
 };
 
-
 const showDetails = selectFilm => {
   getDetails.release_date = getDetails.release_date
     .split('')
     .splice(0, 4)
     .join('');
-  const temp = detailsFilms(getDetails);
+  const temp = detailsFilms(selectFilm);
   refs.detailsPage.innerHTML = temp;
+  console.log();
   monitorButtonStatusText();
 };
 
