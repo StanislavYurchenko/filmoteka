@@ -1,7 +1,7 @@
 .section__details-pag {
     margin-bottom: 20px;
 
-    @media screen and (min-width: $tablet-w) {
+    @media screen and (min-width: $tablet-bp-min) {
         margin-bottom: 28px;
     }
 }
@@ -25,7 +25,7 @@
         margin-bottom: 20px;
     }
 
-    @media screen and (min-width: $tablet-w) {
+    @media screen and (min-width: $tablet-bp-min) {
         width: 354px;
         margin-left: 10px;
         margin-right: 20px;
@@ -39,7 +39,7 @@
 }
 
 .details__content-container {
-    @media screen and (min-width: $tablet-w) {
+    @media screen and (min-width: $tablet-bp-min) {
         width: 328px;
         padding-top: 12px;
     }
@@ -57,7 +57,7 @@
     color: $font-color;
     margin-bottom: 18px;
 
-    @media screen and (min-width: $tablet-w) {
+    @media screen and (min-width: $tablet-bp-min) {
         margin-bottom: 14px;
     }
 }
@@ -65,7 +65,7 @@
 .details__list {
     margin-bottom: 30px;
 
-    @media screen and (min-width: $tablet-w) {
+    @media screen and (min-width: $tablet-bp-min) {
         margin-bottom: 46px;
     }
 }
@@ -77,7 +77,7 @@
     line-height: 26px;
     font-weight: 400;
 
-    @media screen and (min-width: $tablet-w) {
+    @media screen and (min-width: $tablet-bp-min) {
         width: 328px;
     }
 
@@ -98,7 +98,7 @@
 .details__description {
     width: 172px;
 
-    @media screen and (min-width: $tablet-w) {
+    @media screen and (min-width: $tablet-bp-min) {
         width: 202px;
     }
 
@@ -138,6 +138,7 @@
     border: none;
     background: transparent;
     outline: none;
+    cursor: pointer;
     font-family: $first-font;
     font-size: 14px;
     line-height: 24px;
