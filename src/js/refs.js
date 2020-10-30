@@ -9,7 +9,9 @@ const refs = {
   linkHome: null,
   linkMyLibrary: null,
   linkLogo: null,
-  watchedBtn:null,
-  queueBtn:null,
+  homeList: document.querySelector('.home-page-list'),
+  libraryList: document.querySelector('.library-list'),
+  watchedBtn: null,
+  queueBtn: null,
 };
 export default refs;
