@@ -20,7 +20,11 @@ renderNavigate(navigateTemplate);
 fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
     const arrData = data.results;
     renderFilmList(filmListTemplate, formattingFethData(arrData));
+    refs.homePage.querySelector('.page').innerHTML = pageNumber;
 });
 
 //render query
 usersSearch();
+
+//при переходе на HomePage  вызвать controlGlobalPage.setStartPage() в navigation.js при клике на кнопку Home
+// ===>/controlGlobalPage импортнуть с ./js/searchAndPaginationHomePage НАДА ДЛЯ ПАГИНАЦИИ!
