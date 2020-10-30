@@ -1,14 +1,24 @@
 import refs from './refs';
 import homePageTpl from '../template/homePageContent.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-import { formattingFethData } from './initialHomePage';
-
+import { formattingFethData, fetchPopularMoviesList, baseUrl } from './initialHomePage';
+const apiKey = '81f248d3c9154788229a5419bb33091a';
 let formRef = null;
 let btn_next = null;
 let btn_prev = null;
 let page_span = null;
 let isLastPage = false;
 let isFirstPage = false;
+
+const controlGlobalPage = {
+  isStartGlobalPage: true,
+  setStartPage() {
+    this.isStartGlobalPage = true;
+  },
+  setSomePage() {
+    this.isStartGlobalPage = false;
+  }
+}
 
 const renderForm = template => {
   refs.homePage.insertAdjacentHTML('afterbegin', template());
@@ -32,29 +42,54 @@ function usersSearch() {
 }
 
 function handlerNext() {
-  films.incrementPage();
-  fetchMovies();
-  btn_prev.removeAttribute('disabled');
-}
-function handlerPrev() {
-  if (films.pageNumb === 1) {
-    btn_prev.setAttribute('disabled', 'disabled');
-  }
-  if (films.isStartPage === false) {
-    films.decrementPage();
+  if (!controlGlobalPage.isStartGlobalPage) {
+    films.incrementPage();
     fetchMovies();
+    btn_prev.removeAttribute('disabled');
+  } else {
+    films.incrementPage();
+    fetchPopularMoviesList(baseUrl, films.pageNumb, apiKey).then(data => {
+      const arrData = data.results;
+      refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(formattingFethData(arrData));
+      page_span.innerHTML = films.pageNumb;
+    })
+    btn_prev.removeAttribute('disabled');
   }
 }
+
+function handlerPrev() {
+  if (!controlGlobalPage.isStartGlobalPage) {
+    if (films.isStartPage === false) {
+      films.decrementPage();
+      fetchMovies();
+    }
+    if (films.pageNumb === 1) {
+      btn_prev.setAttribute('disabled', 'disabled');
+    }
+  } else {
+    if (films.isStartPage === false) {
+      films.decrementPage();
+      fetchPopularMoviesList(baseUrl, films.pageNumb, apiKey).then(data => {
+        const arrData = data.results;
+        refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(formattingFethData(arrData));
+        page_span.innerHTML = films.pageNumb;
+      })
+    }
+    if (films.pageNumb === 1) {
+      btn_prev.setAttribute('disabled', 'disabled');
+    }
+  }
+}
+
 function searchFilmsHandler(event) {
   event.preventDefault();
   films.resetPage();
   const formData = new FormData(formRef);
   const userInput = formData.get('query');
-
   if (!userInput) return;
   films.inputValue = userInput;
-
   fetchMovies();
+  controlGlobalPage.setSomePage();
 }
 
 function fetchMovies() {
@@ -82,8 +117,6 @@ function fetchMovies() {
   });
 }
 
-const apiKey = '81f248d3c9154788229a5419bb33091a';
-
 const films = {
   isStartPage: true,
   inputValue: '',
@@ -93,7 +126,6 @@ const films = {
       const response = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`,
       );
-
       const data = await response.json();
       console.log('data', data);
       isLastPage = data.page === data.total_pages ? true : false;
@@ -124,4 +156,4 @@ const films = {
   },
 };
 
-export { usersSearch, renderForm, renderNavigate };
+export { usersSearch, renderForm, renderNavigate, controlGlobalPage };
