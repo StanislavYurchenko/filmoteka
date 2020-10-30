@@ -77,6 +77,10 @@ const drawWatchedFilmList = () => {
 };
 
 const showDetails = selectFilm => {
+  getDetails.release_date = getDetails.release_date
+    .split('')
+    .splice(0, 4)
+    .join('');
   const temp = detailsFilms(getDetails);
   refs.detailsPage.innerHTML = temp;
   monitorButtonStatusText();
