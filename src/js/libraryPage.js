@@ -4,10 +4,8 @@ import { formattingFethData } from './initialHomePage';
 import refs from './refs';
 import { notice } from './pnotify';
 
-// const watchedBtn = document.querySelector('.watched');
-// const queueBtn = document.querySelector('.queue');
 
-//
+
 fetch(
   'https://api.themoviedb.org/3/search/movie?api_key=81f248d3c9154788229a5419bb33091a&language=en-US&query=bad&page=1&include_adult=false',
 )
