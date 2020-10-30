@@ -1,78 +1,92 @@
 import refs from './refs';
 import homePageTpl from '../template/homePageContent.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-// import renderFilmList from './initialHomePage';
 
 let formRef = null;
-const reg = 'https://api.themoviedb.org/3/search/movie?api_key=81f248d3c9154788229a5419bb33091a&language=en-US&query=strong&page=1&include_adult=false';
-// const orig = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`;
+let btn_next = null;
+let btn_prev = null;
+let page_span = null;
 
-const renderForm = (template) => {
+const renderForm = template => {
   refs.homePage.insertAdjacentHTML('afterbegin', template());
-}
+};
 
-
-const renderNavigate = (template) => {
-  refs.homePage.insertAdjacentHTML('beforeend', template())
-}
-
-
+const renderNavigate = template => {
+  refs.homePage.insertAdjacentHTML('beforeend', template());
+};
 
 function usersSearch() {
-  // const markup = homePageTpl();
-  // refs.homePage.insertAdjacentHTML('beforeend', markup);
-  // formRef = document.querySelector('.form-search');
-  // console.log(formRef);
-  // formRef.addEventListener('submit', searchFilms);
   formRef = refs.homePage.querySelector('form');
-  formRef.addEventListener('submit', searchFilms);
-
+  formRef.addEventListener('submit', searchFilmsHandler);
+  btn_next = refs.homePage.querySelector('.button-next');
+  btn_prev = refs.homePage.querySelector('.button-prev');
+  page_span = refs.homePage.querySelector('.page');
+  btn_next.addEventListener('click', handlerNext);
+  btn_prev.addEventListener('click', handlerPrev);
+  if (films.isStartPage) {
+    btn_prev.setAttribute('disabled', 'disabled');
+  }
 }
 
-
-function searchFilms(event) {
-  console.log('searchFilms');
+function handlerNext() {
+  films.incrementPage();
+  fetchMovies();
+  btn_prev.removeAttribute('disabled');
+}
+function handlerPrev() {
+  if (films.pageNumb === 1) {
+    btn_prev.setAttribute('disabled', 'disabled');
+  }
+  if (films.isStartPage === false) {
+    films.decrementPage();
+    fetchMovies();
+  }
+}
+function searchFilmsHandler(event) {
   event.preventDefault();
+  films.resetPage();
   const formData = new FormData(formRef);
   const userInput = formData.get('query');
-  console.log(userInput);
 
-  if (!userInput) return
+  if (!userInput) return;
   films.inputValue = userInput;
-
 
   fetchMovies();
 }
 
 function fetchMovies() {
-  console.log('fetchMovies');
   films.fetchFilms().then(data => {
-
-    refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(data);
-
-
-    films.incrementPage();
+    const requir = refs.homePage.querySelector('.form-search__requirements');
+    if (data.length === 0) {
+      requir.classList.remove('is-hidden');
+      btn_next.setAttribute('disabled', 'disabled');
+    } else {
+      requir.classList.add('is-hidden');
+    }
+    const markup = data.length === 0 ? '' : homePageTpl(data);
+    refs.homePage.querySelector('.home-page-list').innerHTML = markup;
+    page_span.innerHTML = films.pageNumb;
     console.log('data', data);
-
   });
-
 }
 
 const apiKey = '81f248d3c9154788229a5419bb33091a';
 
-
-
 const films = {
+  isStartPage: true,
   inputValue: '',
   pageNumb: 1,
   async fetchFilms() {
     try {
-      const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`);
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`,
+      );
 
       const data = await response.json();
+      console.log('data', data);
+      console.log('pages', data.total_pages);
       return data.results;
     } catch (error) {
-      console.log('error', error);
       throw error;
     }
   },
@@ -80,7 +94,14 @@ const films = {
     this.pageNumb = 1;
   },
   incrementPage() {
-    this.pageNumb += 1;
+    this.pageNumb++;
+    this.isStartPage = false;
+  },
+  decrementPage() {
+    this.pageNumb--;
+    if (this.pageNumb === 1) {
+      this.isStartPage = true;
+    }
   },
   get query() {
     return this.inputValue;
@@ -89,57 +110,5 @@ const films = {
     this.inputValue = value;
   },
 };
-
-// const inputValue = '';
-// let pageNumb = 1;
-
-// function fetchFilms() {
-//   const url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${inputValue}&page=${pageNumb}&include_adult=false`;
-//   return fetch(url)
-//     .then(res => res.json())
-//     .then(({ movies }) => {
-//       this.incrementPage();
-
-//       return movies;
-//     });
-// }
-
-// function clearMoviesContainer() {}
-
-// refs.form = document.querySelector('.form-search');
-// refs.form.addEventListener('submit', searchFilms);
-
-// function () {
-
-// }
-
-// let pageNumber = 1;
-// const filmsOnPage = 6;
-
-// function prevPage() {
-//   if (pageNumber > 1) {
-//     pageNumber--;
-//     changePage(pageNumber);
-//   }
-// }
-
-// function nextPage() {
-//   if (pageNumber < numPage()) {
-//     pageNumber++;
-//     changePage(pageNumber);
-//   }
-// }
-
-// function changePage(page) {
-//   const btnNext = document.querySelector('.button-next');
-//   const btnPrev = document.querySelector('.button-prev');
-//   const pagination = document.querySelector('.pagination');
-//   const pageNum = document.getElementById('page');
-
-//   if (page < 1) page = 1;
-//   if (page > numPages()) page = numPages();
-
-//   pageNum.innerHTML = page;
-// }
 
 export { usersSearch, renderForm, renderNavigate };
