@@ -1,9 +1,9 @@
 {{#each this}}
-<li id='{{id}}' class='library-item'>
-
-    <img src="https://image.tmdb.org/t/p/w300{{backdrop_path}}" alt="{{title}}" class="library-item__image">
-    <p class="library-item__title"> {{title}}({{release_date}}) </p>
-    <p class="library-item__rating"> {{vote_average}} </p>
-
+<li class="home-page-list_item" data-itemId="{{id}}">
+    <div class="item-overlov">
+    </div>
+    <h2 class="home-page-list_item-title">{{ original_title }} ({{ release_date }})</h2>
+    <img src="{{backdrop_path}}" alt="{{original_title}}" class="home-page-list_item-image">
+    <p class="home-page-list_item-rateblock"> {{vote_average}} </p>
 </li>
 {{/each}}

@@ -1,5 +1,5 @@
 import myFilmLibraryPage from '../template/myFilmLibraryPage.hbs';
-import myFilmLibraryPageButtons from '../template/myFilmLibraryPageButtons.hbs';
+import { formattingFethData } from './initialHomePage';
 // import activeDetailsPage from './filmDetailsPage'
 import refs from './refs';
 import { notice } from './pnotify';
@@ -7,9 +7,7 @@ import { notice } from './pnotify';
 const watchedBtn = document.querySelector('.watched');
 const queueBtn = document.querySelector('.queue');
 
-watchedBtn.addEventListener('click', drawWatchedFilmList);
-queueBtn.addEventListener('click', drawQueueFilmList);
-
+//
 fetch(
   'https://api.themoviedb.org/3/search/movie?api_key=81f248d3c9154788229a5419bb33091a&language=en-US&query=bad&page=1&include_adult=false',
 )
@@ -30,29 +28,38 @@ fetch(
     localStorage.setItem('filmsQueue', JSON.stringify(results));
   });
 
+function renderLibraryButtons(template) {
+  refs.myFilmLibraryPage.insertAdjacentHTML(
+    'afterbegin',
+    template(),
+    //  myFilmLibraryPageButtons(),
+  );
+}
+
 function createLibraryCardFunc(parsedLocalStorage, message) {
   if (!parsedLocalStorage) {
     notice(message);
     return;
   }
   refs.libraryList.innerHTML = '';
-  const fragment = myFilmLibraryPage(parsedLocalStorage);
-  //  refs.myFilmLibraryPage.insertAdjacentHTML(
-  //     'afterbegin',
-  //     myFilmLibraryPageButtons(),
-  //   );
+  const formatData = formattingFethData(parsedLocalStorage);
+  const fragment = myFilmLibraryPage(formatData);
+
   refs.libraryList.insertAdjacentHTML('beforeend', fragment);
 
-  refs.libraryList.addEventListener('click', e => {
-    if (!e.target.nodeName === 'IMG') {
-      return;
-    }
-    // activeDetailsPage();
-    console.log(e.target.nodeName);
-  });
+  // refs.libraryList.addEventListener('click', e => {
+  //   if (!e.target.nodeName === 'IMG') {
+  //     return;
+  //   }
+  //   activeDetailsPage();
+  //   // console.log(e.target.nodeName);
+  // });
 }
 
 function drawQueueFilmList() {
+  watchedBtn.addEventListener('click', drawWatchedFilmList);
+  queueBtn.addEventListener('click', drawQueueFilmList);
+
   watchedBtn.classList.remove('library-btn--active');
   queueBtn.classList.add('library-btn--active');
 
@@ -74,4 +81,4 @@ function drawWatchedFilmList() {
   createLibraryCardFunc(parsedLocalStorage, message);
 }
 
-export { drawQueueFilmList, drawWatchedFilmList };
+export { drawQueueFilmList, drawWatchedFilmList, renderLibraryButtons };
