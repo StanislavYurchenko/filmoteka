@@ -4,7 +4,10 @@ import refs from './refs';
 import 'material-design-icons/iconfont/material-icons.css';
 import {showDetails} from './filmDetailsPage';
 import {drawQueueFilmList} from './libraryPage'
-
+import { baseUrl, apiKey} from './initialHomePage'
+import { data } from 'autoprefixer';
+// const a = showDetails();
+// console.log(a);
 
 const selectFilm = {};
 
@@ -20,11 +23,11 @@ const activeLibraryPage = () => {
     refs.homePage.classList.add('notActivePage');
 }
 
-const activeDetailsPage = (moviid, itsLibraryFilm) => {
+const activeDetailsPage = (movied) => {
     refs.homePage.classList.add('notActivePage');
     refs.myFilmLibraryPage.classList.add('notActivePage');
     refs.detailsPage.classList.remove('notActivePage');
-    showDetails();
+    showDetails(movied);
 }
 
 refs.header.insertAdjacentHTML('afterbegin', headerTemplate());
@@ -53,6 +56,38 @@ refs.linkMyLibrary.addEventListener('click', event => {
   drawQueueFilmList();
 });
 
+refs.homeList.addEventListener('click', event => {
+  console.log('homeList');
+  const {target, currentTarget} = event;
 
+  if (target.nodeName !== 'LI') {
+      console.log("Не лишка выходим");
+      return;
+  }
+
+  const movieId = target.dataset.itemid;
+     console.log(movieId);
+
+//   console.dir( target);
+//   console.dir(currentTarget);
+
+  fetch (`${baseUrl}/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
+  .then(res => res.json())
+  .then(data => {activeDetailsPage(data);
+    return data})
+    .then(data => {
+        // const qwe = data
+        // selectFilm = data;
+        // console.log(buttonWatched)
+        console.log(data)
+       })
+    
+
+});
+
+
+
+// console.log(refs);
 
 export {activeHomePage, selectFilm}
+
