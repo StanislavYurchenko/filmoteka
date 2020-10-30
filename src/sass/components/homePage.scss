@@ -1,10 +1,10 @@
 .section__home-page {
   @media screen and (max-width: $mobile-bp-max) {
-    padding-top: 13px;
+    // padding-top: 13px;
     padding-bottom: 13px;
   }
   @media screen and (min-width: $tablet-bp-min) {
-    padding-top: 30px;
+    // padding-top: 30px;
     padding-bottom: 30px;
   }
 }
@@ -17,6 +17,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 30px;
 
   &_item {
     position: relative;
@@ -105,6 +106,13 @@
   position: relative;
   margin: 0 auto;
   width: 257px;
+  padding-top: 21px;
+  padding-bottom: 22px;
+  // box-shadow: 0px 5px 9px 1px rgba(0, 0, 0, 0.23);
+  @media screen and (min-width: $tablet-bp-min) {
+  }
+  @media screen and (min-width: $desktop-bp-min) {
+  }
 
   &__input {
     border: none;
@@ -112,6 +120,12 @@
     border-bottom: 2px solid #818181;
     width: 100%;
     padding-left: 40px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    @media screen and (min-width: $tablet-bp-min) {
+    }
+    @media screen and (min-width: $desktop-bp-min) {
+    }
 
     &::placeholder {
       font-size: 14.4px;
