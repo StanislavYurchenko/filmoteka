@@ -64,6 +64,9 @@
       justify-content: center;
       align-items: center;
 
+      // box-shadow: inset 0px 0px 2.79px 0.21px rgba(0, 0, 0, 0.35),
+      //   inset 0px 0px 2.64px 1.36px rgba(0, 0, 0, 0.35);
+
       @media screen and (min-width: $tablet-bp-min) {
         top: 10px;
         right: 10px;

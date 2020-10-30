@@ -4,8 +4,6 @@ import { formattingFethData } from './initialHomePage';
 import refs from './refs';
 import { notice } from './pnotify';
 
-
-
 fetch(
   'https://api.themoviedb.org/3/search/movie?api_key=81f248d3c9154788229a5419bb33091a&language=en-US&query=bad&page=1&include_adult=false',
 )
@@ -32,19 +30,15 @@ function renderLibraryButtons(template) {
     template(),
     //  myFilmLibraryPageButtons(),
   );
-
 }
 
 function serviceLibraryButtons(template) {
   renderLibraryButtons(template);
   refs.watchedBtn = document.querySelector('.watched');
   refs.queueBtn = document.querySelector('.queue');
-  console.log('refs.watchedBtn',refs.watchedBtn);
-  console.log(' refs.queueBtn', refs.queueBtn);
   refs.watchedBtn.addEventListener('click', drawWatchedFilmList);
   refs.queueBtn.addEventListener('click', drawQueueFilmList);
 }
-
 
 function createLibraryCardFunc(parsedLocalStorage, message) {
   if (!parsedLocalStorage) {
@@ -67,7 +61,6 @@ function createLibraryCardFunc(parsedLocalStorage, message) {
 }
 
 function drawQueueFilmList() {
-
   refs.watchedBtn.classList.remove('library-btn--active');
   refs.queueBtn.classList.add('library-btn--active');
 
