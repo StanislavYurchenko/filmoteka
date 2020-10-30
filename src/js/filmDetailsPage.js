@@ -71,16 +71,16 @@ const monitorButtonStatusText = () => {
 
 const toggleToQueue = () => {
   const toQueueArray = [];
-  const localStorage = JSON.parse(localStorage.getItem('filmsQueue'));
+  const moviesToQueueFromLocalStorage = JSON.parse(localStorage.getItem('filmsQueue'));
   const movie = localStorage
     .getItem('filmsQueue')
     .find(movie => movie.original_title === selectFilm.original_title);
 
-  if (localStorage) {
-    toWatchedArray.push(...localStorage);
+  if (moviesToQueueFromLocalStorage) {
+    toWatchedArray.push(...moviesToQueueFromLocalStorage);
   }
 
-  if (localStorage && !movie) {
+  if (moviesToQueueFromLocalStorage && !movie) {
     toQueueArray.push(selectFilm);
   } else {
     if (toQueueArray.length === 0) return;
@@ -94,16 +94,16 @@ const toggleToQueue = () => {
 
 const toggleToWatched = () => {
   const toWatchedArray = [];
-  const localStorage = JSON.parse(localStorage.getItem('filmsWatched'));
+  const moviesToWatchedFromLocalStorage = JSON.parse(localStorage.getItem('filmsWatched'));
   const movie = localStorage
     .getItem('filmsWatched')
     .find(movie => movie.original_title === selectFilm.original_title);
 
-  if (localStorage) {
-    toWatchedArray.push(...localStorage);
+  if (moviesToWatchedFromLocalStorage) {
+    toWatchedArray.push(...moviesToWatchedFromLocalStorage);
   }
 
-  if (localStorage && !movie) {
+  if (moviesToWatchedFromLocalStorage && !movie) {
     toWatchedArray.push(selectFilm);
   } else {
     if (toWatchedArray.length === 0) return;
@@ -139,4 +139,5 @@ const showDetails = selectFilm => {
 
 
 export { showDetails, toggleToQueue, toggleToWatched };
+
 
