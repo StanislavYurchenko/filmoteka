@@ -81,4 +81,4 @@ refs.homeList.addEventListener('click', event => {
 
 // console.log(refs);
 
-export { activeHomePage, selectedFilm };
+export { activeHomePage, selectedFilm, activeDetailsPage };

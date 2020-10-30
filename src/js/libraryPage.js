@@ -1,6 +1,6 @@
 import myFilmLibraryPage from '../template/myFilmLibraryPage.hbs';
 import { formattingFethData } from './initialHomePage';
-// import activeDetailsPage from './filmDetailsPage'
+import { activeDetailsPage } from './navigation';
 import refs from './refs';
 import { notice } from './pnotify';
 
@@ -11,7 +11,6 @@ fetch(
   .then(movies => {
     const { results } = movies;
     localStorage.setItem('filmsWatched', JSON.stringify(results));
-    // localStorage.setItem('filmsQueue', JSON.stringify(results));
   });
 
 fetch(
@@ -20,16 +19,11 @@ fetch(
   .then(res => res.json())
   .then(movies => {
     const { results } = movies;
-    // localStorage.setItem('filmsWatched', JSON.stringify(results));
     localStorage.setItem('filmsQueue', JSON.stringify(results));
   });
 
 function renderLibraryButtons(template) {
-  refs.myFilmLibraryPage.insertAdjacentHTML(
-    'afterbegin',
-    template(),
-    //  myFilmLibraryPageButtons(),
-  );
+  refs.myFilmLibraryPage.insertAdjacentHTML('afterbegin', template());
 }
 
 function serviceLibraryButtons(template) {
@@ -48,14 +42,27 @@ function createLibraryCardFunc(parsedLocalStorage, message) {
   refs.libraryList.innerHTML = '';
   const formatData = formattingFethData(parsedLocalStorage);
   const fragment = myFilmLibraryPage(formatData);
-
   refs.libraryList.insertAdjacentHTML('beforeend', fragment);
 
-  refs.libraryList.removeEventListener('click', onClickFilmAtLibrary);
-  refs.libraryList.addEventListener('click', onClickFilmAtLibrary);
+  refs.libraryList.removeEventListener('click', onClickFilmAtMyLibrary);
+  refs.libraryList.addEventListener('click', onClickFilmAtMyLibrary);
+}
 
-  function onClickFilmAtLibrary(e) {
-    console.log(e.target);
+function onClickFilmAtMyLibrary(e) {
+  if (e.target.nodeName !== 'LI') {
+    return;
+  }
+
+  refs.queueBtn.classList.contains('library-btn--active')
+    ? renderDetailPageFromLibrary('filmsQueue')
+    : renderDetailPageFromLibrary('filmsWatched');
+
+  function renderDetailPageFromLibrary(query) {
+    const arr = JSON.parse(localStorage.getItem(query));
+    let detailFilm = arr.find(
+      filmData => filmData.id === Number(e.target.dataset.itemid),
+    );
+    activeDetailsPage(detailFilm);
   }
 }
 
