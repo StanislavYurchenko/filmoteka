@@ -51,14 +51,12 @@ function createLibraryCardFunc(parsedLocalStorage, message) {
 
   refs.libraryList.insertAdjacentHTML('beforeend', fragment);
 
-  refs.libraryList.addEventListener('click', e => {
-    // if (!e.target.nodeName === 'IMG') {
-    //   return;
-    // }
+  refs.libraryList.removeEventListener('click', onClickFilmAtLibrary);
+  refs.libraryList.addEventListener('click', onClickFilmAtLibrary);
 
-    // activeDetailsPage();
+  function onClickFilmAtLibrary(e) {
     console.log(e.target);
-  });
+  }
 }
 
 function drawQueueFilmList() {
