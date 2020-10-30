@@ -6,5 +6,8 @@ const refs = {
   detailsPage: document.querySelector('#root-details-page'),
   form: null,
   libraryList: document.querySelector('.library-list'),
-}
+  linkHome: null,
+  linkMyLibrary: null,
+  linkLogo: null,
+};
 export default refs;

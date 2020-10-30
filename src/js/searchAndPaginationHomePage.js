@@ -8,6 +8,10 @@ let btn_prev = null;
 let page_span = null;
 
 const renderForm = template => {
+  refs.homePage.insertAdjacentHTML('afterbegin', template());
+};
+
+const renderNavigate = template => {
   refs.homePage.insertAdjacentHTML('beforeend', template());
 };
 

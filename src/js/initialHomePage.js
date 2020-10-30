@@ -6,8 +6,8 @@ const baseUrl = 'https://api.themoviedb.org';
 let pageNumber = 1;
 
 const renderFilmList = (template, arrFilms) => {
-  const ref = refs.homePage.querySelector('form')
-  ref.insertAdjacentHTML('afterend', filmListTemplate(arrFilms))
+  const ref = refs.homePage.querySelector('ul')
+  ref.innerHTML = filmListTemplate(arrFilms);
 
 };
 

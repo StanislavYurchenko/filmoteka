@@ -1,0 +1,158 @@
+.section__details-pag {
+    margin-bottom: 20px;
+
+    @media screen and (min-width: $tablet-w) {
+        margin-bottom: 28px;
+    }
+}
+
+.details__container {
+    @media screen and (min-width: $tablet-bp-min) {
+        display: flex;
+        height: 526px;
+    }
+
+    @media screen and (min-width: $desktop-bp-min){
+        height: 630px;
+    }
+}
+
+
+.details__img {
+    @media screen and (max-width: $mobile-bp-max) {
+        height: 400px;
+        width: 300px;
+        margin-bottom: 20px;
+    }
+
+    @media screen and (min-width: $tablet-w) {
+        width: 354px;
+        margin-left: 10px;
+        margin-right: 20px;
+    }
+
+    @media screen and (min-width: $desktop-bp-min) {
+        width: 456px;
+        margin-left: 34x;
+        margin-right: 34px;
+    }
+}
+
+.details__content-container {
+    @media screen and (min-width: $tablet-w) {
+        width: 328px;
+        padding-top: 12px;
+    }
+
+    @media screen and (min-width: $desktop-bp-min) {
+        width: 464px;
+    }
+}
+
+.details__title {
+    font-family: $first-font;
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 500;
+    color: $font-color;
+    margin-bottom: 18px;
+
+    @media screen and (min-width: $tablet-w) {
+        margin-bottom: 14px;
+    }
+}
+
+.details__list {
+    margin-bottom: 30px;
+
+    @media screen and (min-width: $tablet-w) {
+        margin-bottom: 46px;
+    }
+}
+
+.details__item {
+    width: 300px;
+    display: flex;
+    font-size: 14px;
+    line-height: 26px;
+    font-weight: 400;
+
+    @media screen and (min-width: $tablet-w) {
+        width: 328px;
+    }
+
+    @media screen and (min-width: $desktop-bp-min) {
+        width: 464px;
+    }
+}
+
+.details__item:nth-child(odd) {
+    background-color: $main-color-alfa-60;
+}
+
+.details__characteristic {
+    width: 126px;
+    padding-left: 16px;
+}
+
+.details__description {
+    width: 172px;
+
+    @media screen and (min-width: $tablet-w) {
+        width: 202px;
+    }
+
+    @media screen and (min-width: $desktop-bp-min) {
+        width: 338px;
+    }
+}
+
+.details__description-item:not(:last-child)::after {
+    content: ",";
+}
+
+.details__about {
+    font-family: $first-font;
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    color: $font-color;
+}
+
+.details__text-about {
+    font-family: $first-font;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: $font-color;
+    margin-bottom: 36px;
+}
+
+.details__button-container {
+    display: flex;
+}
+
+.details__button-container button {
+    position: relative;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: $first-font;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+    color: $font-color;
+    padding-left: 30px;
+}
+
+.details__button-watched {
+    margin-right: 14px;
+}
+
+.details__icons {
+    color: $main-color-alfa-60;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
