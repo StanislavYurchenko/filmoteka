@@ -139,3 +139,4 @@ const showDetails = selectFilm => {
 
 
 export { showDetails, toggleToQueue, toggleToWatched };
+

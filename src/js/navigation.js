@@ -78,7 +78,7 @@ refs.homeList.addEventListener('click', event => {
     .then(data => {
         // const qwe = data
         // selectFilm = data;
-        // console.log(selectFilm)
+        // console.log(buttonWatched)
         console.log(data)
        })
     
