@@ -2,10 +2,20 @@ import footerTemplate from '../template/footer.hbs';
 import headerTemplate from '../template/header.hbs';
 import refs from './refs';
 import 'material-design-icons/iconfont/material-icons.css';
+<<<<<<< HEAD
 import { showDetails } from './filmDetailsPage';
 import { drawQueueFilmList } from './libraryPage';
+=======
+import {showDetails} from './filmDetailsPage';
+import {drawQueueFilmList} from './libraryPage'
+import { baseUrl, apiKey} from './initialHomePage'
+import { data } from 'autoprefixer';
+// const a = showDetails();
+// console.log(a);
 
-const selectFilm = {};
+let selectedFilm = {};
+>>>>>>> 4bb836ca6aa3108c776f7ee7e244b2720b6069e8
+
 
 const activeHomePage = () => {
   refs.homePage.classList.remove('notActivePage');
@@ -19,12 +29,12 @@ const activeLibraryPage = () => {
   refs.homePage.classList.add('notActivePage');
 };
 
-const activeDetailsPage = (moviid, itsLibraryFilm) => {
-  refs.homePage.classList.add('notActivePage');
-  refs.myFilmLibraryPage.classList.add('notActivePage');
-  refs.detailsPage.classList.remove('notActivePage');
-  showDetails();
-};
+const activeDetailsPage = (movied) => {
+    refs.homePage.classList.add('notActivePage');
+    refs.myFilmLibraryPage.classList.add('notActivePage');
+    refs.detailsPage.classList.remove('notActivePage');
+    showDetails(movied);
+}
 
 refs.header.insertAdjacentHTML('afterbegin', headerTemplate());
 refs.footer.insertAdjacentHTML('afterbegin', footerTemplate());
@@ -36,10 +46,10 @@ refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
 // console.log(refs.linkHome, refs.linkMyLibrary, refs.linkLogo);
 
 refs.linkLogo.addEventListener('click', event => {
-  console.log('Слушаем Лого');
-  activeDetailsPage();
-  // activeHomePage()
-});
+    console.log('Слушаем Лого');
+    // activeDetailsPage()
+    activeHomePage()
+  });
 
 refs.linkHome.addEventListener('click', event => {
   console.log('Слушаем Хоме');
@@ -52,4 +62,33 @@ refs.linkMyLibrary.addEventListener('click', event => {
   drawQueueFilmList();
 });
 
-export { activeHomePage, selectFilm };
+refs.homeList.addEventListener('click', event => {
+  console.log('homeList');
+  const {target, currentTarget} = event;
+
+  if (target.nodeName !== 'LI') {
+      console.log("Не лишка выходим");
+      return;
+  }
+
+  const movieId = target.dataset.itemid;
+     console.log(movieId);
+
+//   console.dir( target);
+//   console.dir(currentTarget);
+
+  fetch (`${baseUrl}/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
+  .then(res => res.json())
+  .then(data => {
+    selectedFilm = data;
+    activeDetailsPage(data);
+    })   
+
+});
+
+
+
+// console.log(refs);
+
+export {activeHomePage, selectedFilm}
+
