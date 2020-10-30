@@ -1,11 +1,12 @@
-import getDetails from '../data/getDetails';
 import detailsFilms from '../template/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
 import refs from './refs';
+import { selectedFilm } from './navigation';
 
 
 const findMoveInArray = (array) => {
-  return array.find(movie => movie.original_title === getDetails.original_title).original_title;
+  const findMovie = array.find(movie => movie.id === selectedFilm.id);
+  if(findMovie) return findMovie.id;
 };
 
 
@@ -20,13 +21,13 @@ const monitorButtonStatusText = () => {
   const filmsQueueInLocalStorage = JSON.parse(localStorage.getItem('filmsQueue'));
   const filmsWatchedInLocalStorage = JSON.parse(localStorage.getItem('filmsWatched'));
 
-  if (filmsQueueInLocalStorage && filmsQueueInLocalStorage.length && findMoveInArray(filmsQueueInLocalStorage) === getDetails.original_title) {
+  if (filmsQueueInLocalStorage && filmsQueueInLocalStorage.length && findMoveInArray(filmsQueueInLocalStorage) === selectedFilm.id) {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Delete from queue`;
   } else {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
   }
 
-  if (filmsWatchedInLocalStorage && filmsWatchedInLocalStorage.length && findMoveInArray(filmsWatchedInLocalStorage) === getDetails.original_title) {
+  if (filmsWatchedInLocalStorage && filmsWatchedInLocalStorage.length && findMoveInArray(filmsWatchedInLocalStorage) === selectedFilm.id) {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Delete from watched`;
   } else {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
@@ -38,13 +39,13 @@ const toggleToQueue = () => {
   const toQueueArray = [];
   const moviesToQueueFromLocalStorage = JSON.parse(localStorage.getItem('filmsQueue'));
 
+  if(moviesToQueueFromLocalStorage) toQueueArray.push(...moviesToQueueFromLocalStorage);
 
   if (moviesToQueueFromLocalStorage && moviesToQueueFromLocalStorage.length && findMoveInArray(moviesToQueueFromLocalStorage)) {
-    toQueueArray.push(...moviesToQueueFromLocalStorage);
-    const indexOfTheMovieToBeDeleted = toQueueArray.indexOf(getDetails);
+    const indexOfTheMovieToBeDeleted = toQueueArray.indexOf(selectedFilm);
     toQueueArray.splice(indexOfTheMovieToBeDeleted, 1);
   } else {
-    toQueueArray.push(getDetails);
+    toQueueArray.push(selectedFilm);
   }
 
   localStorage.setItem('filmsQueue', JSON.stringify(toQueueArray));
@@ -55,33 +56,29 @@ const toggleToQueue = () => {
 const toggleToWatched = () => {
   const toWatchedArray = [];
   const moviesToWatchedFromLocalStorage = JSON.parse(localStorage.getItem('filmsWatched'));
-  console.log(typeof localStorage
-    .getItem('filmsWatched'));
-  const movie = localStorage
-    .getItem('filmsWatched')
-    .find(movie => movie.original_title === selectFilm.original_title);
 
+  if(moviesToWatchedFromLocalStorage) toWatchedArray.push(...moviesToWatchedFromLocalStorage); 
 
   if (moviesToWatchedFromLocalStorage && moviesToWatchedFromLocalStorage.length && findMoveInArray(moviesToWatchedFromLocalStorage)) {
-    toWatchedArray.push(...moviesToWatchedFromLocalStorage);
-    const indexOfTheMovieToBeDeleted = toWatchedArray.indexOf(getDetails);
+    const indexOfTheMovieToBeDeleted = toWatchedArray.indexOf(selectedFilm);
     toWatchedArray.splice(indexOfTheMovieToBeDeleted, 1);
   } else {
-    toWatchedArray.push(getDetails);
+    toWatchedArray.push(selectedFilm);
   }
 
   localStorage.setItem('filmsWatched', JSON.stringify(toWatchedArray));
   monitorButtonStatusText();
 };
 
+
 const showDetails = selectFilm => {
-  getDetails.release_date = getDetails.release_date
+  selectFilm.release_date = selectedFilm.release_date
     .split('')
     .splice(0, 4)
     .join('');
   const temp = detailsFilms(selectFilm);
   refs.detailsPage.innerHTML = temp;
-  console.log();
+
   monitorButtonStatusText();
 };
 
