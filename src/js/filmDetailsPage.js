@@ -25,28 +25,28 @@ const monitorButtonStatusText = () => {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Delete from queue`;
   } else {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
-  }
+  };
 
   if (filmsWatchedInLocalStorage && filmsWatchedInLocalStorage.length && findMoveInArray(filmsWatchedInLocalStorage) === selectedFilm.id) {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Delete from watched`;
   } else {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
-  }
+  };
 };
 
 
 const toggleToQueue = () => {
-  const toQueueArray = [];
+  let toQueueArray = [];
   const moviesToQueueFromLocalStorage = JSON.parse(localStorage.getItem('filmsQueue'));
 
   if(moviesToQueueFromLocalStorage) toQueueArray.push(...moviesToQueueFromLocalStorage);
 
   if (moviesToQueueFromLocalStorage && moviesToQueueFromLocalStorage.length && findMoveInArray(moviesToQueueFromLocalStorage)) {
-    const indexOfTheMovieToBeDeleted = toQueueArray.indexOf(selectedFilm);
-    toQueueArray.splice(indexOfTheMovieToBeDeleted, 1);
+    toQueueArray = toQueueArray.filter(el => el.id !== selectedFilm.id);
+
   } else {
     toQueueArray.push(selectedFilm);
-  }
+  };
 
   localStorage.setItem('filmsQueue', JSON.stringify(toQueueArray));
   monitorButtonStatusText();
@@ -54,17 +54,16 @@ const toggleToQueue = () => {
 
 
 const toggleToWatched = () => {
-  const toWatchedArray = [];
+  let toWatchedArray = [];
   const moviesToWatchedFromLocalStorage = JSON.parse(localStorage.getItem('filmsWatched'));
 
   if(moviesToWatchedFromLocalStorage) toWatchedArray.push(...moviesToWatchedFromLocalStorage); 
 
   if (moviesToWatchedFromLocalStorage && moviesToWatchedFromLocalStorage.length && findMoveInArray(moviesToWatchedFromLocalStorage)) {
-    const indexOfTheMovieToBeDeleted = toWatchedArray.indexOf(selectedFilm);
-    toWatchedArray.splice(indexOfTheMovieToBeDeleted, 1);
+    toWatchedArray = toWatchedArray.filter(el => el.id !== selectedFilm.id);
   } else {
     toWatchedArray.push(selectedFilm);
-  }
+  };
 
   localStorage.setItem('filmsWatched', JSON.stringify(toWatchedArray));
   monitorButtonStatusText();
