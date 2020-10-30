@@ -1,11 +1,14 @@
 import refs from './refs';
 import homePageTpl from '../template/homePageContent.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
+import { formattingFethData } from './initialHomePage';
 
 let formRef = null;
 let btn_next = null;
 let btn_prev = null;
 let page_span = null;
+let isLastPage = false;
+let isFirstPage = false;
 
 const renderForm = template => {
   refs.homePage.insertAdjacentHTML('afterbegin', template());
@@ -63,10 +66,19 @@ function fetchMovies() {
     } else {
       requir.classList.add('is-hidden');
     }
-    const markup = data.length === 0 ? '' : homePageTpl(data);
+    if (films.inputValue === ' ') return;
+    if (isLastPage) {
+      btn_next.setAttribute('disabled', 'disabled');
+    } else btn_next.removeAttribute('disabled');
+
+    if (isFirstPage) {
+      btn_prev.setAttribute('disabled', 'disabled');
+    } else btn_prev.removeAttribute('disabled');
+
+    const markup =
+      data.length === 0 ? '' : homePageTpl(formattingFethData(data));
     refs.homePage.querySelector('.home-page-list').innerHTML = markup;
     page_span.innerHTML = films.pageNumb;
-    console.log('data', data);
   });
 }
 
@@ -84,7 +96,8 @@ const films = {
 
       const data = await response.json();
       console.log('data', data);
-      console.log('pages', data.total_pages);
+      isLastPage = data.page === data.total_pages ? true : false;
+      isFirstPage = data.page === 1 ? true : false;
       return data.results;
     } catch (error) {
       throw error;
