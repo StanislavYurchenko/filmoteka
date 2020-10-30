@@ -30,10 +30,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
 
-  // @media screen and (min-width: $tablet-bp-min) {
-  //   justify-content: flex-start;
-  // }
+.home-page-list_item-rateblock {
+  box-shadow: inset 0px 0px 2.79px 0.21px rgba(0, 0, 0, 0.35),
+    inset 0px 0px 2.64px 1.36px rgba(0, 0, 0, 0.35);
+}
+
+.item-overlov,
+.home-page-list_item-title,
+.home-page-list_item-image,
+.home-page-list_item-rateblock {
+  pointer-events: none;
 }
 
 // .library-item {

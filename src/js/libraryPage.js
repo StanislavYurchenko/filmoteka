@@ -51,13 +51,14 @@ function createLibraryCardFunc(parsedLocalStorage, message) {
 
   refs.libraryList.insertAdjacentHTML('beforeend', fragment);
 
-  // refs.libraryList.addEventListener('click', e => {
-  //   if (!e.target.nodeName === 'IMG') {
-  //     return;
-  //   }
-  //   activeDetailsPage();
-  //   // console.log(e.target.nodeName);
-  // });
+  refs.libraryList.addEventListener('click', e => {
+    // if (!e.target.nodeName === 'IMG') {
+    //   return;
+    // }
+
+    // activeDetailsPage();
+    console.log(e.target);
+  });
 }
 
 function drawQueueFilmList() {
