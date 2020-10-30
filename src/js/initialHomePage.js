@@ -27,8 +27,10 @@ const formattingFethData = (arrData) => {
   return arrData.map(el => {
     let imgPath = el.backdrop_path;
     let imgPathBig = el.poster_path;
-    let filmDateFormated = el.release_date.slice(0, 4);
-    el.release_date = filmDateFormated;
+    let release_date = el.release_date;
+    (typeof release_date === 'undefined')
+      ? el.release_date = 'unknown'
+      : el.release_date = el.release_date.slice(0, 4);
     const verifyImgBigPath = () => {
       if (typeof imgPathBig === "object") {
         el.backdrop_path = `${pathImageDefault}`;
