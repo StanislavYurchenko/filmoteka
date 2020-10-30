@@ -4,14 +4,14 @@ import 'material-design-icons/iconfont/material-icons.css';
 import refs from './refs';
 
 const monitorButtonStatusText = () => {
-// <<<<<
+
 // const filmsQueueInLocalStorage = JSON.parse(localStorage.getItem('filmsQueue')).find(movie => movie.original_title === selectFilm.original_title);
 // const filmsWatchedInLocalStorage = JSON.parse(localStorage.getItem('filmsWatched')).find(movie => movie.original_title === selectFilm.original_title);
 
-// const buttonWatched = document.querySelector('.details__button-watched');
-// const buttonQueue = document.querySelector('.details__button-queue');
-
-
+const buttonWatched = document.querySelector('.details__button-watched');
+const buttonQueue = document.querySelector('.details__button-queue');
+buttonWatched.addEventListener('click', toggleToQueue)
+buttonQueue.addEventListener('click', toggleToWatched)
 // const filmsQueueInLocalStorage = JSON.parse(localStorage.getItem('filmsQueue')).find(movie => movie.original_title === getDetails.original_title);
 // const filmsWatchedInLocalStorage = JSON.parse(localStorage.getItem('filmsWatched')).find(movie => movie.original_title === getDetails.original_title);
 
@@ -28,26 +28,24 @@ const monitorButtonStatusText = () => {
     //     buttonWatched.textContent = 'Add to watched';
     // };
 
-    // if(filmsQueueInLocalStorage === getDetails.original_title) {
-    //     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Delete from queue`;
-    // } else {
-    //     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
-    // };
+    if(filmsQueueInLocalStorage === getDetails.original_title) {
+        buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Delete from queue`;
+    } else {
+        buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
+    };
+
+    if(filmsWatchedInLocalStorage === getDetails.original_title) {
+        buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Delete from watched`;
+    } else {
+        buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
+    };
 
 
-    // if(filmsWatchedInLocalStorage === getDetails.original_title) {
-    //     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Delete from watched`;
-    // } else {
-    //     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
-    // };
-
-
-// =======
   // const filmsQueueInLocalStorage = JSON.parse(localStorage.getItem('filmsQueue')).find(movie => movie.original_title === selectFilm.original_title);
   // const filmsWatchedInLocalStorage = JSON.parse(localStorage.getItem('filmsWatched')).find(movie => movie.original_title === selectFilm.original_title);
 
-  const buttonWatched = document.querySelector('.details__button-watched');
-  const buttonQueue = document.querySelector('.details__button-queue');
+  // const buttonWatched = document.querySelector('.details__button-watched');
+  // const buttonQueue = document.querySelector('.details__button-queue');
 
   const filmsQueueInLocalStorage = JSON.parse(
     localStorage.getItem('filmsQueue'),
@@ -95,6 +93,8 @@ const toggleToQueue = () => {
 const toggleToWatched = () => {
   const toWatchedArray = [];
   const moviesToWatchedFromLocalStorage = JSON.parse(localStorage.getItem('filmsWatched'));
+  console.log(typeof localStorage
+    .getItem('filmsWatched'));
   const movie = localStorage
     .getItem('filmsWatched')
     .find(movie => movie.original_title === selectFilm.original_title);
@@ -134,10 +134,8 @@ const showDetails = selectFilm => {
     .join('');
   const temp = detailsFilms(selectFilm);
   refs.detailsPage.innerHTML = temp;
+  console.log();
   monitorButtonStatusText();
 };
 
-
 export { showDetails, toggleToQueue, toggleToWatched };
-
-
