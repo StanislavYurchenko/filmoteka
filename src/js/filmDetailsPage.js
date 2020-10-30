@@ -30,7 +30,7 @@ const monitorButtonStatusText = () => {
   }
 };
 
-const drawQueueFilmList = () => {
+const toggleToQueue = () => {
   const toQueueArray = [];
   const localStorage = JSON.parse(localStorage.getItem('filmsQueue'));
   const movie = localStorage
@@ -53,7 +53,7 @@ const drawQueueFilmList = () => {
   monitorButtonStatusText();
 };
 
-const drawWatchedFilmList = () => {
+const toggleToWatched = () => {
   const toWatchedArray = [];
   const localStorage = JSON.parse(localStorage.getItem('filmsWatched'));
   const movie = localStorage
@@ -86,4 +86,4 @@ const showDetails = selectFilm => {
   monitorButtonStatusText();
 };
 
-export { showDetails, drawQueueFilmList, drawWatchedFilmList };
+export { showDetails, toggleToQueue, toggleToWatched };
