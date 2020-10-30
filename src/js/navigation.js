@@ -9,7 +9,8 @@ import { data } from 'autoprefixer';
 // const a = showDetails();
 // console.log(a);
 
-const selectFilm = {};
+let selectedFilm = {};
+
 
 const activeHomePage = () => {
     refs.homePage.classList.remove('notActivePage');
@@ -41,8 +42,8 @@ refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
 
 refs.linkLogo.addEventListener('click', event => {
     console.log('Слушаем Лого');
-    activeDetailsPage()
-    // activeHomePage()
+    // activeDetailsPage()
+    activeHomePage()
   });
 
 refs.linkHome.addEventListener('click', event => {
@@ -73,15 +74,10 @@ refs.homeList.addEventListener('click', event => {
 
   fetch (`${baseUrl}/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
   .then(res => res.json())
-  .then(data => {activeDetailsPage(data);
-    return data})
-    .then(data => {
-        // const qwe = data
-        // selectFilm = data;
-        // console.log(buttonWatched)
-        console.log(data)
-       })
-    
+  .then(data => {
+    selectedFilm = data;
+    activeDetailsPage(data);
+    })   
 
 });
 
@@ -89,5 +85,5 @@ refs.homeList.addEventListener('click', event => {
 
 // console.log(refs);
 
-export {activeHomePage, selectFilm}
+export {activeHomePage, selectedFilm}
 
