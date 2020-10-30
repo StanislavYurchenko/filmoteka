@@ -9,5 +9,7 @@ const refs = {
   linkHome: null,
   linkMyLibrary: null,
   linkLogo: null,
+  watchedBtn:null,
+  queueBtn:null,
 };
 export default refs;

@@ -4,8 +4,8 @@ import { formattingFethData } from './initialHomePage';
 import refs from './refs';
 import { notice } from './pnotify';
 
-const watchedBtn = document.querySelector('.watched');
-const queueBtn = document.querySelector('.queue');
+// const watchedBtn = document.querySelector('.watched');
+// const queueBtn = document.querySelector('.queue');
 
 //
 fetch(
@@ -34,7 +34,19 @@ function renderLibraryButtons(template) {
     template(),
     //  myFilmLibraryPageButtons(),
   );
+
 }
+
+function serviceLibraryButtons(template) {
+  renderLibraryButtons(template);
+  refs.watchedBtn = document.querySelector('.watched');
+  refs.queueBtn = document.querySelector('.queue');
+  console.log('refs.watchedBtn',refs.watchedBtn);
+  console.log(' refs.queueBtn', refs.queueBtn);
+  refs.watchedBtn.addEventListener('click', drawWatchedFilmList);
+  refs.queueBtn.addEventListener('click', drawQueueFilmList);
+}
+
 
 function createLibraryCardFunc(parsedLocalStorage, message) {
   if (!parsedLocalStorage) {
@@ -57,11 +69,9 @@ function createLibraryCardFunc(parsedLocalStorage, message) {
 }
 
 function drawQueueFilmList() {
-  watchedBtn.addEventListener('click', drawWatchedFilmList);
-  queueBtn.addEventListener('click', drawQueueFilmList);
 
-  watchedBtn.classList.remove('library-btn--active');
-  queueBtn.classList.add('library-btn--active');
+  refs.watchedBtn.classList.remove('library-btn--active');
+  refs.queueBtn.classList.add('library-btn--active');
 
   const message = 'You do not have to queue movies to watch. Add them.';
   let readLocalStorage = localStorage.getItem('filmsQueue');
@@ -71,8 +81,8 @@ function drawQueueFilmList() {
 }
 
 function drawWatchedFilmList() {
-  queueBtn.classList.remove('library-btn--active');
-  watchedBtn.classList.add('library-btn--active');
+  refs.queueBtn.classList.remove('library-btn--active');
+  refs.watchedBtn.classList.add('library-btn--active');
 
   const message = 'You do not have watched movies. Add them';
   let readLocalStorage = localStorage.getItem('filmsWatched');
@@ -81,4 +91,4 @@ function drawWatchedFilmList() {
   createLibraryCardFunc(parsedLocalStorage, message);
 }
 
-export { drawQueueFilmList, drawWatchedFilmList, renderLibraryButtons };
+export { drawQueueFilmList, drawWatchedFilmList, serviceLibraryButtons };

@@ -15,7 +15,7 @@ import {
   renderForm,
   renderNavigate,
 } from './js/searchAndPaginationHomePage';
-import { renderLibraryButtons } from './js/libraryPage';
+import { serviceLibraryButtons } from './js/libraryPage';
 import formTemplate from './template/homePageForm.hbs';
 import filmListTemplate from './template/homePageContent.hbs';
 import navigateTemplate from './template/homePageNav.hbs';
@@ -28,7 +28,7 @@ renderForm(formTemplate);
 renderNavigate(navigateTemplate);
 
 //render library buttons
-renderLibraryButtons(myFilmLibraryPageButtons);
+serviceLibraryButtons(myFilmLibraryPageButtons);
 
 // render movies
 fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
