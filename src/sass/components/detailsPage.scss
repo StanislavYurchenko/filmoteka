@@ -1,8 +1,14 @@
 .section__details-pag {
+    padding-top: 20px;
     margin-bottom: 20px;
 
     @media screen and (min-width: $tablet-bp-min) {
+        padding-top: 22px;
         margin-bottom: 28px;
+    }
+
+    @media screen and (min-width: $desktop-bp-min) {
+        padding-top: 26px;
     }
 }
 
@@ -134,6 +140,9 @@
 }
 
 .details__button-container button {
+    @media screen and (max-width: $mobile-bp-max) {
+        font-size: 13px;
+    }
     position: relative;
     border: none;
     background: transparent;
