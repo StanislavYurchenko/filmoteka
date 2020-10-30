@@ -76,9 +76,9 @@ refs.homeList.addEventListener('click', event => {
   .then(data => {activeDetailsPage(data);
     return data})
     .then(data => {
-        const qwe = data
-        // selectFilm = {...data};
-        console.log(qwe)
+        // const qwe = data
+        // selectFilm = data;
+        // console.log(selectFilm)
         console.log(data)
        })
     
