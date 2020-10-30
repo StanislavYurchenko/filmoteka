@@ -114,10 +114,21 @@
     padding: 21px 368px 22px;
   }
 
+  &__wrap {
+    // display: block;
+    margin: 0 auto;
+    @media screen and (max-width: $mobile-bp-max) {
+      width: 258px;
+    }
+    @media screen and (min-width: $tablet-bp-min) {
+      width: 288px;
+    }
+  }
+
   &__input {
     position: relative;
     border: none;
-    display: block;
+    // display: block;
     outline: none;
     border-bottom: 2px solid #818181;
     margin: 0 auto;
@@ -125,11 +136,11 @@
     font-family: $first-font;
 
     @media screen and (max-width: $mobile-bp-max) {
-      width: 258px;
+      width: 100%;
       @include font-settings(14.4px, 1, 400, rgb(0, 0, 0));
     }
     @media screen and (min-width: $tablet-bp-min) {
-      width: 288px;
+      width: 100%;
       @include font-settings(16px, 1, 400, rgb(0, 0, 0));
     }
 
