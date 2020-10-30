@@ -1,11 +1,9 @@
 .section__home-page {
   @media screen and (max-width: $mobile-bp-max) {
-    // padding-top: 13px;
-    padding-bottom: 13px;
+    // padding-bottom: 13px;
   }
   @media screen and (min-width: $tablet-bp-min) {
-    // padding-top: 30px;
-    padding-bottom: 30px;
+    // padding-bottom: 30px;
   }
 }
 
@@ -103,58 +101,137 @@
 }
 
 .form-search {
-  position: relative;
-  margin: 0 auto;
-  width: 257px;
-  padding-top: 21px;
-  padding-bottom: 22px;
-  // box-shadow: 0px 5px 9px 1px rgba(0, 0, 0, 0.23);
+  box-shadow: -5px 5px 9px 1px rgba(0, 0, 0, 0.23);
+
+  @media screen and (max-width: $mobile-bp-max) {
+    padding: 21px 32px 22px;
+  }
+
   @media screen and (min-width: $tablet-bp-min) {
+    padding: 21px 240px 22px;
   }
   @media screen and (min-width: $desktop-bp-min) {
+    padding: 21px 368px 22px;
   }
 
   &__input {
+    position: relative;
     border: none;
+    display: block;
     outline: none;
     border-bottom: 2px solid #818181;
-    width: 100%;
-    padding-left: 40px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    @media screen and (min-width: $tablet-bp-min) {
+    margin: 0 auto;
+    padding: 6px 0px 6px 28px;
+    font-family: $first-font;
+
+    @media screen and (max-width: $mobile-bp-max) {
+      width: 258px;
+      @include font-settings(14.4px, 1, 400, rgb(0, 0, 0));
     }
-    @media screen and (min-width: $desktop-bp-min) {
+    @media screen and (min-width: $tablet-bp-min) {
+      width: 288px;
+      @include font-settings(16px, 1, 400, rgb(0, 0, 0));
     }
 
     &::placeholder {
-      font-size: 14.4px;
-      font-family: 'Myriad Pro';
-      color: rgb(0, 0, 0);
-      line-height: 14.4;
+      font-family: $first-font;
+      @media screen and (max-width: $mobile-bp-max) {
+        @include font-settings(14.4px, 1, 400, rgb(0, 0, 0));
+      }
+      @media screen and (min-width: $tablet-bp-min) {
+        @include font-settings(16px, 1, 400, rgb(0, 0, 0));
+      }
     }
   }
 
   &__icon {
+    display: block;
     position: absolute;
-    width: 17px;
-    height: 17px;
+    z-index: 100;
     color: #818181;
+    top: 100px;
+    @media screen and (max-width: $mobile-bp-max) {
+      width: 17px;
+      height: 17px;
+    }
+    @media screen and (min-width: $tablet-bp-min) {
+      width: 19px;
+      height: 19px;
+    }
   }
 
   &__requirements {
-    max-height: 200px;
-    padding: 0 30px 20px 50px;
-    // padding: 0 30px 0 50px;
+    padding: 10px 0px 0px 20px;
     color: #999;
-    // max-height: 0;
     transition: 0.28s;
     overflow: hidden;
-    color: red;
     font-style: italic;
+    font-family: $first-font;
+    @media screen and (max-width: $mobile-bp-max) {
+      @include font-settings(12px, 1, 400, rgb(255, 0, 0));
+    }
+    @media screen and (min-width: $tablet-bp-min) {
+      @include font-settings(14px, 1, 400, rgb(255, 0, 0));
+    }
+
     &.is-hidden {
       display: none;
     }
+  }
+}
+
+.pagination {
+  display: flex;
+  margin: 0 auto;
+  @media screen and (max-width: $mobile-bp-max) {
+    width: 270px;
+    padding: 26px 0px;
+  }
+  @media screen and (min-width: $tablet-bp-min) {
+    width: 214px;
+    padding: 20px 0px;
+  }
+  &__btn {
+    justify-content: space-between;
+    margin: 0 auto;
+    text-align: center;
+    font-family: $second-font;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(221, 221, 221);
+    border-radius: 5px;
+    width: 94px;
+    height: 46px;
+    background: linear-gradient(
+      to top,
+      rgb(240, 240, 240) 0%,
+      rgba(240, 240, 240, 0) 100%
+    );
+    box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.004);
+    @media screen and (max-width: $mobile-bp-max) {
+      width: 94px;
+      height: 46px;
+      @include font-settings(22px, 26px, 700, rgb(85, 98, 112));
+    }
+    @media screen and (min-width: $tablet-bp-min) {
+      width: 74px;
+      height: 36px;
+      @include font-settings(18px, 20px, 700, rgb(85, 98, 112));
+    }
+  }
+}
+
+.page {
+  display: block;
+  padding-top: 8px;
+
+  @media screen and (max-width: $mobile-bp-max) {
+    width: 46px;
+    height: 46px;
+  }
+  @media screen and (min-width: $tablet-bp-min) {
+    width: 36px;
+    height: 36px;
   }
 }
 
@@ -170,4 +247,13 @@
     rgba(35, 31, 32, 0.1) 40%
   );
   border-radius: 0.8rem;
+}
+
+[disabled] {
+  @media screen and (max-width: $mobile-bp-max) {
+    @include font-settings(22px, 26px, 400, rgb(167, 177, 187));
+  }
+  @media screen and (min-width: $tablet-bp-min) {
+    @include font-settings(18px, 20px, 400, rgb(167, 177, 187));
+  }
 }

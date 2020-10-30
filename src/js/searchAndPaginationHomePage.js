@@ -15,10 +15,6 @@ const renderNavigate = template => {
   refs.homePage.insertAdjacentHTML('beforeend', template());
 };
 
-const renderNavigate = template => {
-  refs.homePage.insertAdjacentHTML('beforeend', template());
-};
-
 function usersSearch() {
   formRef = refs.homePage.querySelector('form');
   formRef.addEventListener('submit', searchFilmsHandler);
@@ -28,18 +24,18 @@ function usersSearch() {
   btn_next.addEventListener('click', handlerNext);
   btn_prev.addEventListener('click', handlerPrev);
   if (films.isStartPage) {
-    btn_prev.classList.add('display-none');
+    btn_prev.setAttribute('disabled', 'disabled');
   }
 }
 
 function handlerNext() {
   films.incrementPage();
   fetchMovies();
-  btn_prev.classList.remove('display-none');
+  btn_prev.removeAttribute('disabled');
 }
 function handlerPrev() {
-  if (films.pageNumb === 2) {
-    btn_prev.classList.add('display-none');
+  if (films.pageNumb === 1) {
+    btn_prev.setAttribute('disabled', 'disabled');
   }
   if (films.isStartPage === false) {
     films.decrementPage();
@@ -60,16 +56,13 @@ function searchFilmsHandler(event) {
 
 function fetchMovies() {
   films.fetchFilms().then(data => {
+    const requir = refs.homePage.querySelector('.form-search__requirements');
     if (data.length === 0) {
-      refs.homePage
-        .querySelector('.form-search__requirements')
-        .classList.remove('is-hidden');
+      requir.classList.remove('is-hidden');
+      btn_next.setAttribute('disabled', 'disabled');
     } else {
-      refs.homePage
-        .querySelector('.form-search__requirements')
-        .classList.add('is-hidden');
+      requir.classList.add('is-hidden');
     }
-
     const markup = data.length === 0 ? '' : homePageTpl(data);
     refs.homePage.querySelector('.home-page-list').innerHTML = markup;
     page_span.innerHTML = films.pageNumb;
