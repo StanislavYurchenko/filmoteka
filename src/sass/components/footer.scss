@@ -31,3 +31,11 @@
 .material-icons-white {
   color: white;
 }
+
+.command_logo {
+  @media screen and (min-width: $tablet-bp-min) {
+    max-width: 300px;
+  }
+  max-width: 200px;
+  margin: 0 auto;
+}

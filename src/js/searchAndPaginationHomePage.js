@@ -13,8 +13,11 @@ const controlGlobalPage = {
   isStartGlobalPage: true,
   setStartPage() {
     this.isStartGlobalPage = true;
-    requir.classList.add('is-hidden');
-    formRef.reset();
+    if (requir !== null) {
+      requir.classList.add('is-hidden');
+      formRef.reset();
+    }
+
   },
   setSomePage() {
     this.isStartGlobalPage = false;
