@@ -7,11 +7,14 @@ let formRef = null;
 let btn_next = null;
 let btn_prev = null;
 let page_span = null;
+let requir = null;
 
 const controlGlobalPage = {
   isStartGlobalPage: true,
   setStartPage() {
     this.isStartGlobalPage = true;
+    requir.classList.add('is-hidden');
+    formRef.reset();
   },
   setSomePage() {
     this.isStartGlobalPage = false;
@@ -105,7 +108,7 @@ function chendjeButtonPagActive(data) {
 
 function fetchMovies() {
   films.fetchFilms().then(data => {
-    const requir = refs.homePage.querySelector('.form-search__requirements');
+    requir = refs.homePage.querySelector('.form-search__requirements');
     if (data.length === 0) {
       requir.classList.remove('is-hidden');
       btn_next.setAttribute('disabled', 'disabled');
@@ -158,4 +161,4 @@ const films = {
   },
 };
 
-export { usersSearch, renderForm, renderNavigate, controlGlobalPage };
+export { usersSearch, renderForm, renderNavigate, controlGlobalPage, homePagePagination };
