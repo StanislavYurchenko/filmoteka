@@ -1,6 +1,8 @@
 import './sass/main.scss';
 import './js/navigation';
 import img from './images/temp.png';
+import img_footer from './images/footer_logo/me_logo.png';
+
 import refs from './js/refs.js';
 import { renderFilmList, fetchPopularMoviesList, baseUrl, apiKey, pageNumber, formattingFethData } from './js/initialHomePage';
 import { usersSearch, renderForm, renderNavigate } from './js/searchAndPaginationHomePage';
@@ -21,9 +23,9 @@ serviceLibraryButtons(myFilmLibraryPageButtons);
 
 // render movies
 fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
-  const arrData = data.results;
-  renderFilmList(filmListTemplate, formattingFethData(arrData));
-  refs.homePage.querySelector('.page').innerHTML = pageNumber;
+    const arrData = data.results;
+    renderFilmList(filmListTemplate, formattingFethData(arrData));
+    refs.homePage.querySelector('.page').innerHTML = pageNumber;
 });
 
 //render query
