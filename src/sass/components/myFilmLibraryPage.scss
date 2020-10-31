@@ -43,6 +43,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  @media screen and (min-width: $tablet-bp-min) {
+    justify-content: start;
+  }
 }
 
 .home-page-list_item-rateblock {
