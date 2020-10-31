@@ -84,11 +84,9 @@ const toggleToWatched = () => {
 //   monitorButtonStatusText();
 // };
 const showDetails = selectFilm => {
-  console.log('selectFilm', selectFilm);
-
-  if (selectFilm.release_date && selectFilm.release_date.length > 4) {
-    selectFilm.release_date = selectedFilm.release_date.split('').splice(0, 4).join('');
-  }
+  (typeof selectFilm.release_date === 'undefined' || selectFilm.release_date === "" || selectFilm.release_date.length < 4)
+    ? selectFilm.release_date = 'unknown'
+    : selectFilm.release_date = selectFilm.release_date.slice(0, 4);
 
   const temp = detailsFilms(selectFilm);
   refs.detailsPage.innerHTML = temp;
@@ -98,3 +96,4 @@ const showDetails = selectFilm => {
 
 
 export { showDetails, toggleToQueue, toggleToWatched };
+
