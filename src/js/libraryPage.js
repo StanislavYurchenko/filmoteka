@@ -1,4 +1,4 @@
-import myFilmLibraryPage from '../template/myFilmLibraryPage.hbs';
+import myFilmLibraryPageTemplate from '../template/myFilmLibraryPage.hbs';
 import { formattingFethData } from './initialHomePage';
 import { activeDetailsPage } from './navigation';
 import refs from './refs';
@@ -23,7 +23,7 @@ function createLibraryCardFunc(parsedLocalStorage, message) {
   }
   // refs.libraryList.innerHTML = '';
   const formatData = formattingFethData(parsedLocalStorage);
-  const renderLibraryList = myFilmLibraryPage(formatData);
+  const renderLibraryList = myFilmLibraryPageTemplate(formatData);
   refs.libraryList.insertAdjacentHTML('beforeend', renderLibraryList);
 
   refs.libraryList.removeEventListener('click', onClickFilmAtMyLibrary);
@@ -38,6 +38,12 @@ function createLibraryCardFunc(parsedLocalStorage, message) {
     refs.queueBtn.classList.contains('library-btn--active')
       ? renderDetailPageFromLibrary('filmsQueue')
       : renderDetailPageFromLibrary('filmsWatched');
+
+    // if (refs.queueBtn.classList.contains('library-btn--active')) {
+    //   renderDetailPageFromLibrary('filmsQueue');
+    // } else {
+    //   renderDetailPageFromLibrary('filmsWatched');
+    // }
 
     function renderDetailPageFromLibrary(query) {
       const arr = JSON.parse(localStorage.getItem(query));
