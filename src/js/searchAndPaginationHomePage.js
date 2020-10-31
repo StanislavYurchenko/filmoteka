@@ -41,6 +41,14 @@ function usersSearch() {
   }
 }
 
+function homePagePagination() {
+  fetchPopularMoviesList(baseUrl, films.pageNumb, apiKey).then(data => {
+    const arrData = data.results;
+    refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(formattingFethData(arrData));
+    page_span.innerHTML = films.pageNumb;
+  })
+}
+
 function handlerNext() {
   if (!controlGlobalPage.isStartGlobalPage) {
     films.incrementPage();
@@ -48,11 +56,7 @@ function handlerNext() {
     btn_prev.removeAttribute('disabled');
   } else {
     films.incrementPage();
-    fetchPopularMoviesList(baseUrl, films.pageNumb, apiKey).then(data => {
-      const arrData = data.results;
-      refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(formattingFethData(arrData));
-      page_span.innerHTML = films.pageNumb;
-    })
+    homePagePagination()
     btn_prev.removeAttribute('disabled');
   }
 }
@@ -69,11 +73,7 @@ function handlerPrev() {
   } else {
     if (films.isStartPage === false) {
       films.decrementPage();
-      fetchPopularMoviesList(baseUrl, films.pageNumb, apiKey).then(data => {
-        const arrData = data.results;
-        refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(formattingFethData(arrData));
-        page_span.innerHTML = films.pageNumb;
-      })
+      homePagePagination()
     }
     if (films.pageNumb === 1) {
       btn_prev.setAttribute('disabled', 'disabled');
