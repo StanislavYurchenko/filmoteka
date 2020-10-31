@@ -1,7 +1,7 @@
 import refs from './refs';
 import homePageTpl from '../template/homePageContent.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-import { formattingFethData, fetchPopularMoviesList, baseUrl } from './initialHomePage';
+import { formattingFetchData, fetchPopularMoviesList, baseUrl } from './initialHomePage';
 const apiKey = '81f248d3c9154788229a5419bb33091a';
 let formRef = null;
 let btn_next = null;
@@ -47,9 +47,9 @@ function usersSearch() {
 
 function homePagePagination() {
   fetchPopularMoviesList(baseUrl, films.pageNumb, apiKey).then(data => {
-    chendjeButtonPagActive(data);
+    changeButtonPagActive(data);
     const arrData = data.results;
-    refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(formattingFethData(arrData));
+    refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(formattingFetchData(arrData));
     page_span.innerHTML = films.pageNumb;
   })
 }
@@ -97,7 +97,7 @@ function searchFilmsHandler(event) {
   controlGlobalPage.setSomePage();
 }
 
-function chendjeButtonPagActive(data) {
+function changeButtonPagActive(data) {
   let isLastPage = data.page === data.total_pages ? true : false;
   let isFirstPage = data.page === 1 ? true : false;
   if (isLastPage) {
@@ -137,7 +137,7 @@ const films = {
       );
       const data = await response.json();
       console.log('data', data);
-      chendjeButtonPagActive(data);
+      changeButtonPagActive(data);
       return data.results;
     } catch (error) {
       throw error;

@@ -1,6 +1,6 @@
 import myLibraryFilmListTemplate from '../template/myFilmLibraryPage.hbs';
-import { formattingFethData } from './initialHomePage';
-import { activeDetailsPage } from './navigation';
+import { formattingFetchData } from './initialHomePage';
+import { activeDetailsPage} from './navigation';
 import refs from './refs';
 import { notice } from './pnotify';
 
@@ -24,7 +24,7 @@ function createLibraryCardFunc(localeStorageRequest, message) {
     notice(message);
     return;
   }
-  const formatData = formattingFethData(readLocalStorage);
+  const formatData = formattingFetchData(readLocalStorage);
   const renderLibraryList = myLibraryFilmListTemplate(formatData);
   refs.libraryList.insertAdjacentHTML('beforeend', renderLibraryList);
 
@@ -46,7 +46,8 @@ function createLibraryCardFunc(localeStorageRequest, message) {
       const detailFilm = getLocalStorage.find(
         filmData => filmData.id === Number(e.target.dataset.itemid),
       );
-      activeDetailsPage(detailFilm, itsLibraryFilm = true);
+
+      activeDetailsPage(detailFilm);
     }
   }
 }
@@ -77,3 +78,4 @@ function doNotActiveButton(button) {
 }
 
 export { drawQueueFilmList, drawWatchedFilmList, serviceLibraryButtons };
+

@@ -1,8 +1,8 @@
 import detailsFilms from '../template/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
 import refs from './refs';
-import { selectedFilm } from './navigation';
 
+let selectedFilm = null;
 
 const findMoveInArray = (array) => {
   const findMovie = array.find(movie => movie.id === selectedFilm.id);
@@ -70,14 +70,12 @@ const toggleToWatched = () => {
 };
 
 
-const showDetails = selectFilm => {
+const showDetails =( selectFilm )=> {
+  selectedFilm = selectFilm;
   (typeof selectFilm.release_date === 'undefined' || selectFilm.release_date === "")
     ? selectFilm.release_date = 'unknown'
     : selectFilm.release_date = selectFilm.release_date.slice(0, 4);
-
-  const temp = detailsFilms(selectFilm);
-  refs.detailsPage.innerHTML = temp;
-
+  refs.detailsPage.innerHTML = detailsFilms(selectFilm);  
   monitorButtonStatusText();
 };
 

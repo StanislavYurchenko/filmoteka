@@ -8,11 +8,9 @@ import { baseUrl, apiKey } from './initialHomePage';
 import { controlGlobalPage, homePagePagination } from './searchAndPaginationHomePage';
 
 
-import { data } from 'autoprefixer';
+// import { data } from 'autoprefixer';
 // const a = showDetails();
 // console.log(a);
-
-let selectedFilm = {};
 
 const activeHomePage = () => {
   refs.homePage.classList.remove('notActivePage');
@@ -26,11 +24,11 @@ const activeLibraryPage = () => {
   refs.homePage.classList.add('notActivePage');
 };
 
-const activeDetailsPage = movied => {
+const activeDetailsPage = (movied, isLibraryFilm) => {
   refs.homePage.classList.add('notActivePage');
   refs.myFilmLibraryPage.classList.add('notActivePage');
   refs.detailsPage.classList.remove('notActivePage');
-  showDetails(movied);
+  showDetails(movied, isLibraryFilm);
 };
 
 refs.header.insertAdjacentHTML('afterbegin', headerTemplate());
@@ -81,11 +79,10 @@ refs.homeList.addEventListener('click', event => {
   fetch(`${baseUrl}/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
     .then(res => res.json())
     .then(data => {
-      selectedFilm = data;
       activeDetailsPage(data);
     });
 });
 
 // console.log(refs);
 
-export { activeHomePage, selectedFilm, activeDetailsPage };
+export { activeHomePage, activeDetailsPage };

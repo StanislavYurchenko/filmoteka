@@ -21,7 +21,7 @@ const fetchPopularMoviesList = (baseUrl, pageNumber, apiKey) => {
 };
 
 
-const formattingFethData = (arrData) => {
+const formattingFetchData = (arrData) => {
   const baseImageDataUrl = `https://image.tmdb.org/t/p/w500/`;
   const pathImageDefault = `./images/temp.png`;
   return arrData.map(el => {
@@ -47,4 +47,4 @@ const formattingFethData = (arrData) => {
 
 
 
-export { renderFilmList, fetchPopularMoviesList, baseUrl, apiKey, pageNumber, formattingFethData };
+export { renderFilmList, fetchPopularMoviesList, baseUrl, apiKey, pageNumber, formattingFetchData };
