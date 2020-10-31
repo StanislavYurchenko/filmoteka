@@ -70,11 +70,26 @@ const toggleToWatched = () => {
 };
 
 
+// const showDetails = selectFilm => {
+//   // console.log('electFilm.release_date', selectFilm.release_date);
+//   // console.log('selectedFilm.release_date', selectedFilm.release_date);
+//   selectFilm.release_date = selectedFilm.release_date
+//     .split('')
+//     .splice(0, 4)
+//     .join('');
+//   console.log(selectFilm.release_date);
+//   const temp = detailsFilms(selectFilm);
+//   refs.detailsPage.innerHTML = temp;
+
+//   monitorButtonStatusText();
+// };
 const showDetails = selectFilm => {
-  if(selectFilm.release_date) {
+  console.log('selectFilm', selectFilm);
+
+  if (selectFilm.release_date && selectFilm.release_date.length > 4) {
     selectFilm.release_date = selectedFilm.release_date.split('').splice(0, 4).join('');
   }
-  
+
   const temp = detailsFilms(selectFilm);
   refs.detailsPage.innerHTML = temp;
 
