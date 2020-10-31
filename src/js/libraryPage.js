@@ -39,12 +39,6 @@ function createLibraryCardFunc(parsedLocalStorage, message) {
       ? renderDetailPageFromLibrary('filmsQueue')
       : renderDetailPageFromLibrary('filmsWatched');
 
-    // if (refs.queueBtn.classList.contains('library-btn--active')) {
-    //   renderDetailPageFromLibrary('filmsQueue');
-    // } else {
-    //   renderDetailPageFromLibrary('filmsWatched');
-    // }
-
     function renderDetailPageFromLibrary(query) {
       const arr = JSON.parse(localStorage.getItem(query));
       let detailFilm = arr.find(
