@@ -7,8 +7,6 @@ let formRef = null;
 let btn_next = null;
 let btn_prev = null;
 let page_span = null;
-let isLastPage = false;
-let isFirstPage = false;
 
 const controlGlobalPage = {
   isStartGlobalPage: true,
@@ -43,6 +41,7 @@ function usersSearch() {
 
 function homePagePagination() {
   fetchPopularMoviesList(baseUrl, films.pageNumb, apiKey).then(data => {
+    chendjeButtonPagActive(data);
     const arrData = data.results;
     refs.homePage.querySelector('.home-page-list').innerHTML = homePageTpl(formattingFethData(arrData));
     page_span.innerHTML = films.pageNumb;
@@ -92,6 +91,18 @@ function searchFilmsHandler(event) {
   controlGlobalPage.setSomePage();
 }
 
+function chendjeButtonPagActive(data) {
+  let isLastPage = data.page === data.total_pages ? true : false;
+  let isFirstPage = data.page === 1 ? true : false;
+  if (isLastPage) {
+    btn_next.setAttribute('disabled', 'disabled');
+  } else btn_next.removeAttribute('disabled');
+
+  if (isFirstPage) {
+    btn_prev.setAttribute('disabled', 'disabled');
+  } else btn_prev.removeAttribute('disabled');
+}
+
 function fetchMovies() {
   films.fetchFilms().then(data => {
     const requir = refs.homePage.querySelector('.form-search__requirements');
@@ -102,14 +113,6 @@ function fetchMovies() {
       requir.classList.add('is-hidden');
     }
     if (films.inputValue === ' ') return;
-    if (isLastPage) {
-      btn_next.setAttribute('disabled', 'disabled');
-    } else btn_next.removeAttribute('disabled');
-
-    if (isFirstPage) {
-      btn_prev.setAttribute('disabled', 'disabled');
-    } else btn_prev.removeAttribute('disabled');
-
     const markup =
       data.length === 0 ? '' : homePageTpl(formattingFethData(data));
     refs.homePage.querySelector('.home-page-list').innerHTML = markup;
@@ -128,8 +131,7 @@ const films = {
       );
       const data = await response.json();
       console.log('data', data);
-      isLastPage = data.page === data.total_pages ? true : false;
-      isFirstPage = data.page === 1 ? true : false;
+      chendjeButtonPagActive(data);
       return data.results;
     } catch (error) {
       throw error;
