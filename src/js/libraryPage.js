@@ -46,7 +46,7 @@ function createLibraryCardFunc(localeStorageRequest, message) {
       const detailFilm = getLocalStorage.find(
         filmData => filmData.id === Number(e.target.dataset.itemid),
       );
-      activeDetailsPage(detailFilm);
+      activeDetailsPage(detailFilm, itsLibraryFilm = true);
     }
   }
 }
