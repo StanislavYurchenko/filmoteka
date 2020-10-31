@@ -84,7 +84,7 @@ const toggleToWatched = () => {
 //   monitorButtonStatusText();
 // };
 const showDetails = selectFilm => {
-  (typeof selectFilm.release_date === 'undefined' || selectFilm.release_date === "" || selectFilm.release_date.length < 4)
+  (typeof selectFilm.release_date === 'undefined' || selectFilm.release_date === "")
     ? selectFilm.release_date = 'unknown'
     : selectFilm.release_date = selectFilm.release_date.slice(0, 4);
 
