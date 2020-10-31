@@ -6,7 +6,7 @@ import { selectedFilm } from './navigation';
 
 const findMoveInArray = (array) => {
   const findMovie = array.find(movie => movie.id === selectedFilm.id);
-  if(findMovie) return findMovie.id;
+  if (findMovie) return findMovie.id;
 };
 
 
@@ -39,7 +39,7 @@ const toggleToQueue = () => {
   let toQueueArray = [];
   const moviesToQueueFromLocalStorage = JSON.parse(localStorage.getItem('filmsQueue'));
 
-  if(moviesToQueueFromLocalStorage) toQueueArray.push(...moviesToQueueFromLocalStorage);
+  if (moviesToQueueFromLocalStorage) toQueueArray.push(...moviesToQueueFromLocalStorage);
 
   if (moviesToQueueFromLocalStorage && moviesToQueueFromLocalStorage.length && findMoveInArray(moviesToQueueFromLocalStorage)) {
     toQueueArray = toQueueArray.filter(el => el.id !== selectedFilm.id);
@@ -57,7 +57,7 @@ const toggleToWatched = () => {
   let toWatchedArray = [];
   const moviesToWatchedFromLocalStorage = JSON.parse(localStorage.getItem('filmsWatched'));
 
-  if(moviesToWatchedFromLocalStorage) toWatchedArray.push(...moviesToWatchedFromLocalStorage); 
+  if (moviesToWatchedFromLocalStorage) toWatchedArray.push(...moviesToWatchedFromLocalStorage);
 
   if (moviesToWatchedFromLocalStorage && moviesToWatchedFromLocalStorage.length && findMoveInArray(moviesToWatchedFromLocalStorage)) {
     toWatchedArray = toWatchedArray.filter(el => el.id !== selectedFilm.id);
@@ -71,10 +71,10 @@ const toggleToWatched = () => {
 
 
 const showDetails = selectFilm => {
-  selectFilm.release_date = selectedFilm.release_date
-    .split('')
-    .splice(0, 4)
-    .join('');
+  (typeof selectFilm.release_date === 'undefined' || selectFilm.release_date === "")
+    ? selectFilm.release_date = 'unknown'
+    : selectFilm.release_date = selectFilm.release_date.slice(0, 4);
+
   const temp = detailsFilms(selectFilm);
   refs.detailsPage.innerHTML = temp;
 
@@ -83,3 +83,4 @@ const showDetails = selectFilm => {
 
 
 export { showDetails, toggleToQueue, toggleToWatched };
+
