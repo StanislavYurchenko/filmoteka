@@ -5,6 +5,9 @@ import 'material-design-icons/iconfont/material-icons.css';
 import { showDetails } from './filmDetailsPage';
 import { drawQueueFilmList } from './libraryPage';
 import { baseUrl, apiKey } from './initialHomePage';
+import { controlGlobalPage, homePagePagination } from './searchAndPaginationHomePage';
+
+
 import { data } from 'autoprefixer';
 // const a = showDetails();
 // console.log(a);
@@ -41,12 +44,16 @@ refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
 
 refs.linkLogo.addEventListener('click', event => {
   console.log('Слушаем Лого');
+  homePagePagination();
+  controlGlobalPage.setStartPage();
   // activeDetailsPage()
   activeHomePage();
 });
 
 refs.linkHome.addEventListener('click', event => {
   console.log('Слушаем Хоме');
+  homePagePagination();
+  controlGlobalPage.setStartPage();
   activeHomePage();
 });
 
