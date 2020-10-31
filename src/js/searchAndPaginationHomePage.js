@@ -158,4 +158,4 @@ const films = {
   },
 };
 
-export { usersSearch, renderForm, renderNavigate, controlGlobalPage };
+export { usersSearch, renderForm, renderNavigate, controlGlobalPage, homePagePagination };
