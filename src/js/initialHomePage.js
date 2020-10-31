@@ -28,7 +28,7 @@ const formattingFethData = (arrData) => {
     let imgPath = el.backdrop_path;
     let imgPathBig = el.poster_path;
     let release_date = el.release_date;
-    (typeof release_date === 'undefined' || release_date === "")
+    (typeof release_date === 'undefined' || release_date === "" || selectFilm.release_date.length < 4)
       ? el.release_date = 'unknown'
       : el.release_date = el.release_date.slice(0, 4);
     const verifyImgBigPath = () => {
