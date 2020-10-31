@@ -15,11 +15,6 @@
 .details__container {
     @media screen and (min-width: $tablet-bp-min) {
         display: flex;
-        height: 526px;
-    }
-
-    @media screen and (min-width: $desktop-bp-min){
-        height: 630px;
     }
 }
 
@@ -33,12 +28,14 @@
 
     @media screen and (min-width: $tablet-bp-min) {
         width: 354px;
+        min-height: 536px;
         margin-left: 10px;
         margin-right: 20px;
     }
 
     @media screen and (min-width: $desktop-bp-min) {
         width: 456px;
+        min-height: 630px;
         margin-left: 34x;
         margin-right: 34px;
     }

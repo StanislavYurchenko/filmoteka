@@ -71,10 +71,10 @@ const toggleToWatched = () => {
 
 
 const showDetails = selectFilm => {
-  selectFilm.release_date = selectedFilm.release_date
-    .split('')
-    .splice(0, 4)
-    .join('');
+  if(selectFilm.release_date) {
+    selectFilm.release_date = selectedFilm.release_date.split('').splice(0, 4).join('');
+  }
+  
   const temp = detailsFilms(selectFilm);
   refs.detailsPage.innerHTML = temp;
 
