@@ -70,12 +70,18 @@ const toggleToWatched = () => {
 };
 
 
-const showDetails =( selectFilm )=> {
-  selectedFilm = selectFilm;
+const showDetails = (selectFilm) => {
   (typeof selectFilm.release_date === 'undefined' || selectFilm.release_date === "")
     ? selectFilm.release_date = 'unknown'
     : selectFilm.release_date = selectFilm.release_date.slice(0, 4);
-  refs.detailsPage.innerHTML = detailsFilms(selectFilm);  
+
+  if (typeof selectFilm.poster_path === "object") {
+    selectFilm.poster_path = `./images/temp.png`
+  } else {
+    selectFilm.poster_path = `https://image.tmdb.org/t/p/original${selectFilm.poster_path}`
+  }
+  selectedFilm = selectFilm;
+  refs.detailsPage.innerHTML = detailsFilms(selectFilm);
   monitorButtonStatusText();
 };
 

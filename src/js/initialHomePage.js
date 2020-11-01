@@ -13,10 +13,9 @@ const renderFilmList = (template, arrFilms) => {
 };
 
 
-
 const fetchPopularMoviesList = (baseUrl, pageNumber, apiKey) => {
   return fetch(
-    `${baseUrl}/3/search/movie?api_key=${apiKey}&language=en-US&query=strong&page=${pageNumber}&include_adult=false`,
+    `${baseUrl}/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}&include_adult=false`,
   ).then(res => res.json());
 };
 
