@@ -74,17 +74,18 @@ const showDetails = (selectFilm) => {
   (typeof selectFilm.release_date === 'undefined' || selectFilm.release_date === "")
     ? selectFilm.release_date = 'unknown'
     : selectFilm.release_date = selectFilm.release_date.slice(0, 4);
-
+  console.log(selectFilm.poster_path);
   if (typeof selectFilm.poster_path === "object") {
     selectFilm.poster_path = `./images/temp.png`
   } else {
-    selectFilm.poster_path = `https://image.tmdb.org/t/p/original${selectFilm.poster_path}`
+    selectFilm.poster_path = selectFilm.poster_path.includes('https://image.tmdb.org/t/p/original') 
+    ? selectFilm.poster_path
+    :`https://image.tmdb.org/t/p/original${selectFilm.poster_path}`
   }
   selectedFilm = selectFilm;
   refs.detailsPage.innerHTML = detailsFilms(selectFilm);
   monitorButtonStatusText();
 };
-
 
 export { showDetails, toggleToQueue, toggleToWatched };
 

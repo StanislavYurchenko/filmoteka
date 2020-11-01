@@ -94,12 +94,15 @@ function handlerPrev() {
 }
 
 function searchFilmsHandler(event) {
-  console.log('event',event);
   event.preventDefault();
   films.resetPage();
   const formData = new FormData(formRef);
   const userInput = formData.get('query');
-  if (!userInput) return;
+  if (!userInput) {
+    homePagePagination()
+    controlGlobalPage.setStartPage()
+    return
+  }
   films.inputValue = userInput;
   fetchMovies();
   controlGlobalPage.setSomePage();
