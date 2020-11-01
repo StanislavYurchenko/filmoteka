@@ -1,36 +1,50 @@
-# Filmoteka.
+# Filmoteka by <magnificent_eight>
 
-## This is a project that was completed as part of the educational process at GoIT by a group of students.
-The main focus of this work is on teaching teamwork. The tasks are very interrelated, each participant must communicate with the rest of the participants.
-
-### The application has functionality:
-- User authorization and new user registration
-- Information about the current exchange rate in Ukraine by the National Bank of Ukraine
-- Currency calculator
-- Charts the dynamics of changes in the last 8 days.
+## JS block graduation work by <magnificent_eight>.
+The main goal of the project is to learn how to work in a team, using all the knowledge we got from the course.
+The tasks are very interrelated so each participant has to communicate with others to acomplish own tasks.
 
 ### Project goals: 
 - Strengthening teamwork skills
-- Use third-party libraries and services
-- Repetition of the acquired skills on the JS course
+- Usage of third-party libraries and services
+- Repetition and consolidation in practice of the acquired skills
 
-### Technology: 
+### Functionality of the application:
+- allows to check the information about the latest movies which are viewed on the Homepage
+- search movie by the name
+- add movies to your personal library and mark them either like 'to be watched' or 'watched'
+- operate your movie library by easily removing movies from both of lists (if you want)
+
+### User instructions:
+- enjoy
+- give us high five and some good feedback
+
+### API:
+https://www.themoviedb.org
+
+### Technologies used: 
 - HTML5
 - CSS3
 - SCSS
 - BEM
 - JS
 - WEBPACK
+- NPM
 
-### Libraries: 
+### Packages:
 - pnotify
 - material-design-icons
 - handlebars
 
-### Services: 
-- Trello
+### Templating language:
+- handlebars
 
-### Authors and implementers of the idea: 
+### Communication and Task planning Services: 
+- Trello
+- Slack
+- Discord
+
+### Team: 
 - [Artur Stahov](https://github.com/ArturStahov)
 - [Inna Tishchenko](https://github.com/inna91)
 - [Yulia Labutkina](https://github.com/YuliaLabutkina)
@@ -41,3 +55,4 @@ The main focus of this work is on teaching teamwork. The tasks are very interrel
 - [Stanislav Yurchenko](https://github.com/StanislavYurchenko)
 
 **©2020 magnificent-eight team**
+![logo](https://github.com/StanislavYurchenko/filmoteka/tree/dev/src/images/footer_logo)
