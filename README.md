@@ -56,4 +56,4 @@ The tasks are very interrelated so each participant has to communicate with othe
 - [Stanislav Yurchenko](https://github.com/StanislavYurchenko)
 
 **©2020 magnificent-eight team** 
-<br><img src="https://github.com/StanislavYurchenko/filmoteka/blob/dev/src/images/footer_logo/me_logo.png" width="250"><br>
+<br><img src="./src/images/footer_logo/me_logo.png" width="250"><br>
