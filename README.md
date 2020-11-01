@@ -55,4 +55,4 @@ https://www.themoviedb.org
 - [Stanislav Yurchenko](https://github.com/StanislavYurchenko)
 
 **©2020 magnificent-eight team**
-![logo](https://github.com/StanislavYurchenko/filmoteka/tree/dev/src/images/footer_logo)
+![logo](https://github.com/StanislavYurchenko/filmoteka/blob/dev/src/images/footer_logo/me_logo.png)
