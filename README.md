@@ -1,4 +1,4 @@
-# Filmoteka by ![logo] (<img src="https://github.com/StanislavYurchenko/filmoteka/blob/dev/src/images/footer_logo/me_logo.png" width="100">)
+# Filmoteka by <img src="https://github.com/StanislavYurchenko/filmoteka/blob/dev/src/images/footer_logo/me_logo.png" width="250">
 
 ## JS block graduation work by <magnificent_eight>.
 The main goal of the project is to learn how to work in a team, using all the knowledge we got from the course.
