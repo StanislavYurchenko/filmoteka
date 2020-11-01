@@ -1,0 +1,9 @@
+.notActivePage {
+    display: none;
+}
+
+.item-overlov,
+.home-page-list_item-title,
+.home-page-list_item-image {
+    pointer-events: none;
+}

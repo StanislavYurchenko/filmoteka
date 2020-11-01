@@ -1,43 +1,81 @@
-import myFilmLibraryPage from '../template/myFilmLibraryPage.hbs';
+import myLibraryFilmListTemplate from '../template/myFilmLibraryPage.hbs';
+import { formattingFetchData } from './initialHomePage';
+import { activeDetailsPage} from './navigation';
 import refs from './refs';
 import { notice } from './pnotify';
 
-fetch(
-  'https://api.themoviedb.org/3/search/movie?api_key=81f248d3c9154788229a5419bb33091a&language=en-US&query=bad&page=1&include_adult=false',
-)
-  .then(res => res.json())
-  .then(movies => {
-    const { results } = movies;
-    localStorage.setItem('filmsQueue', JSON.stringify(results));
-    localStorage.setItem('filmsWatched', JSON.stringify(results));
-  });
+function renderLibraryButtons(template) {
+  refs.myFilmLibraryPage.insertAdjacentHTML('afterbegin', template());
+}
 
-function createLibraryCardFunc(parsedLocalStorage, message) {
-  if (!parsedLocalStorage) {
+function serviceLibraryButtons(template) {
+  renderLibraryButtons(template);
+  refs.watchedBtn = document.querySelector('.watched');
+  refs.queueBtn = document.querySelector('.queue');
+  refs.watchedBtn.addEventListener('click', drawWatchedFilmList);
+  refs.queueBtn.addEventListener('click', drawQueueFilmList);
+}
+
+function createLibraryCardFunc(localeStorageRequest, message) {
+  refs.libraryList.innerHTML = '';
+
+  const readLocalStorage = JSON.parse(localStorage.getItem(localeStorageRequest));
+  if (!readLocalStorage || !readLocalStorage.length) {
     notice(message);
     return;
   }
-  const fragment = myFilmLibraryPage(parsedLocalStorage);
-  refs.libraryList.innerHTML = '';
-  refs.libraryList.insertAdjacentHTML('beforeend', fragment);
+  const formatData = formattingFetchData(readLocalStorage);
+  const renderLibraryList = myLibraryFilmListTemplate(formatData);
+  refs.libraryList.insertAdjacentHTML('beforeend', renderLibraryList);
+
+  refs.libraryList.removeEventListener('click', onClickFilmAtMyLibrary);
+  refs.libraryList.addEventListener('click', onClickFilmAtMyLibrary);
+
+  function onClickFilmAtMyLibrary(e) {
+    console.log(e.target.dataset.itemid);
+    if (e.target.nodeName !== 'LI') {
+      return;
+    }
+
+    refs.queueBtn.classList.contains('library-btn--active')
+      ? renderDetailPageFromLibrary('filmsQueue')
+      : renderDetailPageFromLibrary('filmsWatched');
+
+    function renderDetailPageFromLibrary(query) {
+      const getLocalStorage = JSON.parse(localStorage.getItem(query));
+      const detailFilm = getLocalStorage.find(
+        filmData => filmData.id === Number(e.target.dataset.itemid),
+      );
+
+      activeDetailsPage(detailFilm);
+    }
+  }
 }
 
 function drawQueueFilmList() {
+  doNotActiveButton(refs.watchedBtn);
+  doActiveButton(refs.queueBtn);
+  const localeStorageRequest = 'filmsQueue';
   const message = 'You do not have to queue movies to watch. Add them.';
-  let readLocalStorage = localStorage.getItem('filmsQueue');
-  const parsedLocalStorage = JSON.parse(readLocalStorage);
 
-  createLibraryCardFunc(parsedLocalStorage, message);
+  createLibraryCardFunc(localeStorageRequest, message);
 }
 
 function drawWatchedFilmList() {
+  doNotActiveButton(refs.queueBtn);
+  doActiveButton(refs.watchedBtn);
+  const localeStorageRequest = 'filmsWatched';
   const message = 'You do not have watched movies. Add them';
-  let readLocalStorage = localStorage.getItem('filmsWatched');
-  const parsedLocalStorage = JSON.parse(readLocalStorage);
 
-  createLibraryCardFunc(parsedLocalStorage, message);
+  createLibraryCardFunc(localeStorageRequest, message);
 }
 
-export { drawQueueFilmList, drawWatchedFilmList };
-drawQueueFilmList();
-drawWatchedFilmList();
+function doActiveButton(button) {
+  button.classList.add('library-btn--active');
+}
+function doNotActiveButton(button) {
+  button.classList.remove('library-btn--active');
+}
+
+export { drawQueueFilmList, drawWatchedFilmList, serviceLibraryButtons };
+

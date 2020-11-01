@@ -6,5 +6,12 @@ const refs = {
   detailsPage: document.querySelector('#root-details-page'),
   form: null,
   libraryList: document.querySelector('.library-list'),
-}
+  linkHome: null,
+  linkMyLibrary: null,
+  linkLogo: null,
+  homeList: document.querySelector('.home-page-list'),
+  libraryList: document.querySelector('.library-list'),
+  watchedBtn: null,
+  queueBtn: null,
+};
 export default refs;
