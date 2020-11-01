@@ -52,8 +52,6 @@ function usersSearch() {
   }
 }
 
-
-
 function homePagePagination() {
   fetchPopularMoviesList(baseUrl, films.pageNumb, apiKey).then(data => {
     changeButtonPagActive(data);
