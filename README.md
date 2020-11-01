@@ -1,4 +1,4 @@
-# Filmoteka by <img src="https://github.com/StanislavYurchenko/filmoteka/blob/dev/src/images/footer_logo/me_logo.png" width="350">
+# Filmoteka by <p align="center"> <img src="https://github.com/StanislavYurchenko/filmoteka/blob/dev/src/images/footer_logo/me_logo.png" width="350"> </p>
 
 ## JS block graduation work by <magnificent_eight>.
 The main goal of the project is to learn how to work in a team, using all the knowledge we got from the course.
@@ -54,4 +54,4 @@ The tasks are very interrelated so each participant has to communicate with othe
 - [Ihor Levchenko](https://github.com/IhorLev1)
 - [Stanislav Yurchenko](https://github.com/StanislavYurchenko)
 
-**©2020 magnificent-eight team** <img src="https://github.com/StanislavYurchenko/filmoteka/blob/dev/src/images/footer_logo/me_logo.png" width="350">
+**©2020 magnificent-eight team** <p align="center"> <img src="https://github.com/StanislavYurchenko/filmoteka/blob/dev/src/images/footer_logo/me_logo.png" width="350"> </p>
