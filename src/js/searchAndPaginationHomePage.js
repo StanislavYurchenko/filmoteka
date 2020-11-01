@@ -119,8 +119,7 @@ function fetchMovies() {
       requir.classList.add('is-hidden');
     }
     if (films.inputValue === ' ') return;
-    const markup =
-      data.length === 0 ? '' : homePageTpl(formattingFethData(data));
+    const markup = data.length === 0 ? '' : homePageTpl(formattingFetchData(data));
     refs.homePage.querySelector('.home-page-list').innerHTML = markup;
     page_span.innerHTML = films.pageNumb;
   });
