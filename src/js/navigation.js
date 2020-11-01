@@ -8,10 +8,6 @@ import { baseUrl, apiKey } from './initialHomePage';
 import { controlGlobalPage, homePagePagination } from './searchAndPaginationHomePage';
 
 
-// import { data } from 'autoprefixer';
-// const a = showDetails();
-// console.log(a);
-
 const activeHomePage = () => {
   refs.homePage.classList.remove('notActivePage');
   refs.myFilmLibraryPage.classList.add('notActivePage');
@@ -24,65 +20,65 @@ const activeLibraryPage = () => {
   refs.homePage.classList.add('notActivePage');
 };
 
-const activeDetailsPage = (movied, isLibraryFilm) => {
+const activeDetailsPage = (movied) => {
   refs.homePage.classList.add('notActivePage');
   refs.myFilmLibraryPage.classList.add('notActivePage');
   refs.detailsPage.classList.remove('notActivePage');
-  showDetails(movied, isLibraryFilm);
+  showDetails(movied);
 };
 
-refs.header.insertAdjacentHTML('afterbegin', headerTemplate());
-refs.footer.insertAdjacentHTML('afterbegin', footerTemplate());
+function renderHeader(){
+  refs.header.insertAdjacentHTML('afterbegin', headerTemplate());
+}
 
-refs.linkLogo = refs.header.querySelector('.js-logo');
-refs.linkHome = refs.header.querySelector('.js-home');
-refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
+function renderFooter(){
+  refs.footer.insertAdjacentHTML('afterbegin', footerTemplate());
+}
 
-// console.log(refs.linkHome, refs.linkMyLibrary, refs.linkLogo);
+function addHeaderListener(){
+  refs.linkLogo = refs.header.querySelector('.js-logo');
+  refs.linkHome = refs.header.querySelector('.js-home');
+  refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
 
-refs.linkLogo.addEventListener('click', event => {
-  console.log('Слушаем Лого');
-  homePagePagination();
-  controlGlobalPage.setStartPage();
-  // activeDetailsPage()
-  activeHomePage();
-});
+  refs.linkLogo.addEventListener('click', linkLogoHandler);
+  refs.linkHome.addEventListener('click', linkHomeHandler);
+  refs.linkMyLibrary.addEventListener('click', linkMyLibraryHandler);
+  refs.homeList.addEventListener('click', homeListHandler);
+}
 
-refs.linkHome.addEventListener('click', event => {
-  console.log('Слушаем Хоме');
-  homePagePagination();
-  controlGlobalPage.setStartPage();
-  activeHomePage();
-});
 
-refs.linkMyLibrary.addEventListener('click', event => {
-  console.log('Слушаем Библиотеку');
-  activeLibraryPage();
-  drawQueueFilmList();
-});
 
-refs.homeList.addEventListener('click', event => {
-  console.log('homeList');
+function homeListHandler(event) {
   const { target, currentTarget } = event;
 
   if (target.nodeName !== 'LI') {
-    console.log('Не лишка выходим');
     return;
   }
 
   const movieId = target.dataset.itemid;
-  console.log(movieId);
-
-  //   console.dir( target);
-  //   console.dir(currentTarget);
 
   fetch(`${baseUrl}/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
     .then(res => res.json())
     .then(data => {
       activeDetailsPage(data);
     });
-});
+}
 
-// console.log(refs);
+function linkMyLibraryHandler(){
+  activeLibraryPage();
+  drawQueueFilmList();
+}
 
-export { activeHomePage, activeDetailsPage };
+function linkHomeHandler(){
+  homePagePagination();
+  controlGlobalPage.setStartPage();
+  activeHomePage();
+}
+
+function linkLogoHandler(){
+  homePagePagination();
+  controlGlobalPage.setStartPage();
+  activeHomePage();
+}
+
+export { activeHomePage, activeDetailsPage, renderHeader, renderFooter, addHeaderListener };
