@@ -1,4 +1,4 @@
-# Filmoteka by ![logo](https://github.com/StanislavYurchenko/filmoteka/blob/dev/src/images/footer_logo/me_logo.png)
+# Filmoteka by ![logo] <img src="./images/footer_logo/me_logo.png" width="100">)
 
 ## JS block graduation work by <magnificent_eight>.
 The main goal of the project is to learn how to work in a team, using all the knowledge we got from the course.
@@ -20,7 +20,7 @@ The tasks are very interrelated so each participant has to communicate with othe
 - give us high five and some good feedback
 
 ### API:
-https://www.themoviedb.org
+- https://www.themoviedb.org
 
 ### Technologies used: 
 - HTML5
