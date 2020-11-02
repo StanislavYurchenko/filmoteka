@@ -1,19 +1,21 @@
 .section__details-pag {
-    margin-bottom: 20px;
+    // padding-top: 20px;
+    // margin-bottom: 20px;
 
     @media screen and (min-width: $tablet-bp-min) {
+        padding-top: 22px;
         margin-bottom: 28px;
+    }
+
+    @media screen and (min-width: $desktop-bp-min) {
+        padding-top: 26px;
     }
 }
 
 .details__container {
+    padding: 20px 0;
     @media screen and (min-width: $tablet-bp-min) {
         display: flex;
-        height: 526px;
-    }
-
-    @media screen and (min-width: $desktop-bp-min){
-        height: 630px;
     }
 }
 
@@ -27,12 +29,14 @@
 
     @media screen and (min-width: $tablet-bp-min) {
         width: 354px;
+        min-height: 536px;
         margin-left: 10px;
         margin-right: 20px;
     }
 
     @media screen and (min-width: $desktop-bp-min) {
         width: 456px;
+        min-height: 630px;
         margin-left: 34x;
         margin-right: 34px;
     }
@@ -134,6 +138,9 @@
 }
 
 .details__button-container button {
+    @media screen and (max-width: $mobile-bp-max) {
+        font-size: 13px;
+    }
     position: relative;
     border: none;
     background: transparent;

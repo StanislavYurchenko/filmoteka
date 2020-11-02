@@ -13,22 +13,23 @@ const renderFilmList = (template, arrFilms) => {
 };
 
 
-
 const fetchPopularMoviesList = (baseUrl, pageNumber, apiKey) => {
   return fetch(
-    `${baseUrl}/3/search/movie?api_key=${apiKey}&language=en-US&query=strong&page=${pageNumber}&include_adult=false`,
+    `${baseUrl}/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}&include_adult=false`,
   ).then(res => res.json());
 };
 
 
-const formattingFethData = (arrData) => {
+const formattingFetchData = (arrData) => {
   const baseImageDataUrl = `https://image.tmdb.org/t/p/w500/`;
   const pathImageDefault = `./images/temp.png`;
   return arrData.map(el => {
     let imgPath = el.backdrop_path;
     let imgPathBig = el.poster_path;
-    let filmDateFormated = el.release_date.slice(0, 4);
-    el.release_date = filmDateFormated;
+    let release_date = el.release_date;
+    (typeof release_date === 'undefined' || release_date === "")
+      ? el.release_date = 'unknown'
+      : el.release_date = el.release_date.slice(0, 4);
     const verifyImgBigPath = () => {
       if (typeof imgPathBig === "object") {
         el.backdrop_path = `${pathImageDefault}`;
@@ -45,4 +46,4 @@ const formattingFethData = (arrData) => {
 
 
 
-export { renderFilmList, fetchPopularMoviesList, baseUrl, apiKey, pageNumber, formattingFethData };
+export { renderFilmList, fetchPopularMoviesList, baseUrl, apiKey, pageNumber, formattingFetchData };

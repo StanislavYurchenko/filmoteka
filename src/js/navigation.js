@@ -2,92 +2,90 @@ import footerTemplate from '../template/footer.hbs';
 import headerTemplate from '../template/header.hbs';
 import refs from './refs';
 import 'material-design-icons/iconfont/material-icons.css';
-import {showDetails} from './filmDetailsPage';
-import {drawQueueFilmList} from './libraryPage'
-import { baseUrl, apiKey} from './initialHomePage'
-import { data } from 'autoprefixer';
-// const a = showDetails();
-// console.log(a);
+import { showDetails } from './filmDetailsPage';
+import { drawQueueFilmList } from './libraryPage';
+import { baseUrl, apiKey } from './initialHomePage';
+import { controlGlobalPage, homePagePagination } from './searchAndPaginationHomePage';
 
-const selectFilm = {};
 
 const activeHomePage = () => {
-    refs.homePage.classList.remove('notActivePage');
-    refs.myFilmLibraryPage.classList.add('notActivePage');
-    refs.detailsPage.classList.add('notActivePage');
-} 
+  refs.linkHome.classList.add('isActivLinkNavigation');
+  refs.homePage.classList.remove('notActivePage');
+  refs.myFilmLibraryPage.classList.add('notActivePage');
+  refs.detailsPage.classList.add('notActivePage');
+  history.pushState({ page: "/home" }, "title 1", "/home")
+};
 
 const activeLibraryPage = () => {
-    refs.myFilmLibraryPage.classList.remove('notActivePage');
-    refs.detailsPage.classList.add('notActivePage');
-    refs.homePage.classList.add('notActivePage');
-}
+  refs.myFilmLibraryPage.classList.remove('notActivePage');
+  refs.detailsPage.classList.add('notActivePage');
+  refs.homePage.classList.add('notActivePage');
+  history.pushState({ page: "/library" }, "title 2", "/library")
+};
 
 const activeDetailsPage = (movied) => {
-    refs.homePage.classList.add('notActivePage');
-    refs.myFilmLibraryPage.classList.add('notActivePage');
-    refs.detailsPage.classList.remove('notActivePage');
-    showDetails(movied);
+  refs.homePage.classList.add('notActivePage');
+  refs.myFilmLibraryPage.classList.add('notActivePage');
+  refs.detailsPage.classList.remove('notActivePage');
+  showDetails(movied);
+  if (typeof movied.original_title !== "underfined" || movied.original_title !== "") {
+    const brUrl = movied.original_title.toLowerCase().split(" ").join('-')
+    history.pushState({ page: "/movied" }, "title 3", `/movied=${brUrl}`)
+  }
+};
+
+function renderHeader() {
+  refs.header.insertAdjacentHTML('afterbegin', headerTemplate());
 }
 
-refs.header.insertAdjacentHTML('afterbegin', headerTemplate());
-refs.footer.insertAdjacentHTML('afterbegin', footerTemplate());
+function renderFooter() {
+  refs.footer.insertAdjacentHTML('afterbegin', footerTemplate());
+}
 
-refs.linkLogo = refs.header.querySelector('.js-logo');
-refs.linkHome = refs.header.querySelector('.js-home');
-refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
+function addHeaderListener() {
+  refs.linkLogo = refs.header.querySelector('.js-logo');
+  refs.linkHome = refs.header.querySelector('.js-home');
+  refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
 
-// console.log(refs.linkHome, refs.linkMyLibrary, refs.linkLogo);
 
-refs.linkLogo.addEventListener('click', event => {
-    console.log('Слушаем Лого');
-    // activeDetailsPage()
-    activeHomePage()
-  });
+  refs.linkLogo.addEventListener('click', linkLogoHandler);
+  refs.linkHome.addEventListener('click', linkHomeHandler);
+  refs.linkMyLibrary.addEventListener('click', linkMyLibraryHandler);
+  refs.homeList.addEventListener('click', homeListHandler);
+}
 
-refs.linkHome.addEventListener('click', event => {
-  console.log('Слушаем Хоме');
-  activeHomePage()
-});
 
-refs.linkMyLibrary.addEventListener('click', event => {
-  console.log('Слушаем Библиотеку');
-  activeLibraryPage();
-  drawQueueFilmList();
-});
-
-refs.homeList.addEventListener('click', event => {
-  console.log('homeList');
-  const {target, currentTarget} = event;
+function homeListHandler(event) {
+  const { target, currentTarget } = event;
 
   if (target.nodeName !== 'LI') {
-      console.log("Не лишка выходим");
-      return;
+    return;
   }
 
   const movieId = target.dataset.itemid;
-     console.log(movieId);
 
-//   console.dir( target);
-//   console.dir(currentTarget);
-
-  fetch (`${baseUrl}/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
-  .then(res => res.json())
-  .then(data => {activeDetailsPage(data);
-    return data})
+  fetch(`${baseUrl}/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
+    .then(res => res.json())
     .then(data => {
-        // const qwe = data
-        // selectFilm = data;
-        // console.log(buttonWatched)
-        console.log(data)
-       })
-    
+      activeDetailsPage(data);
+    });
+}
 
-});
+function linkMyLibraryHandler() {
+  activeLibraryPage();
+  drawQueueFilmList();
+}
 
+function linkHomeHandler() {
+  homePagePagination();
+  controlGlobalPage.setStartPage();
+  activeHomePage();
+}
 
+function linkLogoHandler() {
+  homePagePagination();
+  controlGlobalPage.setStartPage();
+  activeHomePage();
+}
 
-// console.log(refs);
-
-export {activeHomePage, selectFilm}
-
+export { activeHomePage, activeDetailsPage, renderHeader, renderFooter, addHeaderListener };

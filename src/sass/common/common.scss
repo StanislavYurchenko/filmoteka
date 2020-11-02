@@ -2,6 +2,9 @@ html {
   box-sizing: border-box;
   scroll-behavior: smooth;
   font-size: 16px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 *,
@@ -14,6 +17,9 @@ html {
 
 body {
   font-family: $first-font;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .visually-hidden {

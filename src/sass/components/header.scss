@@ -1,3 +1,7 @@
+.header {
+  background-color: $main-color;
+}
+
 .logotip {
   padding-left: 10px;
   display: flex;
@@ -29,7 +33,7 @@
 .navigation {
   display: flex;
   justify-content: space-between;
-  background-color: $main-color;
+  // background-color: $main-color;
 
   &__list {
     display: flex;
@@ -81,4 +85,9 @@
       width: 100px;
     }
   }
+}
+
+.isActivLinkNavigation {
+  color: rgba(55, 44, 72, 1);
+  border-bottom: 3px solid rgb(55, 44, 72)
 }
