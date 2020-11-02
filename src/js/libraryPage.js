@@ -1,6 +1,6 @@
 import myLibraryFilmListTemplate from '../template/myFilmLibraryPage.hbs';
 import { formattingFetchData } from './initialHomePage';
-import { activeDetailsPage} from './navigation';
+import { activeDetailsPage } from './navigation';
 import refs from './refs';
 import { notice } from './pnotify';
 
@@ -24,8 +24,8 @@ function createLibraryCardFunc(localeStorageRequest, message) {
     notice(message);
     return;
   }
-  const formatData = formattingFetchData(readLocalStorage);
-  const renderLibraryList = myLibraryFilmListTemplate(formatData);
+  // const formatData = formattingFetchData(readLocalStorage);
+  const renderLibraryList = myLibraryFilmListTemplate(readLocalStorage);
   refs.libraryList.insertAdjacentHTML('beforeend', renderLibraryList);
 
   refs.libraryList.removeEventListener('click', onClickFilmAtMyLibrary);
