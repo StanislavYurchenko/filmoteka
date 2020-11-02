@@ -31,13 +31,11 @@ const formattingFetchData = (arrData) => {
       ? el.release_date = 'unknown'
       : el.release_date = el.release_date.slice(0, 4);
     const verifyImgBigPath = () => {
-      if (typeof imgPathBig === "object") {
-        el.backdrop_path = `${pathImageDefault}`;
-      } else {
-        el.backdrop_path = `${baseImageDataUrl}${imgPathBig}`
-      }
+      el.backdrop_path = (typeof imgPathBig !== "string") 
+        ? `${pathImageDefault}`
+        : `${baseImageDataUrl}${imgPathBig}`      
     }
-    (typeof imgPath === "object")
+    (typeof imgPath !== "string")
       ? verifyImgBigPath()
       : el.backdrop_path = `${baseImageDataUrl}${imgPath}`
     return el

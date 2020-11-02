@@ -28,7 +28,7 @@ const activeDetailsPage = (movied) => {
   refs.myFilmLibraryPage.classList.add('notActivePage');
   refs.detailsPage.classList.remove('notActivePage');
   showDetails(movied);
-  if (typeof movied.original_title !== "underfined" || movied.original_title !== "") {
+  if ( movied.original_title ) {
     const brUrl = movied.original_title.toLowerCase().split(" ").join('-')
     history.pushState({ page: "/movied" }, "title 3", `/movied=${brUrl}`)
   }
@@ -76,8 +76,6 @@ function linkMyLibraryHandler() {
 }
 
 function linkHomeHandler() {
-  homePagePagination();
-  controlGlobalPage.setStartPage();
   activeHomePage();
 }
 

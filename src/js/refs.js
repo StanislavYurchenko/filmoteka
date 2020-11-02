@@ -10,7 +10,6 @@ const refs = {
   linkMyLibrary: null,
   linkLogo: null,
   homeList: document.querySelector('.home-page-list'),
-  libraryList: document.querySelector('.library-list'),
   watchedBtn: null,
   queueBtn: null,
 };

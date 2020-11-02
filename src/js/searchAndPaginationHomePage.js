@@ -109,8 +109,8 @@ function searchFilmsHandler(event) {
 }
 
 function changeButtonPagActive(data) {
-  let isLastPage = data.page === data.total_pages ? true : false;
-  let isFirstPage = data.page === 1 ? true : false;
+  let isLastPage = (data.page === data.total_pages);
+  let isFirstPage = (data.page === 1);
   if (isLastPage) {
     btn_next.setAttribute('disabled', 'disabled');
   } else btn_next.removeAttribute('disabled');
@@ -133,6 +133,7 @@ function fetchMovies() {
     const markup = data.length === 0 ? '' : homePageTpl(formattingFetchData(data));
     refs.homePage.querySelector('.home-page-list').innerHTML = markup;
     page_span.innerHTML = films.pageNumb;
+
   });
 }
 
@@ -146,7 +147,6 @@ const films = {
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${this.inputValue}&page=${this.pageNumb}&include_adult=false`,
       );
       const data = await response.json();
-      // console.log('data', data);
       changeButtonPagActive(data);
       return data.results;
     } catch (error) {

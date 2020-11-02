@@ -76,11 +76,13 @@
       transition: all 200ms linear;
     }
 
+    &:active,
     &:hover,
     &:focus {
       // Добавить в переменые
       color: rgba(55, 44, 72, 1);
     }
+    &:active::after,
     &:hover::after,
     &:focus::after {
       width: 100px;
