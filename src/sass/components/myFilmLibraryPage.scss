@@ -1,13 +1,15 @@
 .library-btn-wrap {
   box-shadow: -5px 5px 9px 1px rgba(0, 0, 0, 0.23);
-  padding-bottom: 14px;
-  padding-top: 14px;
+  padding-bottom: 17px;
+  padding-top: 17px;
 
   @media screen and (max-width: $mobile-bp-max) {
-    margin-bottom: 14px;
+    margin-bottom: 30px;
   }
 
   @media screen and (min-width: $tablet-bp-min) {
+    padding-bottom: 18px;
+    padding-top: 18px;
     margin-bottom: 30px;
   }
 }
