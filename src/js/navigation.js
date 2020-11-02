@@ -41,8 +41,8 @@ refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
 
 refs.linkLogo.addEventListener('click', event => {
     console.log('Слушаем Лого');
-    activeDetailsPage()
-    // activeHomePage()
+    // activeDetailsPage()
+    activeHomePage()
   });
 
 refs.linkHome.addEventListener('click', event => {
