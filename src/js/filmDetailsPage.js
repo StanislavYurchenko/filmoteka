@@ -22,13 +22,13 @@ const monitorButtonStatusText = async () => {
   buttonWatched.addEventListener('click', toggleToWatched);
   buttonQueue.addEventListener('click', toggleToQueue);
 
-  await Movies.getIdAllToWatchedMovies().then(movie => {
+  await Movies.getAllToWatchedMovies().then(movie => {
     allToWatched = movie || [];
-  })
+  });
 
   await Movies.getAllToQueueMovies().then(movie => {
     allToQueue = movie || [];
-  })
+  });
 
   if (allToQueue.length && findMoveInArray(allToQueue) === selectedFilm.id) {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Delete from queue`;
@@ -38,34 +38,35 @@ const monitorButtonStatusText = async () => {
 
   if (allToWatched.length && findMoveInArray(allToWatched) === selectedFilm.id) {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Delete from watched`;
+
   } else {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
   };
 };
 
 
-const toggleToQueue = () => {
+const toggleToQueue = async () => {
 
   if (allToQueue.length && findMoveInArray(allToQueue)) {
     allToQueue = allToQueue.filter(el => el.id !== selectedFilm.id);
-    Movies.addAndDeleteToQueue(allToQueue);
+    await Movies.addAndDeleteToQueue(allToQueue);
   } else {
     allToQueue.push(selectedFilm);
-    Movies.addAndDeleteToQueue(allToQueue);
+    await Movies.addAndDeleteToQueue(allToQueue);
   };
 
   monitorButtonStatusText();
 };
 
 
-const toggleToWatched = () => {
+const toggleToWatched = async () => {
 
   if (allToWatched.length && findMoveInArray(allToWatched)) {
     allToWatched = allToWatched.filter(el => el.id !== selectedFilm.id);
-    Movies.addAndDeleteToWatched(allToWatched);
+    await Movies.addAndDeleteToWatched(allToWatched);
   } else {
     allToWatched.push(selectedFilm);
-    Movies.addAndDeleteToWatched(allToWatched);
+    await Movies.addAndDeleteToWatched(allToWatched);
   };
 
   monitorButtonStatusText();

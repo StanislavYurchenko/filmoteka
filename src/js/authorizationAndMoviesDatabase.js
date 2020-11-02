@@ -4,7 +4,7 @@ let userMoviesToQueue = null;
 
 export class Movies {
     static addAndDeleteToQueue(movies) {
-        return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestqueue${userMoviesToQueue}.json`, {
+        return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestoqueue${userMoviesToQueue}.json`, {
             method: 'PUT',
             body: JSON.stringify(movies),
             headers: {
@@ -24,7 +24,7 @@ export class Movies {
     }
 
     static getAllToQueueMovies() {
-        return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestqueue${userMoviesToQueue}.json`, {
+        return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestoqueue${userMoviesToQueue}.json`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
