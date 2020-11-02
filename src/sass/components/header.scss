@@ -87,5 +87,13 @@
     &:focus::after {
       width: 100px;
     }
+
+    &--active{
+      &::after{
+      width: 100px;
+      // Добавить в переменые
+      color: rgba(55, 44, 72, 1);
+      }
+    }  
   }
 }

@@ -7,12 +7,14 @@ import { drawQueueFilmList } from './libraryPage';
 import { baseUrl, apiKey } from './initialHomePage';
 import { controlGlobalPage, homePagePagination } from './searchAndPaginationHomePage';
 
-
+// navigation__link--active
 const activeHomePage = () => {
   refs.linkHome.classList.add('isActivLinkNavigation');
   refs.homePage.classList.remove('notActivePage');
   refs.myFilmLibraryPage.classList.add('notActivePage');
   refs.detailsPage.classList.add('notActivePage');
+  refs.linkHome.classList.add('navigation__link--active');
+  refs.linkMyLibrary.classList.remove('navigation__link--active');
   history.pushState({ page: "/home" }, "title 1", "/home")
 };
 
@@ -20,6 +22,8 @@ const activeLibraryPage = () => {
   refs.myFilmLibraryPage.classList.remove('notActivePage');
   refs.detailsPage.classList.add('notActivePage');
   refs.homePage.classList.add('notActivePage');
+  refs.linkMyLibrary.classList.add('navigation__link--active');
+  refs.linkHome.classList.remove('navigation__link--active');  
   history.pushState({ page: "/library" }, "title 2", "/library")
 };
 
