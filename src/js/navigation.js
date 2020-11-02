@@ -16,12 +16,14 @@ const activeHomePage = () => {
   refs.homePage.classList.remove('notActivePage');
   refs.myFilmLibraryPage.classList.add('notActivePage');
   refs.detailsPage.classList.add('notActivePage');
+  history.pushState({ page: "/home" }, "title 1", "/home")
 };
 
 const activeLibraryPage = () => {
   refs.myFilmLibraryPage.classList.remove('notActivePage');
   refs.detailsPage.classList.add('notActivePage');
   refs.homePage.classList.add('notActivePage');
+  history.pushState({ page: "/library" }, "title 2", "/library")
 };
 
 const activeDetailsPage = (movied, isLibraryFilm) => {
@@ -29,6 +31,10 @@ const activeDetailsPage = (movied, isLibraryFilm) => {
   refs.myFilmLibraryPage.classList.add('notActivePage');
   refs.detailsPage.classList.remove('notActivePage');
   showDetails(movied, isLibraryFilm);
+  if (typeof movied.original_title !== "underfined" || movied.original_title !== "") {
+    const brUrl = movied.original_title.toLowerCase().split(" ").join('-')
+    history.pushState({ page: "/movied" }, "title 3", `/movied=${brUrl}`)
+  }
 };
 
 refs.header.insertAdjacentHTML('afterbegin', headerTemplate());
