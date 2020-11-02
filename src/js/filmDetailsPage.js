@@ -22,7 +22,7 @@ const monitorButtonStatusText = async () => {
   buttonWatched.addEventListener('click', toggleToWatched);
   buttonQueue.addEventListener('click', toggleToQueue);
 
-  await Movies.getAllToWatchedMovies().then(movie => {
+  await Movies.getIdAllToWatchedMovies().then(movie => {
     allToWatched = movie || [];
   })
 
