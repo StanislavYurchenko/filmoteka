@@ -23,7 +23,7 @@ export class Movies {
         }).then(response => response.json()).catch(error => console.log(error));
     }
 
-    static getIdOfAllToQueueMovies() {
+    static getAllToQueueMovies() {
         return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestqueue${userMoviesToQueue}.json`, {
             method: 'GET',
             headers: {
@@ -32,7 +32,7 @@ export class Movies {
         }).then(response => response.json()).catch(error => console.log(error));
     }
 
-    static getIdOfAllToWatchedMovies() {
+    static getAllToWatchedMovies() {
         return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestowatched${userMoviesToQueue}.json`, {
             method: 'GET',
             headers: {
@@ -59,7 +59,7 @@ class RegistrationAdnAuthorization {
     static authWithEmailAndPassword(email, password) {
         const options = {
           method: "POST",
-          body: JSON.stringify({ email, password, returnSecureToken: true, }),
+          body: JSON.stringify({ email, password, returnSecureToken: true }),
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
           }
