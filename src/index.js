@@ -2,7 +2,7 @@ import './sass/main.scss';
 import { renderHeader, renderFooter, addHeaderListener } from './js/navigation';
 import img from './images/temp.png';
 import img_footer from './images/footer_logo/me_logo.png';
-
+import './js/authorizationAndMoviesDatabase';
 import refs from './js/refs.js';
 import { renderFilmList, fetchPopularMoviesList, baseUrl, apiKey, pageNumber, formattingFetchData } from './js/initialHomePage';
 import { usersSearch, renderForm, renderNavigate } from './js/searchAndPaginationHomePage';

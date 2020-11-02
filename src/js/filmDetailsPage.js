@@ -1,8 +1,13 @@
 import detailsFilms from '../template/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
 import refs from './refs';
+import { Movies } from './authorizationAndMoviesDatabase';
+
 
 let selectedFilm = null;
+let allToQueue = []; 
+let allToWatched = [];
+
 
 const findMoveInArray = (array) => {
   const findMovie = array.find(movie => movie.id === selectedFilm.id);
@@ -10,24 +15,28 @@ const findMoveInArray = (array) => {
 };
 
 
-const monitorButtonStatusText = () => {
+const monitorButtonStatusText = async () => {
   const buttonWatched = document.querySelector('.details__button-watched');
   const buttonQueue = document.querySelector('.details__button-queue');
 
   buttonWatched.addEventListener('click', toggleToWatched);
   buttonQueue.addEventListener('click', toggleToQueue);
 
+  await Movies.getIdOfAllToWatchedMovies().then(movie => {
+    allToWatched = movie || [];
+  })
 
-  const filmsQueueInLocalStorage = JSON.parse(localStorage.getItem('filmsQueue'));
-  const filmsWatchedInLocalStorage = JSON.parse(localStorage.getItem('filmsWatched'));
+  await Movies.getIdOfAllToQueueMovies().then(movie => {
+    allToQueue = movie || [];
+  })
 
-  if (filmsQueueInLocalStorage && filmsQueueInLocalStorage.length && findMoveInArray(filmsQueueInLocalStorage) === selectedFilm.id) {
+  if (allToQueue.length && findMoveInArray(allToQueue) === selectedFilm.id) {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Delete from queue`;
   } else {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
   };
 
-  if (filmsWatchedInLocalStorage && filmsWatchedInLocalStorage.length && findMoveInArray(filmsWatchedInLocalStorage) === selectedFilm.id) {
+  if (allToWatched.length && findMoveInArray(allToWatched) === selectedFilm.id) {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Delete from watched`;
   } else {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
@@ -36,36 +45,29 @@ const monitorButtonStatusText = () => {
 
 
 const toggleToQueue = () => {
-  let toQueueArray = [];
-  const moviesToQueueFromLocalStorage = JSON.parse(localStorage.getItem('filmsQueue'));
 
-  if (moviesToQueueFromLocalStorage) toQueueArray.push(...moviesToQueueFromLocalStorage);
-
-  if (moviesToQueueFromLocalStorage && moviesToQueueFromLocalStorage.length && findMoveInArray(moviesToQueueFromLocalStorage)) {
-    toQueueArray = toQueueArray.filter(el => el.id !== selectedFilm.id);
-
+  if (allToQueue.length && findMoveInArray(allToQueue)) {
+    allToQueue = allToQueue.filter(el => el.id !== selectedFilm.id);
+    Movies.addAndDeleteToQueue(allToQueue);
   } else {
-    toQueueArray.push(selectedFilm);
+    allToQueue.push(selectedFilm);
+    Movies.addAndDeleteToQueue(allToQueue);
   };
 
-  localStorage.setItem('filmsQueue', JSON.stringify(toQueueArray));
   monitorButtonStatusText();
 };
 
 
 const toggleToWatched = () => {
-  let toWatchedArray = [];
-  const moviesToWatchedFromLocalStorage = JSON.parse(localStorage.getItem('filmsWatched'));
 
-  if (moviesToWatchedFromLocalStorage) toWatchedArray.push(...moviesToWatchedFromLocalStorage);
-
-  if (moviesToWatchedFromLocalStorage && moviesToWatchedFromLocalStorage.length && findMoveInArray(moviesToWatchedFromLocalStorage)) {
-    toWatchedArray = toWatchedArray.filter(el => el.id !== selectedFilm.id);
+  if (allToWatched.length && findMoveInArray(allToWatched)) {
+    allToWatched = allToWatched.filter(el => el.id !== selectedFilm.id);
+    Movies.addAndDeleteToWatched(allToWatched);
   } else {
-    toWatchedArray.push(selectedFilm);
+    allToWatched.push(selectedFilm);
+    Movies.addAndDeleteToWatched(allToWatched);
   };
 
-  localStorage.setItem('filmsWatched', JSON.stringify(toWatchedArray));
   monitorButtonStatusText();
 };
 
