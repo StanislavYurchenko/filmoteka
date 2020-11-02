@@ -3,14 +3,9 @@
   padding-bottom: 17px;
   padding-top: 17px;
 
-  @media screen and (max-width: $mobile-bp-max) {
-    margin-bottom: 30px;
-  }
-
   @media screen and (min-width: $tablet-bp-min) {
     padding-bottom: 18px;
     padding-top: 18px;
-    margin-bottom: 30px;
   }
 }
 
@@ -45,8 +40,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
+  padding-top: 15px;
+  padding-bottom: 15px;
   @media screen and (min-width: $tablet-bp-min) {
+    padding-top: 30px;
+    padding-bottom: 30px;
     justify-content: start;
   }
 }
