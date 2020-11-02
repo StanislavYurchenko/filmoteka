@@ -30,26 +30,23 @@ function createLibraryCardFunc(localeStorageRequest, message) {
 
   refs.libraryList.removeEventListener('click', onClickFilmAtMyLibrary);
   refs.libraryList.addEventListener('click', onClickFilmAtMyLibrary);
+}
 
-  function onClickFilmAtMyLibrary(e) {
-    console.log(e.target.dataset.itemid);
-    if (e.target.nodeName !== 'LI') {
-      return;
-    }
-
-    refs.queueBtn.classList.contains('library-btn--active')
-      ? renderDetailPageFromLibrary('filmsQueue')
-      : renderDetailPageFromLibrary('filmsWatched');
-
-    function renderDetailPageFromLibrary(query) {
-      const getLocalStorage = JSON.parse(localStorage.getItem(query));
-      const detailFilm = getLocalStorage.find(
-        filmData => filmData.id === Number(e.target.dataset.itemid),
-      );
-
-      activeDetailsPage(detailFilm);
-    }
+function onClickFilmAtMyLibrary(e) {
+  if (e.target.nodeName !== 'LI') {
+    return;
   }
+  refs.queueBtn.classList.contains('library-btn--active')
+    ? renderDetailPageFromLibrary('filmsQueue', e)
+    : renderDetailPageFromLibrary('filmsWatched', e);
+}
+
+function renderDetailPageFromLibrary(query, e) {
+  const getLocalStorage = JSON.parse(localStorage.getItem(query));
+  const detailFilm = getLocalStorage.find(
+    filmData => filmData.id === Number(e.target.dataset.itemid),
+  );
+  activeDetailsPage(detailFilm);
 }
 
 function drawQueueFilmList() {
@@ -73,6 +70,7 @@ function drawWatchedFilmList() {
 function doActiveButton(button) {
   button.classList.add('library-btn--active');
 }
+
 function doNotActiveButton(button) {
   button.classList.remove('library-btn--active');
 }

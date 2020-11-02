@@ -1,5 +1,5 @@
 import './sass/main.scss';
-import './js/navigation';
+import { renderHeader, renderFooter, addHeaderListener } from './js/navigation';
 import img from './images/temp.png';
 import img_footer from './images/footer_logo/me_logo.png';
 
@@ -12,20 +12,30 @@ import filmListTemplate from './template/homePageContent.hbs';
 import navigateTemplate from './template/homePageNav.hbs';
 import myFilmLibraryPageButtons from './template/myFilmLibraryPageButtons.hbs';
 
+
+// render header
+renderHeader();
+
 // render form
 renderForm(formTemplate);
 
-//render navigations
+// render navigation
 renderNavigate(navigateTemplate);
 
-//render library buttons
+// render footer
+renderFooter();
+
+// add header listeners
+addHeaderListener();
+
+// render library buttons
 serviceLibraryButtons(myFilmLibraryPageButtons);
 
 // render movies
 fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
-    const arrData = data.results;
-    renderFilmList(filmListTemplate, formattingFetchData(arrData));
-    refs.homePage.querySelector('.page').innerHTML = pageNumber;
+  const arrData = data.results;
+  renderFilmList(filmListTemplate, formattingFetchData(arrData));
+  refs.homePage.querySelector('.page').innerHTML = pageNumber;
 });
 history.pushState({ page: "/home" }, "title 1", "/home")
 //render query
