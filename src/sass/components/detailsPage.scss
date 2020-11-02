@@ -1,21 +1,15 @@
 .section__details-pag {
-    // padding-top: 20px;
-    // margin-bottom: 20px;
 
-    @media screen and (min-width: $tablet-bp-min) {
-        padding-top: 22px;
-        margin-bottom: 28px;
-    }
-
-    @media screen and (min-width: $desktop-bp-min) {
-        padding-top: 26px;
-    }
 }
 
 .details__container {
-    padding: 20px 0;
+    padding: 20px 0 20px 0;
     @media screen and (min-width: $tablet-bp-min) {
         display: flex;
+        padding: 22px 0 28px 0;
+    }
+    @media screen and (min-width: $desktop-bp-min) {
+        padding: 26px 0 28px 0;
     }
 }
 

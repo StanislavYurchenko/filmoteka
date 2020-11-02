@@ -33,7 +33,7 @@
     @media screen and (min-width: $tablet-bp-min) {
       width: 344px;
       height: 156px;
-      &:not(:last-child) {
+      &:not(:nth-last-child(-n+2)) {
         margin-bottom: 15px;
       }
       &:nth-child(odd) {
@@ -43,7 +43,7 @@
     @media screen and (min-width: $desktop-bp-min) {
       width: 465px;
       height: 244px;
-      &:not(:last-child) {
+      &:not(:nth-last-child(-n+2)) {
         margin-bottom: 20px;
       }
       &:nth-child(odd) {

@@ -54,7 +54,6 @@ function addHeaderListener() {
   refs.homeList.addEventListener('click', homeListHandler);
 }
 
-
 function homeListHandler(event) {
   const { target, currentTarget } = event;
 
