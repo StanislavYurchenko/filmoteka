@@ -12,12 +12,14 @@ const activeHomePage = () => {
   refs.homePage.classList.remove('notActivePage');
   refs.myFilmLibraryPage.classList.add('notActivePage');
   refs.detailsPage.classList.add('notActivePage');
+  history.pushState({ page: "/home" }, "title 1", "/home")
 };
 
 const activeLibraryPage = () => {
   refs.myFilmLibraryPage.classList.remove('notActivePage');
   refs.detailsPage.classList.add('notActivePage');
   refs.homePage.classList.add('notActivePage');
+  history.pushState({ page: "/library" }, "title 2", "/library")
 };
 
 const activeDetailsPage = (movied) => {
@@ -25,17 +27,21 @@ const activeDetailsPage = (movied) => {
   refs.myFilmLibraryPage.classList.add('notActivePage');
   refs.detailsPage.classList.remove('notActivePage');
   showDetails(movied);
+  if (typeof movied.original_title !== "underfined" || movied.original_title !== "") {
+    const brUrl = movied.original_title.toLowerCase().split(" ").join('-')
+    history.pushState({ page: "/movied" }, "title 3", `/movied=${brUrl}`)
+  }
 };
 
-function renderHeader(){
+function renderHeader() {
   refs.header.insertAdjacentHTML('afterbegin', headerTemplate());
 }
 
-function renderFooter(){
+function renderFooter() {
   refs.footer.insertAdjacentHTML('afterbegin', footerTemplate());
 }
 
-function addHeaderListener(){
+function addHeaderListener() {
   refs.linkLogo = refs.header.querySelector('.js-logo');
   refs.linkHome = refs.header.querySelector('.js-home');
   refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
@@ -64,18 +70,18 @@ function homeListHandler(event) {
     });
 }
 
-function linkMyLibraryHandler(){
+function linkMyLibraryHandler() {
   activeLibraryPage();
   drawQueueFilmList();
 }
 
-function linkHomeHandler(){
+function linkHomeHandler() {
   homePagePagination();
   controlGlobalPage.setStartPage();
   activeHomePage();
 }
 
-function linkLogoHandler(){
+function linkLogoHandler() {
   homePagePagination();
   controlGlobalPage.setStartPage();
   activeHomePage();

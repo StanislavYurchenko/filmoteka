@@ -37,7 +37,7 @@ fetchPopularMoviesList(baseUrl, pageNumber, apiKey).then(data => {
   renderFilmList(filmListTemplate, formattingFetchData(arrData));
   refs.homePage.querySelector('.page').innerHTML = pageNumber;
 });
-
+history.pushState({ page: "/home" }, "title 1", "/home")
 //render query
 usersSearch();
 
