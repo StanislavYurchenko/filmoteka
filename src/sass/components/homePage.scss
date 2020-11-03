@@ -112,7 +112,6 @@
   @media screen and (max-width: $mobile-bp-max) {
     padding: 21px 32px 22px;
   }
-
   @media screen and (min-width: $tablet-bp-min) {
     padding: 21px 240px 22px;
   }
@@ -121,8 +120,8 @@
   }
 
   &__wrap {
-    // display: block;
     margin: 0 auto;
+    position: relative;
     @media screen and (max-width: $mobile-bp-max) {
       width: 258px;
     }
@@ -134,7 +133,6 @@
   &__input {
     position: relative;
     border: none;
-    // display: block;
     outline: none;
     border-bottom: 2px solid #818181;
     margin: 0 auto;
@@ -166,7 +164,7 @@
     position: absolute;
     z-index: 100;
     color: #818181;
-    top: 100px;
+    top: 5px;
     @media screen and (max-width: $mobile-bp-max) {
       width: 17px;
       height: 17px;

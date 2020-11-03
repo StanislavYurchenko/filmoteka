@@ -1,17 +1,6 @@
 import './sass/main.scss';
+import './js/importImg' 
 import { renderHeader, renderFooter, addHeaderListener } from './js/navigation';
-import img from './images/temp.png';
-import img_footer from './images/footer_logo/me_logo.png';
-
-import img_home from    './images/user_form/home.png';
-
-import img_logout from  './images/user_form/logout.png';
-import img_user from    './images/user_form/user_ico.png';
-
-import img_lib from     './images/user_form/lib.png';
-
-
-import img_close_icon from './images/close_icon.png';
 import './js/authorizationAndMoviesDatabase';
 import refs from './js/refs.js';
 import { renderFilmList, fetchPopularMoviesList, baseUrl, apiKey, pageNumber, formattingFetchData } from './js/initialHomePage';

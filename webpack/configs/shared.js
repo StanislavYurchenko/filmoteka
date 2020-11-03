@@ -24,7 +24,7 @@ module.exports = env => ({
             loader: 'url-loader',
             options: {
               name: '[path][name].[ext]',
-              limit: 8192,
+              limit: 1192,
               esModule: false,
             },
           },
