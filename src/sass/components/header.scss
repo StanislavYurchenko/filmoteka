@@ -12,8 +12,8 @@
     @include font-settings(
       $size: 1.25rem,
       $weight: 500,
-       // Добавить в переменые
-      $color: rgba(55, 44, 72, 0.86)
+      // Добавить в переменые
+        $color: rgba(55, 44, 72, 0.86)
     );
 
     @media (max-width: $mobile-bp-max) {
@@ -56,7 +56,7 @@
       $weight: 500,
       $color: $font-color-alfa-70
     );
-    outline:none;
+    outline: none;
     position: relative;
     text-transform: uppercase;
 
@@ -88,12 +88,28 @@
       width: 100px;
     }
 
-    &--active{
-      &::after{
-      width: 100px;
-      // Добавить в переменые
-      color: rgba(55, 44, 72, 1);
+    &--active {
+      &::after {
+        width: 100px;
+        // Добавить в переменые
+        color: rgba(55, 44, 72, 1);
       }
-    }  
+    }
+  }
+}
+
+.item-js-user {
+  width: 25px;
+  height: 25px;
+  background-image: url(../images/user_form/user_ico.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  transition-property: transform;
+  transition-duration: 0.3s;
+  &:hover,
+  :focus {
+    transform: scale(1.1);
   }
 }
