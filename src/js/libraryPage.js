@@ -1,8 +1,9 @@
 import myLibraryFilmListTemplate from '../template/myFilmLibraryPage.hbs';
-import { formattingFetchData } from './initialHomePage';
 import { activeDetailsPage } from './navigation';
 import refs from './refs';
 import { notice } from './pnotify';
+import { Movies } from './authorizationAndMoviesDatabase';
+let filmsList;
 
 function renderLibraryButtons(template) {
   refs.myFilmLibraryPage.insertAdjacentHTML('afterbegin', template());
@@ -16,55 +17,49 @@ function serviceLibraryButtons(template) {
   refs.queueBtn.addEventListener('click', drawQueueFilmList);
 }
 
-function createLibraryCardFunc(localeStorageRequest, message) {
+function createLibraryCardFunc(filmsList, message) {
   refs.libraryList.innerHTML = '';
 
-  const readLocalStorage = JSON.parse(localStorage.getItem(localeStorageRequest));
-  if (!readLocalStorage || !readLocalStorage.length) {
+  if (!filmsList || !filmsList.length) {
     notice(message);
     return;
   }
-  // const formatData = formattingFetchData(readLocalStorage);
-  const renderLibraryList = myLibraryFilmListTemplate(readLocalStorage);
+  const renderLibraryList = myLibraryFilmListTemplate(filmsList);
   refs.libraryList.insertAdjacentHTML('beforeend', renderLibraryList);
-
   refs.libraryList.removeEventListener('click', onClickFilmAtMyLibrary);
   refs.libraryList.addEventListener('click', onClickFilmAtMyLibrary);
-}
 
+
+
+}
 function onClickFilmAtMyLibrary(e) {
   if (e.target.nodeName !== 'LI') {
     return;
   }
-  refs.queueBtn.classList.contains('library-btn--active')
-    ? renderDetailPageFromLibrary('filmsQueue', e)
-    : renderDetailPageFromLibrary('filmsWatched', e);
+  renderDetailPage(filmsList, e);
 }
 
-function renderDetailPageFromLibrary(query, e) {
-  const getLocalStorage = JSON.parse(localStorage.getItem(query));
-  const detailFilm = getLocalStorage.find(
+function renderDetailPage(filmsList, e) {
+  const detailFilm = filmsList.find(
     filmData => filmData.id === Number(e.target.dataset.itemid),
   );
   activeDetailsPage(detailFilm);
 }
 
-function drawQueueFilmList() {
+async function drawQueueFilmList() {
   doNotActiveButton(refs.watchedBtn);
   doActiveButton(refs.queueBtn);
-  const localeStorageRequest = 'filmsQueue';
   const message = 'You do not have to queue movies to watch. Add them.';
-
-  createLibraryCardFunc(localeStorageRequest, message);
+  await Movies.getAllToQueueMovies().then(films => filmsList = films)
+  createLibraryCardFunc(filmsList, message);
 }
 
-function drawWatchedFilmList() {
+async function drawWatchedFilmList() {
   doNotActiveButton(refs.queueBtn);
   doActiveButton(refs.watchedBtn);
-  const localeStorageRequest = 'filmsWatched';
   const message = 'You do not have watched movies. Add them';
-
-  createLibraryCardFunc(localeStorageRequest, message);
+  await Movies.getAllToWatchedMovies().then(films => filmsList = films)
+  createLibraryCardFunc(filmsList, message);
 }
 
 function doActiveButton(button) {
