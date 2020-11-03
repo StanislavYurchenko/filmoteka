@@ -1,0 +1,91 @@
+$control-font-family: 'DroidSans', 'Arial', sans-serif;
+$pane-title-font-family: 'Roboto', 'Arial', sans-serif;
+
+//FONT COLORS
+$control-font-color: #030303;
+$pane-title-font-color: #030303;
+$btn-width: 150px;
+$btn-height: 40px;
+$btn-effect-color: rgb(119, 193, 187);
+
+.tabs {
+  margin: 0 auto;
+  max-width: 500px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.pane-item {
+  transition-property: opacity;
+  transition-duration: 0.7s;
+}
+.pane-title {
+  @include font-settings(1.3rem, 1.2, 600, $pane-title-font-color);
+  font-family: $pane-title-font-family;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.tabs_controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.tabs_controls-item--active {
+  background: $btn-effect-color;
+}
+
+.tabs_controls-item {
+  font-family: $control-font-family;
+  @include font-settings(1rem, 1.2, 600, $control-font-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $btn-width;
+  height: $btn-height;
+  overflow: hidden;
+  text-transform: capitalize;
+  z-index: 1;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  transition: 1s ease-out;
+}
+
+[data-type='colusion'] {
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: $btn-effect-color;
+    border-radius: 50px;
+    z-index: -5;
+    transform: scale(1);
+    transition: 0.5s;
+  }
+
+  &:before {
+    top: 30px;
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  &:after {
+    top: 30px;
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  &:hover {
+    &:before {
+      transform: translateX(530%) scale(10);
+    }
+    &:after {
+      transform: translateX(-530%) scale(10);
+    }
+  }
+}
