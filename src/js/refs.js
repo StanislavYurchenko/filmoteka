@@ -12,5 +12,8 @@ const refs = {
   homeList: document.querySelector('.home-page-list'),
   watchedBtn: null,
   queueBtn: null,
+  modalUserReg: document.querySelector('#modal-user-reg'),
+  formLogin: document.querySelector('[data-type="form-login"]'),
+  formSignin: document.querySelector('[data-type="form-signin"]'),
 };
 export default refs;

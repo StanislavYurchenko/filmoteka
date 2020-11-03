@@ -1,3 +1,7 @@
+import refs from './refs';
+import { error } from './pnotify';
+
+
 const apiKey = 'AIzaSyDsxdJLhBCH8GPBoSvuEngfZHh8KKwvWF0';
 let userMoviesToQueue = null;
 
@@ -44,7 +48,6 @@ export class Movies {
 
 
 class RegistrationAdnAuthorization {
-
     static registrationWithEmailAndPassword(email, password) {
         const options = {
             method: 'POST',
@@ -65,13 +68,42 @@ class RegistrationAdnAuthorization {
           }
         }
 
-        return fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, options).then(response => response.json()).then(data => {
+        return fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, options).then(response => {
+            if (!response.ok) {
+                throw('Не верное имя пользователя или пароль. Попробуйте еще раз!')
+            } 
+
+            return response.json();
+        }).catch( err => {
+            new error({
+                title: 'Ошибка!!!',
+                text: `${err}`,
+                delay: 1500, 
+            });
+        });
+    }
+
+    static userRegistration(event) {
+        event.preventDefault();
+        const [ email, password ] = event.currentTarget.elements;
+        RegistrationAdnAuthorization.registrationWithEmailAndPassword(email.value, password.value);
+    }
+
+    static userAuthorization(event) {
+        event.preventDefault();
+        const [ email, password ] = event.currentTarget.elements;
+        RegistrationAdnAuthorization.authWithEmailAndPassword(email.value, password.value).then(data => {
             userMoviesToQueue = data.localId;
+            refs.modalUserReg.classList.remove('is-open');
+    
         });
     }
 }
 
 
-// RegistrationAdnAuthorization.registrationWithEmailAndPassword('yula@gmail.com', '123456');
+refs.formLogin.addEventListener('submit', RegistrationAdnAuthorization.userAuthorization);
 
-RegistrationAdnAuthorization.authWithEmailAndPassword('yula@gmail.com', '123456');
+
+
+
+// RegistrationAdnAuthorization.registrationWithEmailAndPassword('yula@gmail.com', '123456');
