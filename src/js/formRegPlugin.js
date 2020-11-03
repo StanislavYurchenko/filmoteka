@@ -1,4 +1,6 @@
 import MicroModal from 'micromodal';
+import refs from './refs.js';
+import registrationAndAuthFormTemplate from '../template/registrationAndAuthForm.hbs';
 
 MicroModal.init({
     onShow: modal => console.info(`${modal.id} is shown`), // [1]
@@ -14,7 +16,7 @@ MicroModal.init({
 });
 
 
-export class FormRegModalPlugin {
+class FormRegModalPlugin {
     constructor({ selectorButtonOpenModal }) {
         this.buttonOpenModalRef = document.querySelector(selectorButtonOpenModal);
         this._bindEvents();
@@ -27,3 +29,8 @@ export class FormRegModalPlugin {
     }
 }
 
+function renderRegAndAuthForm() {
+  refs.regAndAuth.insertAdjacentHTML('afterbegin', registrationAndAuthFormTemplate());
+}
+
+export {renderRegAndAuthForm, FormRegModalPlugin}

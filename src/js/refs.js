@@ -12,5 +12,6 @@ const refs = {
   homeList: document.querySelector('.home-page-list'),
   watchedBtn: null,
   queueBtn: null,
+  regAndAuth: document.querySelector('#root-registration-form'),
 };
 export default refs;

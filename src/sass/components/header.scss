@@ -38,16 +38,12 @@
   &__list {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 12px 0px;
   }
 
   &__item {
-    padding: 14px 20px 20px 20px;
-
-    &:first-child {
-      padding-right: 40px;
-      padding-left: 40px;
-    }
+    padding: 20px ;
   }
 
   &__link {
@@ -96,20 +92,25 @@
       }
     }
   }
+
+  &__icon{
+    width: 25px;
+    height: 25px;
+  }
 }
 
 .item-js-user {
-  width: 25px;
-  height: 25px;
-  background-image: url(../images/user_form/user_ico.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-  transition-property: transform;
-  transition-duration: 0.3s;
-  &:hover,
-  :focus {
-    transform: scale(1.1);
-  }
+  // width: 25px;
+  // height: 25px;
+  // background-image: url(../images/user_form/user_ico.png);
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: contain;
+  // cursor: pointer;
+  // transition-property: transform;
+  // transition-duration: 0.3s;
+  // &:hover,
+  // :focus {
+  //   transform: scale(1.1);
+  // }
 }

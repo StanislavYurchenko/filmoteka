@@ -1,0 +1,44 @@
+<div class="micromodal-slide" id="modal-user-reg" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <header class="modal__header">
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+            </header>
+            <main class="modal__content" id="modal-1-content">
+                <!-- tabs plugin -->
+                <div class="tabs" id="tabs-reg-log">
+                    <div class="tabs_controls" data-controls>
+                        <a href="#tabs-1" class="tabs_controls-item" data-type="colusion">Log In</a>
+                        <a href="#tabs-2" class="tabs_controls-item" data-type="colusion">Sign In</a>
+                    </div>
+                    <ul class="pane-list" data-pane-list>
+                        <li class="pane-item visually-hidden" id="tabs-1">
+                            <!-- form-login -->
+                            <form class="form-user" data-type="form-login">
+                                <input class="form-user_input" type="email" name="usermail"
+                                    placeholder="Enter you e-mail" min="1" max="20" required>
+                                <input class="form-user_input" type="password" name="userpassword"
+                                    placeholder="Enter you password" min="1" max="20" required>
+                                <button class="form-user_button-submit" type="submit">Submit</button>
+                            </form>
+
+                        </li>
+                        <li class="pane-item visually-hidden" id="tabs-2">
+                            <!-- form signin -->
+                            <form class="form-user" data-type="form-signin">
+                                <input class="form-user_input" type="email" name="usermail"
+                                    placeholder="Enter you e-mail" min="1" max="20" required>
+                                <input class="form-user_input" type="password" name="userpassword"
+                                    placeholder="Enter you password" min="1" max="20" required>
+                                <input class="form-user_input" type="password" name="userpassword"
+                                    placeholder="Check you password" min="1" max="20" required>
+                                <button class="form-user_button-submit" type="submit">Submit</button>
+                            </form>
+
+                        </li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
