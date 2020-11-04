@@ -7,6 +7,7 @@ import { drawQueueFilmList } from './libraryPage';
 import { baseUrl, apiKey } from './initialHomePage';
 import { controlGlobalPage, homePagePagination } from './searchAndPaginationHomePage';
 import { logOut, userAuth } from './authorizationAndMoviesDatabase'
+import { formRegModalPlugin } from './../index.js'
 
 // navigation__link--active
 const activeHomePage = () => {
@@ -24,7 +25,7 @@ const activeLibraryPage = () => {
   refs.detailsPage.classList.add('notActivePage');
   refs.homePage.classList.add('notActivePage');
   refs.linkMyLibrary.classList.add('navigation__link--active');
-  refs.linkHome.classList.remove('navigation__link--active');  
+  refs.linkHome.classList.remove('navigation__link--active');
   history.pushState({ page: "/library" }, "title 2", "/library")
 };
 
@@ -33,7 +34,7 @@ const activeDetailsPage = (movied) => {
   refs.myFilmLibraryPage.classList.add('notActivePage');
   refs.detailsPage.classList.remove('notActivePage');
   showDetails(movied);
-  if ( movied.original_title ) {
+  if (movied.original_title) {
     const brUrl = movied.original_title.toLowerCase().split(" ").join('-')
     history.pushState({ page: "/movied" }, "title 3", `/movied=${brUrl}`)
   }
@@ -91,25 +92,29 @@ function linkLogoHandler() {
   activeHomePage();
 }
 
-function linkLoginHandler(){ 
-  if(userAuth) {
-    logOut(changeLoginBtnStatus) 
-  } 
+function linkLoginHandler() {
+  if (userAuth) {
+    logOut(changeLoginBtnStatus)
+  }
 }
 
 function changeLoginBtnStatus(isLogged) {
   const textRef = refs.linkLogin.querySelector('span');
   const imgRef = refs.linkLogin.querySelector('img');
-
   if (isLogged) {
+    formRegModalPlugin.chendgeStatLogin();
     textRef.textContent = 'Exit';
     imgRef.src = '../images/user_form/exit.png';
     imgRef.alt = 'exit icon';
+
   } else {
+    formRegModalPlugin.chendgeStatUnlogin();
     textRef.textContent = 'Login';
     imgRef.src = '../images/user_form/enter.png';
     imgRef.alt = 'login icon';
+
   }
+
 }
 
 
