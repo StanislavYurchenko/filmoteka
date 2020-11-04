@@ -11,6 +11,7 @@ import navigateTemplate from './template/homePageNav.hbs';
 import myFilmLibraryPageButtons from './template/myFilmLibraryPageButtons.hbs';
 import { FormRegModalPlugin, renderRegAndAuthForm } from './js/formRegPlugin.js'
 import { TabPlugin } from './js/TabPlugin.js'
+import { userAuth } from './js/authorizationAndMoviesDatabase'
 
 // render header
 renderHeader();
@@ -47,7 +48,7 @@ usersSearch();
 // render reg and auth form
 renderRegAndAuthForm();
 
-const formRegModalPlugin = new FormRegModalPlugin({selectorButtonOpenModal: '[data-type="button-user"]'});
+const formRegModalPlugin = new FormRegModalPlugin({selectorButtonOpenModal: '[data-type="button-user"]', userAuth});
 
 const tabUserRegLog = new TabPlugin({
   rootSelector: "#tabs-reg-log",

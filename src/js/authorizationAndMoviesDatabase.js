@@ -114,7 +114,7 @@ const userRegistration = async (event, cb) => {
                 }
                 userAuth = true;
                 monitorButtonStatusText(userAuth);
-                // cb(userAuth);
+                cb && cb(userAuth);
             });
         } catch(err) {
             new error({
@@ -144,17 +144,18 @@ const userAuthorization = (event, cb) => {
         });
         userAuth = true;
         monitorButtonStatusText(userAuth);
-        // cb(userAuth);
+        cb && cb(userAuth);
     });
 
     event.currentTarget.reset();
 };
 
 
-const logOut = () => {
+const logOut = (cb) => {
     userMoviesToQueue = null;
     userAuth = false;
     monitorButtonStatusText(userAuth);
+    cb && cb(userAuth);
 }
 
 
@@ -175,6 +176,5 @@ export {
     userRegistration,
     userAuthorization,
     logOut,
-    clearInput,
-    userAuth,
+    userAuth
 };

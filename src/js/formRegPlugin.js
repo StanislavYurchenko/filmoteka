@@ -23,6 +23,7 @@ class FormRegModalPlugin {
     static openModal() {
         MicroModal.show('modal-user-reg');
     }
+
     constructor({ selectorButtonOpenModal }) {
         this.buttonOpenModalRef = document.querySelector(selectorButtonOpenModal);
         this._bindEvents();
@@ -31,6 +32,8 @@ class FormRegModalPlugin {
         this.buttonOpenModalRef.addEventListener('click', this._handlerOpenModal.bind(this))
     }
     _handlerOpenModal(event) {
+        // console.log(this._isLogged);
+        // if (this._isLogged) return;
         MicroModal.show('modal-user-reg');
     }
 }

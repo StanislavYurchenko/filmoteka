@@ -6,6 +6,7 @@ import { showDetails } from './filmDetailsPage';
 import { drawQueueFilmList } from './libraryPage';
 import { baseUrl, apiKey } from './initialHomePage';
 import { controlGlobalPage, homePagePagination } from './searchAndPaginationHomePage';
+import { logOut } from './authorizationAndMoviesDatabase'
 
 // navigation__link--active
 const activeHomePage = () => {
@@ -56,6 +57,7 @@ function addHeaderListener() {
   refs.linkHome.addEventListener('click', linkHomeHandler);
   refs.linkMyLibrary.addEventListener('click', linkMyLibraryHandler);
   refs.homeList.addEventListener('click', homeListHandler);
+  refs.linkLogin.addEventListener('click', linkLoginHandler);
 }
 
 function homeListHandler(event) {
@@ -89,13 +91,27 @@ function linkLogoHandler() {
   activeHomePage();
 }
 
-function changeLoginBtnStatus(isLogged) {
+function linkLoginHandler(){
 
-  const textRef = refs.linkLogin.querySelector('span');
+ 
+  logOut(changeLoginBtnStatus)
+
   
-  textRef.text.innerHTML =  isLogged ? 'Logout' : 'Login'
-  console.log(textRef.text.innerHTML);
+}
 
+function changeLoginBtnStatus(isLogged) {
+  const textRef = refs.linkLogin.querySelector('span');
+  const imgRef = refs.linkLogin.querySelector('img');
+
+  if (isLogged) {
+    textRef.textContent = 'Exit';
+    imgRef.src = '../images/user_form/exit.png';
+    imgRef.alt = 'exit icon';
+  } else {
+    textRef.textContent = 'Login';
+    imgRef.src = '../images/user_form/enter.png';
+    imgRef.alt = 'login icon';
+  }
 }
 
 

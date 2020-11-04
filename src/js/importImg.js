@@ -7,5 +7,3 @@ import enter from '../images/user_form/enter.png';
 import icon_user from '../images/user_form/icon_user.png';
 import img_close_icon from '../images/close_icon.png';
 
-console.log(enter);
-console.log(icon_lib);
