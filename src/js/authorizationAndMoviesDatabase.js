@@ -149,6 +149,13 @@ const userAuthorization = (event) => {
 };
 
 
+const logOut = () => {
+    userMoviesToQueue = null;
+    userAuth = false;
+    monitorButtonStatusText(userAuth);
+}
+
+
 const clearInput = (email, password, rePassword) => {
     email.value = '';
     password.value = '';
@@ -164,5 +171,7 @@ export {
     registrationWithEmailAndPassword,
     authWithEmailAndPassword,
     userRegistration,
-    userAuthorization
+    userAuthorization,
+    logOut,
+    clearInput
 };
