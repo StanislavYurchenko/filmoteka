@@ -2,7 +2,7 @@ import myLibraryFilmListTemplate from '../template/myFilmLibraryPage.hbs';
 import { activeDetailsPage } from './navigation';
 import refs from './refs';
 import { notice } from './pnotify';
-import { Movies } from './authorizationAndMoviesDatabase';
+import { getAllToQueueMovies, getAllToWatchedMovies } from './authorizationAndMoviesDatabase';
 let filmsList;
 
 function renderLibraryButtons(template) {
@@ -50,7 +50,7 @@ async function drawQueueFilmList() {
   doNotActiveButton(refs.watchedBtn);
   doActiveButton(refs.queueBtn);
   const message = 'You do not have to queue movies to watch. Add them.';
-  await Movies.getAllToQueueMovies().then(films => filmsList = films)
+  await getAllToQueueMovies().then(films => filmsList = films)
   createLibraryCardFunc(filmsList, message);
 }
 
@@ -58,7 +58,7 @@ async function drawWatchedFilmList() {
   doNotActiveButton(refs.queueBtn);
   doActiveButton(refs.watchedBtn);
   const message = 'You do not have watched movies. Add them';
-  await Movies.getAllToWatchedMovies().then(films => filmsList = films)
+  await getAllToWatchedMovies().then(films => filmsList = films)
   createLibraryCardFunc(filmsList, message);
 }
 
