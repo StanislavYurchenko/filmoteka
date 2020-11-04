@@ -1,5 +1,5 @@
 import './sass/main.scss';
-import './js/importImg' 
+import './js/importImg'
 import { renderHeader, renderFooter, addHeaderListener } from './js/navigation';
 import refs from './js/refs.js';
 import { renderFilmList, fetchPopularMoviesList, baseUrl, apiKey, pageNumber, formattingFetchData } from './js/initialHomePage';
@@ -48,7 +48,13 @@ usersSearch();
 // render reg and auth form
 renderRegAndAuthForm();
 
-const formRegModalPlugin = new FormRegModalPlugin({selectorButtonOpenModal: '[data-type="button-user"]', userAuth});
+
+
+export const formRegModalPlugin = new FormRegModalPlugin({ selectorButtonOpenModal: '[data-type="button-user"]' });
+
+
+
+
 
 const tabUserRegLog = new TabPlugin({
   rootSelector: "#tabs-reg-log",
