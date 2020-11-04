@@ -33,7 +33,7 @@ class FormRegModalPlugin {
         this.buttonOpenModalRef.addEventListener('click', this._handlerOpenModal.bind(this))
     }
     _handlerOpenModal(event) {
-        console.log("click")
+
         if (!this._isLogged) {
             MicroModal.show('modal-user-reg');
         }
