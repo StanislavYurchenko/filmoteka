@@ -125,7 +125,7 @@ const userRegistration = async (event, cb) => {
         }
     }
 
-    clearInput(email, password, rePassword);
+    event.currentTarget.reset();
 };
 
 
@@ -147,7 +147,7 @@ const userAuthorization = (event, cb) => {
         // cb(userAuth);
     });
 
-    clearInput(email, password);
+    event.currentTarget.reset();
 };
 
 
@@ -158,11 +158,11 @@ const logOut = () => {
 }
 
 
-const clearInput = (email, password, rePassword) => {
-    email.value = '';
-    password.value = '';
-    if (rePassword) rePassword.value = '';
-};
+// const clearInput = (email, password, rePassword) => {
+//     email.value = '';
+//     password.value = '';
+//     if (rePassword) rePassword.value = '';
+// };
 
 
 export { 
