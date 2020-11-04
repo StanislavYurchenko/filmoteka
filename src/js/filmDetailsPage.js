@@ -1,11 +1,12 @@
 import detailsFilms from '../template/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
 import refs from './refs';
-import { Movies } from './authorizationAndMoviesDatabase';
-import { error } from './pnotify';
+import { getAllToWatchedMovies, getAllToQueueMovies, addAndDeleteToQueue, addAndDeleteToWatched } from './authorizationAndMoviesDatabase';
+import { FormRegModalPlugin } from './formRegPlugin';
 
 
 let selectedFilm = null;
+let userAuth = false;
 let allToQueue = []; 
 let allToWatched = [];
 let arrayMoviesToQueue = [];
@@ -18,31 +19,29 @@ const findMoveInArray = (array) => {
 };
 
 
-const monitorButtonStatusText = async () => {
+const monitorButtonStatusText = async (user) => {
   const buttonWatched = document.querySelector('.details__button-watched');
   const buttonQueue = document.querySelector('.details__button-queue');
 
   buttonWatched.addEventListener('click', toggleToWatched);
   buttonQueue.addEventListener('click', toggleToQueue);
 
-  await Movies.getAllToWatchedMovies().then(movie => {
+  await getAllToWatchedMovies().then(movie => {
     allToWatched = movie || [];
   });
 
-  await Movies.getAllToQueueMovies().then(movie => {
+  await getAllToQueueMovies().then(movie => {
     allToQueue = movie || [];
   });
+
+  userAuth = user;
 
   if (allToQueue.length && findMoveInArray(allToQueue) === selectedFilm.id) {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Delete from queue`;
   } else {
-    if(!arrayMoviesToQueue && arrayMoviesToQueue !== null) {
+    if(!arrayMoviesToQueue && arrayMoviesToQueue !== null && !userAuth) {
       buttonQueue.innerHTML = `<i class="material-icons details__icons" disable>event_busy</i> Add to queue`;
-      new error({
-        title: 'You cannot add a movie!',
-        text: 'Please register or log in!',
-        delay: 1500, 
-    });
+      FormRegModalPlugin.openModal();
     }
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
   };
@@ -51,13 +50,9 @@ const monitorButtonStatusText = async () => {
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Delete from watched`;
 
   } else {
-    if(!arrayMoviesToWatched && arrayMoviesToWatched !== null) {
+    if(!arrayMoviesToWatched && arrayMoviesToWatched !== null && !userAuth) {
       buttonWatched.innerHTML = `<i class="material-icons details__icons" disable>videocam</i> Add to watched`;
-      new error({
-        title: 'You cannot add a movie!',
-        text: 'Please register or log in!',
-        delay: 1500, 
-    });
+      FormRegModalPlugin.openModal();
     }
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
   };
@@ -68,14 +63,14 @@ const toggleToQueue = async () => {
 
   if (allToQueue.length && findMoveInArray(allToQueue)) {
     allToQueue = allToQueue.filter(el => el.id !== selectedFilm.id);
-    arrayMoviesToQueue = await Movies.addAndDeleteToQueue(allToQueue);
+    arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
 
   } else {
     allToQueue.push(selectedFilm);
-    arrayMoviesToQueue = await Movies.addAndDeleteToQueue(allToQueue);
+    arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
   };
 
-  monitorButtonStatusText();
+  monitorButtonStatusText(userAuth);
 };
 
 
@@ -83,13 +78,13 @@ const toggleToWatched = async () => {
 
   if (allToWatched.length && findMoveInArray(allToWatched)) {
     allToWatched = allToWatched.filter(el => el.id !== selectedFilm.id);
-    arrayMoviesToWatched = await Movies.addAndDeleteToWatched(allToWatched);
+    arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
   } else {
     allToWatched.push(selectedFilm);
-    arrayMoviesToWatched = await Movies.addAndDeleteToWatched(allToWatched);
+    arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
   };
 
-  monitorButtonStatusText();
+  monitorButtonStatusText(userAuth);
 };
 
 
@@ -148,5 +143,5 @@ const showDetails = (selectFilm) => {
   monitorButtonStatusText();
 };
 
-export { showDetails, toggleToQueue, toggleToWatched };
+export { showDetails, toggleToQueue, toggleToWatched, monitorButtonStatusText };
 

@@ -1,7 +1,7 @@
 import MicroModal from 'micromodal';
 import refs from './refs.js';
 import registrationAndAuthFormTemplate from '../template/registrationAndAuthForm.hbs';
-import { RegistrationAdnAuthorization } from './authorizationAndMoviesDatabase';
+import { userAuthorization, userRegistration } from './authorizationAndMoviesDatabase';
 
 
 MicroModal.init({
@@ -19,6 +19,9 @@ MicroModal.init({
 
 
 class FormRegModalPlugin {
+    static openModal() {
+        MicroModal.show('modal-user-reg');
+    }
     constructor({ selectorButtonOpenModal }) {
         this.buttonOpenModalRef = document.querySelector(selectorButtonOpenModal);
         this._bindEvents();
@@ -37,8 +40,8 @@ function renderRegAndAuthForm() {
   const formLogin = document.querySelector('[data-type="form-login"]');
   const formSignin = document.querySelector('[data-type="form-signin"]');
 
-  formLogin.addEventListener('submit', RegistrationAdnAuthorization.userAuthorization);
-  formSignin.addEventListener('submit', RegistrationAdnAuthorization.userRegistration);
+  formLogin.addEventListener('submit', userAuthorization);
+  formSignin.addEventListener('submit', userRegistration);
 }
 
 export {renderRegAndAuthForm, FormRegModalPlugin}
