@@ -6,7 +6,7 @@ import { showDetails } from './filmDetailsPage';
 import { drawQueueFilmList } from './libraryPage';
 import { baseUrl, apiKey } from './initialHomePage';
 import { controlGlobalPage, homePagePagination } from './searchAndPaginationHomePage';
-import { logOut } from './authorizationAndMoviesDatabase'
+import { logOut, userAuth } from './authorizationAndMoviesDatabase'
 
 // navigation__link--active
 const activeHomePage = () => {
@@ -91,12 +91,10 @@ function linkLogoHandler() {
   activeHomePage();
 }
 
-function linkLoginHandler(){
-
- 
-  logOut(changeLoginBtnStatus)
-
-  
+function linkLoginHandler(){ 
+  if(userAuth) {
+    logOut(changeLoginBtnStatus) 
+  } 
 }
 
 function changeLoginBtnStatus(isLogged) {
