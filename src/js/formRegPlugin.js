@@ -1,7 +1,8 @@
 import MicroModal from 'micromodal';
 import refs from './refs.js';
 import registrationAndAuthFormTemplate from '../template/registrationAndAuthForm.hbs';
-import { userAuthorization, userRegistration } from './authorizationAndMoviesDatabase';
+import { userAuthorization, userRegistration, userAuth } from './authorizationAndMoviesDatabase';
+import { changeLoginBtnStatus } from './navigation';
 
 
 MicroModal.init({
@@ -38,10 +39,19 @@ function renderRegAndAuthForm() {
   refs.regAndAuth.insertAdjacentHTML('afterbegin', registrationAndAuthFormTemplate());
 
   const formLogin = document.querySelector('[data-type="form-login"]');
-  const formSignin = document.querySelector('[data-type="form-signin"]');
+  const formSignup = document.querySelector('[data-type="form-signin"]');
 
-  formLogin.addEventListener('submit', userAuthorization);
-  formSignin.addEventListener('submit', userRegistration);
+  formLogin.addEventListener('submit', formLoginHolder);
+  formSignup.addEventListener('submit', formSignupHolder);
+
+  function formLoginHolder(event){
+    userAuthorization(event, changeLoginBtnStatus);  
+  }
+
+  function formSignupHolder(event){
+    userRegistration(event, changeLoginBtnStatus);  
+  }
+
 }
 
 export {renderRegAndAuthForm, FormRegModalPlugin}

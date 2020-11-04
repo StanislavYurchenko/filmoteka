@@ -87,7 +87,7 @@ const authWithEmailAndPassword = (email, password) => {
 };
 
 
-const userRegistration = async (event) => {
+const userRegistration = async (event, cb) => {
     event.preventDefault();
     const modalUserReg = document.querySelector('#modal-user-reg');
     const [ email, password, rePassword] = event.currentTarget.elements;
@@ -114,6 +114,7 @@ const userRegistration = async (event) => {
                 }
                 userAuth = true;
                 monitorButtonStatusText(userAuth);
+                // cb(userAuth);
             });
         } catch(err) {
             new error({
@@ -128,7 +129,7 @@ const userRegistration = async (event) => {
 };
 
 
-const userAuthorization = (event) => {
+const userAuthorization = (event, cb) => {
     event.preventDefault();
     const modalUserReg = document.querySelector('#modal-user-reg');
     const [ email, password ] = event.currentTarget.elements;
@@ -143,6 +144,7 @@ const userAuthorization = (event) => {
         });
         userAuth = true;
         monitorButtonStatusText(userAuth);
+        // cb(userAuth);
     });
 
     clearInput(email, password);
@@ -173,5 +175,6 @@ export {
     userRegistration,
     userAuthorization,
     logOut,
-    clearInput
+    clearInput,
+    userAuth,
 };

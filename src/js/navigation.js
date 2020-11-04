@@ -50,7 +50,7 @@ function addHeaderListener() {
   refs.linkLogo = refs.header.querySelector('.js-logo');
   refs.linkHome = refs.header.querySelector('.js-home');
   refs.linkMyLibrary = refs.header.querySelector('.js-myLibrary');
-
+  refs.linkLogin = refs.header.querySelector('.item-js-user_link');
 
   refs.linkLogo.addEventListener('click', linkLogoHandler);
   refs.linkHome.addEventListener('click', linkHomeHandler);
@@ -89,4 +89,14 @@ function linkLogoHandler() {
   activeHomePage();
 }
 
-export { activeHomePage, activeDetailsPage, renderHeader, renderFooter, addHeaderListener };
+function changeLoginBtnStatus(isLogged) {
+
+  const textRef = refs.linkLogin.querySelector('span');
+  
+  textRef.text.innerHTML =  isLogged ? 'Logout' : 'Login'
+  console.log(textRef.text.innerHTML);
+
+}
+
+
+export { activeHomePage, activeDetailsPage, renderHeader, renderFooter, addHeaderListener, changeLoginBtnStatus };

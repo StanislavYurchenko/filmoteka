@@ -13,5 +13,6 @@ const refs = {
   watchedBtn: null,
   queueBtn: null,
   regAndAuth: document.querySelector('#root-registration-form'),
+  linkLogin: null,
 };
 export default refs;
