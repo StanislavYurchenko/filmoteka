@@ -11,7 +11,6 @@ import navigateTemplate from './template/homePageNav.hbs';
 import myFilmLibraryPageButtons from './template/myFilmLibraryPageButtons.hbs';
 import { FormRegModalPlugin, renderRegAndAuthForm } from './js/formRegPlugin.js'
 import { TabPlugin } from './js/TabPlugin.js'
-import { userAuth } from './js/authorizationAndMoviesDatabase'
 
 // render header
 renderHeader();

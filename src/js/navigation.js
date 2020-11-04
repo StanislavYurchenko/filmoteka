@@ -7,7 +7,7 @@ import { drawQueueFilmList } from './libraryPage';
 import { baseUrl, apiKey } from './initialHomePage';
 import { controlGlobalPage, homePagePagination } from './searchAndPaginationHomePage';
 import { logOut, userAuth } from './authorizationAndMoviesDatabase'
-import { formRegModalPlugin } from './../index.js'
+import { formRegModalPlugin } from '../index.js'
 
 // navigation__link--active
 const activeHomePage = () => {
@@ -96,6 +96,7 @@ function linkLoginHandler() {
   if (userAuth) {
     logOut(changeLoginBtnStatus)
   }
+  
 }
 
 function changeLoginBtnStatus(isLogged) {
@@ -106,15 +107,14 @@ function changeLoginBtnStatus(isLogged) {
     textRef.textContent = 'Exit';
     imgRef.src = '../images/user_form/exit.png';
     imgRef.alt = 'exit icon';
-
     refs.linkMyLibrary.classList.remove('visually-hidden');
   } else {
     formRegModalPlugin.chendgeStatUnlogin();
     textRef.textContent = 'Login';
     imgRef.src = '../images/user_form/enter.png';
     imgRef.alt = 'login icon';
-
     refs.linkMyLibrary.classList.add('visually-hidden');
+    linkLogoHandler();
   }
 
 }

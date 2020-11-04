@@ -3,6 +3,7 @@ import 'material-design-icons/iconfont/material-icons.css';
 import refs from './refs';
 import { getAllToWatchedMovies, getAllToQueueMovies, addAndDeleteToQueue, addAndDeleteToWatched } from './authorizationAndMoviesDatabase';
 import { FormRegModalPlugin } from './formRegPlugin';
+import { linkLoginHandler } from './navigation'
 
 
 let selectedFilm = null;
