@@ -124,7 +124,7 @@ const userRegistration = async (event) => {
         }
     }
 
-    clearInput(email, password, rePassword);
+    event.currentTarget.reset();
 };
 
 
@@ -145,7 +145,7 @@ const userAuthorization = (event) => {
         monitorButtonStatusText(userAuth);
     });
 
-    clearInput(email, password);
+    event.currentTarget.reset();
 };
 
 
@@ -156,11 +156,11 @@ const logOut = () => {
 }
 
 
-const clearInput = (email, password, rePassword) => {
-    email.value = '';
-    password.value = '';
-    if (rePassword) rePassword.value = '';
-};
+// const clearInput = (email, password, rePassword) => {
+//     email.value = '';
+//     password.value = '';
+//     if (rePassword) rePassword.value = '';
+// };
 
 
 export { 
@@ -172,6 +172,5 @@ export {
     authWithEmailAndPassword,
     userRegistration,
     userAuthorization,
-    logOut,
-    clearInput
+    logOut
 };
