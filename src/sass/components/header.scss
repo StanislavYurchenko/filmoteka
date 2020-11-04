@@ -33,34 +33,43 @@
 .navigation {
   display: flex;
   justify-content: space-between;
-  // background-color: $main-color;
 
   &__list {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 12px 0px;
   }
 
   &__item {
-    padding: 14px 20px 20px 20px;
-
-    &:first-child {
-      padding-right: 40px;
-      padding-left: 40px;
-    }
+    padding: 20px ;
   }
 
   &__link {
     @include font-settings(
       $size: 0.875rem,
       $weight: 500,
-      $color: $font-color-alfa-70
+      $color: $font-color-alfa-70    
     );
+
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
     outline: none;
     position: relative;
     text-transform: uppercase;
-
     transition: color 200ms linear;
+
+
+
+    & span{
+      @media screen and (max-width: $mobile-bp-max) {
+        display: none;
+      }
+    }
+
+
+
 
     &::after {
       position: absolute;
@@ -77,39 +86,31 @@
     }
 
     &:active,
-    &:hover,
-    &:focus {
+    &:hover {
       // Добавить в переменые
       color: rgba(55, 44, 72, 1);
     }
     &:active::after,
-    &:hover::after,
-    &:focus::after {
-      width: 100px;
+    &:hover::after {
+      width: 100%;
     }
 
     &--active {
       &::after {
-        width: 100px;
+        width: 100%;
         // Добавить в переменые
         color: rgba(55, 44, 72, 1);
       }
     }
   }
-}
 
-.item-js-user {
-  width: 25px;
-  height: 25px;
-  background-image: url(../images/user_form/user_ico.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-  transition-property: transform;
-  transition-duration: 0.3s;
-  &:hover,
-  :focus {
-    transform: scale(1.1);
+  &__icon{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    @media screen and (max-width: $mobile-bp-max) {
+      margin-right: 0;
+    }
   }
 }
+

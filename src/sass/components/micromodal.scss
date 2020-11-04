@@ -14,11 +14,13 @@
 .modal__container {
   background-color: #fff;
   padding: 10px;
+  width: 85%;
   max-width: 500px;
   max-height: 100vh;
   border-radius: 4px;
   overflow-y: auto;
   box-sizing: border-box;
+
 }
 
 .modal__header {
