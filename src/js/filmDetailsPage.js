@@ -20,12 +20,6 @@ const findMoveInArray = (array) => {
 
 
 const monitorButtonStatusText = async (user) => {
-  const buttonWatched = document.querySelector('.details__button-watched');
-  const buttonQueue = document.querySelector('.details__button-queue');
-
-  buttonWatched.addEventListener('click', toggleToWatched);
-  buttonQueue.addEventListener('click', toggleToQueue);
-
   await getAllToWatchedMovies().then(movie => {
     allToWatched = movie || [];
   });
@@ -35,6 +29,13 @@ const monitorButtonStatusText = async (user) => {
   });
 
   userAuth = user;
+  if(!selectedFilm) return;
+
+  const buttonWatched = document.querySelector('.details__button-watched');
+  const buttonQueue = document.querySelector('.details__button-queue');
+
+  buttonWatched.addEventListener('click', toggleToWatched);
+  buttonQueue.addEventListener('click', toggleToQueue);
 
   if (allToQueue.length && findMoveInArray(allToQueue) === selectedFilm.id) {
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Delete from queue`;
