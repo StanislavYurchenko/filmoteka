@@ -106,21 +106,15 @@ function changeLoginBtnStatus(isLogged) {
     textRef.textContent = 'Exit';
     imgRef.src = '../images/user_form/exit.png';
     imgRef.alt = 'exit icon';
-<<<<<<< HEAD
 
-=======
     refs.linkMyLibrary.classList.remove('visually-hidden');
->>>>>>> auth
   } else {
     formRegModalPlugin.chendgeStatUnlogin();
     textRef.textContent = 'Login';
     imgRef.src = '../images/user_form/enter.png';
     imgRef.alt = 'login icon';
-<<<<<<< HEAD
 
-=======
     refs.linkMyLibrary.classList.add('visually-hidden');
->>>>>>> auth
   }
 
 }
