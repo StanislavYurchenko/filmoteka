@@ -19,7 +19,7 @@ const findMoveInArray = (array) => {
 };
 
 
-const monitorButtonStatusText = async (user) => {
+const monitorButtonStatusText = async (user, logOut = false) => {
   await getAllToWatchedMovies().then(movie => {
     allToWatched = movie || [];
   });
@@ -42,7 +42,7 @@ const monitorButtonStatusText = async (user) => {
   } else {
     if(!arrayMoviesToQueue && arrayMoviesToQueue !== null && !userAuth) {
       buttonQueue.innerHTML = `<i class="material-icons details__icons" disable>event_busy</i> Add to queue`;
-      FormRegModalPlugin.openModal();
+      if (!logOut) FormRegModalPlugin.openModal();
     }
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
   };
@@ -53,7 +53,7 @@ const monitorButtonStatusText = async (user) => {
   } else {
     if(!arrayMoviesToWatched && arrayMoviesToWatched !== null && !userAuth) {
       buttonWatched.innerHTML = `<i class="material-icons details__icons" disable>videocam</i> Add to watched`;
-      FormRegModalPlugin.openModal();
+      if (!logOut) FormRegModalPlugin.openModal();
     }
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
   };
