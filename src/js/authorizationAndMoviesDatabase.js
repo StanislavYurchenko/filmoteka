@@ -91,6 +91,8 @@ const userRegistration = async (event, cb) => {
     event.preventDefault();
     const modalUserReg = document.querySelector('#modal-user-reg');
     const [ email, password, rePassword] = event.currentTarget.elements;
+    const currentTarget = event.currentTarget;
+
 
     if(password.value !== rePassword.value) {
         new error({
@@ -124,8 +126,8 @@ const userRegistration = async (event, cb) => {
             });
         }
     }
-
-    event.currentTarget.reset();
+    
+    currentTarget.reset();
 };
 
 
@@ -154,16 +156,9 @@ const userAuthorization = (event, cb) => {
 const logOut = (cb) => {
     userMoviesToQueue = null;
     userAuth = false;
-    monitorButtonStatusText(userAuth);
+    monitorButtonStatusText(userAuth, 'true');
     cb && cb(userAuth);
 }
-
-
-// const clearInput = (email, password, rePassword) => {
-//     email.value = '';
-//     password.value = '';
-//     if (rePassword) rePassword.value = '';
-// };
 
 
 export { 

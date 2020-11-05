@@ -3,13 +3,12 @@ import 'material-design-icons/iconfont/material-icons.css';
 import refs from './refs';
 import { getAllToWatchedMovies, getAllToQueueMovies, addAndDeleteToQueue, addAndDeleteToWatched } from './authorizationAndMoviesDatabase';
 import { FormRegModalPlugin } from './formRegPlugin';
-import { linkLoginHandler } from './navigation'
 
 
 let selectedFilm = null;
 let userAuth = false;
-let allToQueue = []; 
-let allToWatched = [];
+let allToQueue = null; 
+let allToWatched = null;
 let arrayMoviesToQueue = [];
 let arrayMoviesToWatched = [];
 
@@ -20,7 +19,7 @@ const findMoveInArray = (array) => {
 };
 
 
-const monitorButtonStatusText = async (user) => {
+const monitorButtonStatusText = async (user, logOut = false) => {
   await getAllToWatchedMovies().then(movie => {
     allToWatched = movie || [];
   });
@@ -43,7 +42,7 @@ const monitorButtonStatusText = async (user) => {
   } else {
     if(!arrayMoviesToQueue && arrayMoviesToQueue !== null && !userAuth) {
       buttonQueue.innerHTML = `<i class="material-icons details__icons" disable>event_busy</i> Add to queue`;
-      FormRegModalPlugin.openModal();
+      if (!logOut && allToQueue) FormRegModalPlugin.openModal();
     }
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
   };
@@ -54,7 +53,7 @@ const monitorButtonStatusText = async (user) => {
   } else {
     if(!arrayMoviesToWatched && arrayMoviesToWatched !== null && !userAuth) {
       buttonWatched.innerHTML = `<i class="material-icons details__icons" disable>videocam</i> Add to watched`;
-      FormRegModalPlugin.openModal();
+      if (!logOut && allToWatched) FormRegModalPlugin.openModal();
     }
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
   };
@@ -142,7 +141,7 @@ const showDetails = (selectFilm) => {
   selectedFilm = filterBgdropPath(filterPosterPath(filterReliseDate(selectFilm)))
   refs.detailsPage.innerHTML = detailsFilms(selectedFilm);
 
-  monitorButtonStatusText();
+  monitorButtonStatusText(userAuth);
 };
 
 export { showDetails, toggleToQueue, toggleToWatched, monitorButtonStatusText };
