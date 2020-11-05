@@ -54,7 +54,7 @@
 
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
     outline: none;
     position: relative;
     text-transform: uppercase;
@@ -63,6 +63,7 @@
 
 
     & span{
+      margin-top: 5px;
       @media screen and (max-width: $mobile-bp-max) {
         display: none;
       }

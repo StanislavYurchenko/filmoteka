@@ -162,7 +162,7 @@
   &__icon {
     display: block;
     position: absolute;
-    z-index: 100;
+    z-index: 1;
     color: #818181;
     top: 5px;
     @media screen and (max-width: $mobile-bp-max) {
