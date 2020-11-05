@@ -7,8 +7,8 @@ import { FormRegModalPlugin } from './formRegPlugin';
 
 let selectedFilm = null;
 let userAuth = false;
-let allToQueue = []; 
-let allToWatched = [];
+let allToQueue = null; 
+let allToWatched = null;
 let arrayMoviesToQueue = [];
 let arrayMoviesToWatched = [];
 
@@ -42,7 +42,7 @@ const monitorButtonStatusText = async (user, logOut = false) => {
   } else {
     if(!arrayMoviesToQueue && arrayMoviesToQueue !== null && !userAuth) {
       buttonQueue.innerHTML = `<i class="material-icons details__icons" disable>event_busy</i> Add to queue`;
-      if (!logOut) FormRegModalPlugin.openModal();
+      if (!logOut && allToQueue) FormRegModalPlugin.openModal();
     }
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
   };
@@ -53,7 +53,7 @@ const monitorButtonStatusText = async (user, logOut = false) => {
   } else {
     if(!arrayMoviesToWatched && arrayMoviesToWatched !== null && !userAuth) {
       buttonWatched.innerHTML = `<i class="material-icons details__icons" disable>videocam</i> Add to watched`;
-      if (!logOut) FormRegModalPlugin.openModal();
+      if (!logOut && allToWatched) FormRegModalPlugin.openModal();
     }
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
   };
@@ -141,7 +141,7 @@ const showDetails = (selectFilm) => {
   selectedFilm = filterBgdropPath(filterPosterPath(filterReliseDate(selectFilm)))
   refs.detailsPage.innerHTML = detailsFilms(selectedFilm);
 
-  monitorButtonStatusText();
+  monitorButtonStatusText(userAuth);
 };
 
 export { showDetails, toggleToQueue, toggleToWatched, monitorButtonStatusText };
