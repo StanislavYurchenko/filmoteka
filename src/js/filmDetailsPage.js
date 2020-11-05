@@ -1,12 +1,11 @@
 import detailsFilms from '../template/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
 import refs from './refs';
-import { getAllToWatchedMovies, getAllToQueueMovies, addAndDeleteToQueue, addAndDeleteToWatched } from './authorizationAndMoviesDatabase';
+import { getAllToWatchedMovies, getAllToQueueMovies, addAndDeleteToQueue, addAndDeleteToWatched, userAuth } from './authorizationAndMoviesDatabase';
 import { FormRegModalPlugin } from './formRegPlugin';
 
 
 let selectedFilm = null;
-let userAuth = false;
 let allToQueue = null; 
 let allToWatched = null;
 let arrayMoviesToQueue = [];
@@ -19,7 +18,7 @@ const findMoveInArray = (array) => {
 };
 
 
-const monitorButtonStatusText = async (user, logOut = false) => {
+const monitorButtonStatusText = async (logOut = false) => {
   await getAllToWatchedMovies().then(movie => {
     allToWatched = movie || [];
   });
@@ -28,8 +27,11 @@ const monitorButtonStatusText = async (user, logOut = false) => {
     allToQueue = movie || [];
   });
 
-  userAuth = user;
   if(!selectedFilm) return;
+  if(arrayMoviesToQueue !== 0 && arrayMoviesToWatched !== 0) {
+    arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
+    arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
+  }
 
   const buttonWatched = document.querySelector('.details__button-watched');
   const buttonQueue = document.querySelector('.details__button-queue');
@@ -42,7 +44,7 @@ const monitorButtonStatusText = async (user, logOut = false) => {
   } else {
     if(!arrayMoviesToQueue && arrayMoviesToQueue !== null && !userAuth) {
       buttonQueue.innerHTML = `<i class="material-icons details__icons" disable>event_busy</i> Add to queue`;
-      if (!logOut && allToQueue) FormRegModalPlugin.openModal();
+      if (!logOut && arrayMoviesToQueue === 0) FormRegModalPlugin.openModal();
     }
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
   };
@@ -53,10 +55,13 @@ const monitorButtonStatusText = async (user, logOut = false) => {
   } else {
     if(!arrayMoviesToWatched && arrayMoviesToWatched !== null && !userAuth) {
       buttonWatched.innerHTML = `<i class="material-icons details__icons" disable>videocam</i> Add to watched`;
-      if (!logOut && allToWatched) FormRegModalPlugin.openModal();
+      if (!logOut && arrayMoviesToWatched === 0) FormRegModalPlugin.openModal();
     }
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
   };
+
+  arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
+  arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
 };
 
 
@@ -65,13 +70,13 @@ const toggleToQueue = async () => {
   if (allToQueue.length && findMoveInArray(allToQueue)) {
     allToQueue = allToQueue.filter(el => el.id !== selectedFilm.id);
     arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
-
   } else {
     allToQueue.push(selectedFilm);
     arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
   };
 
-  monitorButtonStatusText(userAuth);
+  if(!arrayMoviesToQueue) arrayMoviesToQueue = 0;
+  monitorButtonStatusText();
 };
 
 
@@ -85,7 +90,8 @@ const toggleToWatched = async () => {
     arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
   };
 
-  monitorButtonStatusText(userAuth);
+  if(!arrayMoviesToWatched) arrayMoviesToWatched = 0;
+  monitorButtonStatusText();
 };
 
 
@@ -141,7 +147,8 @@ const showDetails = (selectFilm) => {
   selectedFilm = filterBgdropPath(filterPosterPath(filterReliseDate(selectFilm)))
   refs.detailsPage.innerHTML = detailsFilms(selectedFilm);
 
-  monitorButtonStatusText(userAuth);
+
+  monitorButtonStatusText();
 };
 
 export { showDetails, toggleToQueue, toggleToWatched, monitorButtonStatusText };
