@@ -115,7 +115,7 @@ const userRegistration = async (event, cb) => {
                     });
                 }
                 userAuth = true;
-                monitorButtonStatusText(userAuth);
+                monitorButtonStatusText();
                 cb && cb(userAuth);
             });
         } catch(err) {
@@ -145,7 +145,7 @@ const userAuthorization = (event, cb) => {
             text: 'You signed in successfully!',
         });
         userAuth = true;
-        monitorButtonStatusText(userAuth);
+        monitorButtonStatusText();
         cb && cb(userAuth);
     });
 
@@ -156,7 +156,7 @@ const userAuthorization = (event, cb) => {
 const logOut = (cb) => {
     userMoviesToQueue = null;
     userAuth = false;
-    monitorButtonStatusText(userAuth, 'true');
+    monitorButtonStatusText('true');
     cb && cb(userAuth);
 }
 
