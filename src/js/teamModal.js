@@ -21,7 +21,6 @@ function onOpenTeamModal() {
 
 function onPressKey(e) {
   if (e.code === 'Escape') {
-    console.log('escape');
     closeTeamModal();
   }
 }
@@ -33,7 +32,6 @@ function onCloseTeamModal(e) {
   ) {
     return;
   }
-  console.log('close');
   closeTeamModal();
 }
 

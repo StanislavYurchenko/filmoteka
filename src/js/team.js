@@ -3,7 +3,7 @@ export default [
     name: 'Stanislav',
     surname: 'Yurchenko',
     photo: '../images/team/yurchenko.jpg',
-    position: ['Team Leader', 'Frontend Developer'],
+    position: ['Team Leader', ' Frontend Developer'],
     githubLink: 'https://github.com/StanislavYurchenko',
   },
   {
@@ -17,7 +17,7 @@ export default [
     name: 'Artur',
     surname: 'Stahov',
     photo: '../images/team/stahov.jpg',
-    position: ['Frontend Developer'],
+    position: ['Mentor, Frontend Developer'],
     githubLink: 'https://github.com/ArturStahov',
   },
   {
@@ -45,7 +45,7 @@ export default [
     name: 'Kyrylo',
     surname: 'Hrebin',
     photo: '../images/team/hrebin.jpg',
-    position: ['Frontend Developer'],
+    position: ['Scram master, Frontend Developer'],
     githubLink: 'https://github.com/kyrylohrebin',
   },
   {
