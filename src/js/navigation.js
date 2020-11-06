@@ -114,6 +114,7 @@ function changeLoginBtnStatus(isLogged) {
     imgRef.src = '../images/user_form/enter.png';
     imgRef.alt = 'login icon';
     refs.linkMyLibrary.classList.add('visually-hidden');
+    linkLogoHandler();
   }
 
 }

@@ -8,6 +8,7 @@ import { FormRegModalPlugin } from './formRegPlugin';
 let selectedFilm = null;
 let allToQueue = null; 
 let allToWatched = null;
+let userIsNotAuthorized = false;
 let arrayMoviesToQueue = [];
 let arrayMoviesToWatched = [];
 
@@ -18,7 +19,7 @@ const findMoveInArray = (array) => {
 };
 
 
-const monitorButtonStatusText = async (logOut = false) => {
+const monitorButtonStatusText = async () => {
   await getAllToWatchedMovies().then(movie => {
     allToWatched = movie || [];
   });
@@ -44,7 +45,7 @@ const monitorButtonStatusText = async (logOut = false) => {
   } else {
     if(!arrayMoviesToQueue && arrayMoviesToQueue !== null && !userAuth) {
       buttonQueue.innerHTML = `<i class="material-icons details__icons" disable>event_busy</i> Add to queue`;
-      if (!logOut && arrayMoviesToQueue === 0) FormRegModalPlugin.openModal();
+      if (userIsNotAuthorized) FormRegModalPlugin.openModal();
     }
     buttonQueue.innerHTML = `<i class="material-icons details__icons">event_busy</i> Add to queue`;
   };
@@ -55,13 +56,12 @@ const monitorButtonStatusText = async (logOut = false) => {
   } else {
     if(!arrayMoviesToWatched && arrayMoviesToWatched !== null && !userAuth) {
       buttonWatched.innerHTML = `<i class="material-icons details__icons" disable>videocam</i> Add to watched`;
-      if (!logOut && arrayMoviesToWatched === 0) FormRegModalPlugin.openModal();
+      if (userIsNotAuthorized) FormRegModalPlugin.openModal();
     }
     buttonWatched.innerHTML = `<i class="material-icons details__icons">videocam</i> Add to watched`;
   };
 
-  arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
-  arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
+  userIsNotAuthorized = false;
 };
 
 
@@ -75,7 +75,7 @@ const toggleToQueue = async () => {
     arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
   };
 
-  if(!arrayMoviesToQueue) arrayMoviesToQueue = 0;
+  if(!arrayMoviesToQueue) userIsNotAuthorized = true;
   monitorButtonStatusText();
 };
 
@@ -90,7 +90,7 @@ const toggleToWatched = async () => {
     arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
   };
 
-  if(!arrayMoviesToWatched) arrayMoviesToWatched = 0;
+  if(!arrayMoviesToWatched) userIsNotAuthorized = true;
   monitorButtonStatusText();
 };
 

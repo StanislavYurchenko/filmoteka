@@ -156,7 +156,6 @@ const userAuthorization = (event, cb) => {
 const logOut = (cb) => {
     userMoviesToQueue = null;
     userAuth = false;
-    monitorButtonStatusText('true');
     cb && cb(userAuth);
 }
 

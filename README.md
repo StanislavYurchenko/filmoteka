@@ -3,7 +3,7 @@
 
 ## JS block graduation work by <magnificent_eight>.
 The main goal of the project is to learn how to work in a team, using all the knowledge we got from the course.
-The tasks are very interrelated so each participant has to communicate with others to acomplish own tasks.
+The tasks are very interrelated so each participant has to communicate with others to accomplish own tasks.
 
 ### Project goals: 
 - Strengthening teamwork skills
@@ -13,7 +13,8 @@ The tasks are very interrelated so each participant has to communicate with othe
 ### Functionality of the application:
 - allows to check the information about the latest movies which are viewed on the Homepage
 - search movie by the name
-- add movies to your personal library and mark them either like 'to be watched' or 'watched'
+- registration, to manage your personal movie library
+- add movies to your personal library and mark them either like 'to will be watch' or 'watched'
 - operate your movie library by easily removing movies from both of lists (if you want)
 
 ### User instructions:
@@ -21,7 +22,8 @@ The tasks are very interrelated so each participant has to communicate with othe
 - give us high five and some good feedback
 
 ### API:
-- https://www.themoviedb.org
+- [The Movie Database - TMDb](https://www.themoviedb.org)
+- [Firebase API](https://firebase.google.com/)
 
 ### Technologies used: 
 - HTML5
@@ -34,8 +36,10 @@ The tasks are very interrelated so each participant has to communicate with othe
 
 ### Packages:
 - pnotify
-- material-design-icons
+- material design icons
 - handlebars
+- micromodal
+- lodash - debounce
 
 ### Templating language:
 - handlebars
