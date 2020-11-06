@@ -13,6 +13,8 @@ const refs = {
   watchedBtn: null,
   queueBtn: null,
   regAndAuth: document.querySelector('#root-registration-form'),
+  rootTeamModal: document.querySelector('#root-team-modal'),
   linkLogin: null,
+  logoFooter: null,
 };
 export default refs;

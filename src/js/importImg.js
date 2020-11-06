@@ -6,4 +6,11 @@ import exit from '../images/user_form/exit.png';
 import enter from '../images/user_form/enter.png';
 import icon_user from '../images/user_form/icon_user.png';
 import img_close_icon from '../images/close_icon.png';
-
+import babych from '../images/team/babych.jpg';
+import hrebin from '../images/team/hrebin.jpg';
+import krichkivkiy from '../images/team/krichkivskiy.jpg';
+import labutkina from '../images/team/labutkina.jpg';
+import levchenko from '../images/team/levchenko.jpg';
+import stahov from '../images/team/stahov.jpg';
+import tishchenko from '../images/team/tishchenko.jpg';
+import yurchenko from '../images/team/yurchenko.jpg';

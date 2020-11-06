@@ -50,12 +50,14 @@
   },
   "dependencies": {
     "@pnotify/core": "^5.1.2",
+    "basiclightbox": "^5.0.3",
     "core-js": "^3.6.5",
     "debounce": "^1.2.0",
     "handlebars": "^4.7.6",
     "lodash.debounce": "^4.0.8",
     "material-design-icons": "^3.0.1",
     "micromodal": "^0.4.6",
-    "pnotify": "^5.1.2"
+    "pnotify": "^5.1.2",
+    "tingle.js": "^0.15.3"
   }
 }
