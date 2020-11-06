@@ -13,7 +13,6 @@ function openTeamModal() {
 }
 
 function onOpenTeamModal() {
-  console.log('open');
   refs.rootTeamModal.classList.add('is-open');
   refs.rootTeamModal.addEventListener('click', onCloseTeamModal);
   window.addEventListener('keydown', onPressKey);
