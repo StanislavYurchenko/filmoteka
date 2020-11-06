@@ -2,13 +2,8 @@ export default [
   {
     name: 'Stanislav',
     surname: 'Yurchenko',
-<<<<<<< HEAD
-    photo: '../images/team/yurchenko.jpg',
-    position: ['Team Leader', ' Frontend Developer'],
-=======
     photo: './images/team/yurchenko.jpg',
     position: ['Team Leader', 'Frontend Developer'],
->>>>>>> auth
     githubLink: 'https://github.com/StanislavYurchenko',
   },
   {
