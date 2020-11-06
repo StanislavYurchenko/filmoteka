@@ -1,23 +1,26 @@
-<div class="lightbox__overlay"></div>
+<div class="lightbox__overlay">
 
-<div class="lightbox__content">
-    <div class="team-title">
-        <button type="button" class="lightbox__button" data-action="close-lightbox"></button>
-        <img class="team-title__img" src="./images/footer_logo/me_logo.png" alt=""></div>
-    <ul class='team-list'>
+    <div class="lightbox__content">
+        <div class="team-title">
+            <button type="button" class="lightbox__button" data-action="close-lightbox"></button>
+            <img class="team-title__img" src="./images/footer_logo/me_logo.png" alt=""></div>
+        <ul class='team-list'>
 
-        {{#each this}}
-        <li class='team-item'>
-            <a class='team-item__link' href="{{githubLink}}" target="_blank">
-                <img class='team-item__img' src="{{photo}}" width='200' height='200' alt='{{name}} {{surname}}'>
-            </a>
-            <p class='team-item__name-block'>
-                <span class='team-item__name'>{{name}}</span>
-                <span class='team-item__surname'>{{surname}}</span>
-            </p>
-            <p class='team-item__position'><span>{{position}}</span></p>
-        </li>
-        {{/each}}
+            {{#each this}}
+            <li class='team-item'>
+                <a class='team-item__link' href="{{githubLink}}" target="_blank">
+                    <img class='team-item__img' src="{{photo}}" width='200' height='200' alt='{{name}} {{surname}}'>
+                </a>
+                <p class='team-item__name-block'>
+                    <span class='team-item__name'>{{name}}</span>
+                    <span class='team-item__surname'>{{surname}}</span>
+                </p>
+                <p class='team-item__position'><span>{{position}}</span></p>
+            </li>
+            {{/each}}
 
-    </ul>
+        </ul>
+
+    </div>
+
 </div>
