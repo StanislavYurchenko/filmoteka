@@ -1,0 +1,23 @@
+// FONTS
+$first-font: 'Roboto', 'Arial', sans-serif;
+$second-font: 'DroidSans', 'Arial', sans-serif;
+
+// FONT COLORS
+$font-color: rgb(55, 44, 72);
+$font-color-alfa-70: rgba(55, 44, 72, 0.7);
+$font-color-alfa-54: rgba(55, 44, 72, 0.54);
+
+// COLORS
+$main-color: rgb(119, 193, 187);
+$main-color-alfa-60: rgba(119, 193, 187, 0.6);
+
+// MEDIA mobile
+$mobile-bp-max: 767px;
+$mobile-w: 300px;
+// MEDIA tablet
+$tablet-bp-min: 768px;
+$tablet-w: 712px;
+$tablet-bp-max: 1023px;
+// MEDIA desktop
+$desktop-bp-min: 1024px;
+$desktop-w: 964px;

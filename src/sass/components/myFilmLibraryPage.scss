@@ -1,0 +1,55 @@
+.library-btn-wrap {
+  box-shadow: -5px 5px 9px 1px rgba(0, 0, 0, 0.23);
+  padding-bottom: 17px;
+  padding-top: 17px;
+
+  @media screen and (min-width: $tablet-bp-min) {
+    padding-bottom: 18px;
+    padding-top: 18px;
+  }
+}
+
+.library-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.library-btn {
+  @include font-settings(1rem, 1, 400, rgb(0, 0, 0));
+  letter-spacing: 0.01rem;
+  width: 140px;
+  height: 40px;
+  border: none;
+  border-bottom: 2px solid #9c99a5;
+  background-color: transparent;
+  cursor: pointer;
+
+  &--active {
+    color: #fff;
+    background-color: $main-color;
+    border: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.library-list {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  @media screen and (min-width: $tablet-bp-min) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    justify-content: start;
+  }
+}
+
+.home-page-list_item-rateblock {
+  box-shadow: inset 0px 0px 2.79px 0.21px rgba(0, 0, 0, 0.35),
+    inset 0px 0px 2.64px 1.36px rgba(0, 0, 0, 0.35);
+}

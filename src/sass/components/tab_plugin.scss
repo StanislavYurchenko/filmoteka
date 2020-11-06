@@ -1,0 +1,93 @@
+
+.tabs {
+  margin: 0 auto;
+  max-width: 80%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+
+}
+
+.pane-item {
+  transition-property: opacity;
+  transition-duration: 0.7s;
+}
+.pane-title {
+  @include font-settings(1.3rem, 1.2, 600, $font-color);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.tabs_controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+
+.tabs_controls-item {
+  @include font-settings(1rem, 1, 400, rgb(0, 0, 0));
+  letter-spacing: 0.01rem;
+  width: 50%;
+  height: 40px;
+  border: none;
+  border-bottom: 2px solid #9c99a5;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--active {
+    color: #fff;
+    background-color: $main-color;
+    border: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.form-user_input{
+  width: 100%;
+  font-size: 14.2px;
+  line-height: 1;
+  font-weight: 400;
+  color: black;
+  position: relative;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #818181;
+  margin: 0 auto;
+  padding: 6px 0px 6px 28px;
+  font-family: "Roboto", "Arial", sans-serif;
+  margin-bottom: 20px;
+
+  &:required:valid:focus:not(:placeholder-shown) {
+    border-bottom: 2px solid $main-color;
+  }
+
+  &:required:invalid:focus:not(:placeholder-shown) {
+    border-bottom: 2px solid orange; 
+  }
+}
+
+
+.form-user_button-submit{
+  @include font-settings(1rem, 1, 400, rgb(0, 0, 0));
+  letter-spacing: 0.01rem;
+  width: 50%;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #77c1bb;
+  border: none;
+  outline: none;
+  margin: 0 auto;
+}
+
+

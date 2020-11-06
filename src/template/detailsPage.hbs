@@ -1,0 +1,29 @@
+<div class="details__container">
+    <img class="details__img" src="{{poster_path}}" alt="foto {{original_title}}">
+    <div class="details__content-container">
+        <h2 class="details__title">{{original_title}}({{release_date}})</h2>
+        <ul class="details__list">
+            <li class="details__item"><span class="details__characteristic">vote/votes</span><span
+                    class="details__description">{{vote_average}}/{{vote_count}}</span></li>
+            <li class="details__item"><span class="details__characteristic">popularity</span><span
+                    class="details__description">{{popularity}}</span></li>
+            <li class="details__item"><span class="details__characteristic">original title</span><span
+                    class="details__description">{{original_title}}</span></li>
+            <li class="details__item"><span class="details__characteristic">genre</span>
+                <span class="details__description">
+                    {{#each genres}}
+                    <span class="details__description-item">{{this.name}}</span>
+                    {{/each}}
+                </span>
+            </li>
+        </ul>
+
+        <h2 class="details__about">About</h2>
+        <p class="details__text-about">{{overview}}</p>
+
+        <div class="details__button-container">
+            <button class="details__button-watched"></button>
+            <button class="details__button-queue"></button>
+        </div>
+    </div>
+</div>
