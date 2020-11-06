@@ -17,7 +17,6 @@ const activeHomePage = () => {
   refs.detailsPage.classList.add('notActivePage');
   refs.linkHome.classList.add('navigation__link--active');
   refs.linkMyLibrary.classList.remove('navigation__link--active');
-  // history.pushState({ page: "/home" }, "title 1", "/home")
 };
 
 const activeLibraryPage = () => {
@@ -26,7 +25,6 @@ const activeLibraryPage = () => {
   refs.homePage.classList.add('notActivePage');
   refs.linkMyLibrary.classList.add('navigation__link--active');
   refs.linkHome.classList.remove('navigation__link--active');
-  // history.pushState({ page: "/library" }, "title 2", "/library")
 };
 
 const activeDetailsPage = (movied) => {
@@ -36,7 +34,6 @@ const activeDetailsPage = (movied) => {
   showDetails(movied);
   if (movied.original_title) {
     const brUrl = movied.original_title.toLowerCase().split(" ").join('-')
-    // history.pushState({ page: "/movied" }, "title 3", `/movied=${brUrl}`)
   }
 };
 
@@ -105,13 +102,13 @@ function changeLoginBtnStatus(isLogged) {
   if (isLogged) {
     formRegModalPlugin.chendgeStatLogin();
     textRef.textContent = 'Exit';
-    imgRef.src = '../filmoteka/images//user_form/exit.png';
+    imgRef.src = './images/user_form/exit.png';
     imgRef.alt = 'exit icon';
     refs.linkMyLibrary.classList.remove('visually-hidden');
   } else {
     formRegModalPlugin.chendgeStatUnlogin();
     textRef.textContent = 'Login';
-    imgRef.src = '../filmoteka/images/user_form/enter.png';
+    imgRef.src = './images/user_form/enter.png';
     imgRef.alt = 'login icon';
     refs.linkMyLibrary.classList.add('visually-hidden');
     linkLogoHandler();

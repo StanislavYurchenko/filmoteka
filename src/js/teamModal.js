@@ -13,7 +13,6 @@ function openTeamModal() {
 }
 
 function onOpenTeamModal() {
-  console.log('open');
   refs.rootTeamModal.classList.add('is-open');
   refs.rootTeamModal.addEventListener('click', onCloseTeamModal);
   window.addEventListener('keydown', onPressKey);
@@ -21,7 +20,6 @@ function onOpenTeamModal() {
 
 function onPressKey(e) {
   if (e.code === 'Escape') {
-    console.log('escape');
     closeTeamModal();
   }
 }
@@ -33,7 +31,6 @@ function onCloseTeamModal(e) {
   ) {
     return;
   }
-  console.log('close');
   closeTeamModal();
 }
 
