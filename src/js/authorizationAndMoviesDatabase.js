@@ -4,11 +4,13 @@ import { monitorButtonStatusText } from './filmDetailsPage';
 const apiKey = 'AIzaSyDsxdJLhBCH8GPBoSvuEngfZHh8KKwvWF0';
 let userMoviesToQueue = null;
 let userAuth = false;
+let userToken = null;
 
 
-const addAndDeleteToQueue = (movies) => {
+const addAndDeleteToQueue = (movies, userToken) => {
     if(!userMoviesToQueue) return;
-    return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestoqueue${userMoviesToQueue}.json`, {
+    return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestoqueue${userMoviesToQueue}.json?auth=${userToken}`, {
+        format: 'Default',
         method: 'PUT',
         body: JSON.stringify(movies),
         headers: {
@@ -18,10 +20,11 @@ const addAndDeleteToQueue = (movies) => {
 };
 
 
-const addAndDeleteToWatched = (moviesId) => {
+const addAndDeleteToWatched = (moviesId, userToken) => {
     if(!userMoviesToQueue) return;
-    return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestowatched${userMoviesToQueue}.json`, {
-        method: 'PUT',
+    return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestowatched${userMoviesToQueue}.json?auth=${userToken}`, {
+        
+    method: 'PUT',
         body: JSON.stringify(moviesId),
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -30,8 +33,8 @@ const addAndDeleteToWatched = (moviesId) => {
 };
 
 
-const getAllToQueueMovies = () => {
-    return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestoqueue${userMoviesToQueue}.json`, {
+const getAllToQueueMovies = (userToken) => {
+    return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestoqueue${userMoviesToQueue}.json?auth=${userToken}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -40,8 +43,8 @@ const getAllToQueueMovies = () => {
 };
 
 
-const getAllToWatchedMovies = () => {
-    return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestowatched${userMoviesToQueue}.json`, {
+const getAllToWatchedMovies = (userToken) => {
+    return fetch(`https://filmoteka-dcbc5.firebaseio.com/moviestowatched${userMoviesToQueue}.json?auth=${userToken}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -75,7 +78,7 @@ const authWithEmailAndPassword = (email, password) => {
     return fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, options).then(response => {
         if (!response.ok) {
             throw('The username or password you entered is incorrect. Try again!')
-        } 
+        }
         return response.json();
     }).catch( err => {
         new error({
@@ -139,6 +142,7 @@ const userAuthorization = (event, cb) => {
     authWithEmailAndPassword(email.value, password.value).then(data => {
         if(!data) return;
         userMoviesToQueue = data.localId;
+        userToken = data.idToken;
         modalUserReg.classList.remove('is-open');
         success({
             title: 'Congratulations!',
@@ -170,5 +174,6 @@ export {
     userRegistration,
     userAuthorization,
     logOut,
-    userAuth
+    userAuth,
+    userToken
 };
