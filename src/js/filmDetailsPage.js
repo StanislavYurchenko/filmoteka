@@ -1,7 +1,7 @@
 import detailsFilms from '../template/detailsPage.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
 import refs from './refs';
-import { getAllToWatchedMovies, getAllToQueueMovies, addAndDeleteToQueue, addAndDeleteToWatched, userAuth } from './authorizationAndMoviesDatabase';
+import { getAllToWatchedMovies, getAllToQueueMovies, addAndDeleteToQueue, addAndDeleteToWatched, userAuth, userToken } from './authorizationAndMoviesDatabase';
 import { FormRegModalPlugin } from './formRegPlugin';
 
 
@@ -20,18 +20,19 @@ const findMoveInArray = (array) => {
 
 
 const monitorButtonStatusText = async () => {
-  await getAllToWatchedMovies().then(movie => {
-    allToWatched = movie || [];
-  });
+  if (!userToken) {
+    allToQueue = [];
+    allToWatched = [];
+  } else {
+  await getAllToWatchedMovies(userToken).then(movie => allToWatched = movie || []);
+  await getAllToQueueMovies(userToken).then(movie => allToQueue = movie || []);
+  };
 
-  await getAllToQueueMovies().then(movie => {
-    allToQueue = movie || [];
-  });
 
   if(!selectedFilm) return;
   if(arrayMoviesToQueue !== 0 && arrayMoviesToWatched !== 0) {
-    arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
-    arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
+    arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue, userToken);
+    arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched, userToken);
   }
 
   const buttonWatched = document.querySelector('.details__button-watched');
@@ -69,10 +70,10 @@ const toggleToQueue = async () => {
 
   if (allToQueue.length && findMoveInArray(allToQueue)) {
     allToQueue = allToQueue.filter(el => el.id !== selectedFilm.id);
-    arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
+    arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue, userToken);
   } else {
     allToQueue.push(selectedFilm);
-    arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue);
+    arrayMoviesToQueue = await addAndDeleteToQueue(allToQueue, userToken);
   };
 
   if(!arrayMoviesToQueue) userIsNotAuthorized = true;
@@ -84,10 +85,10 @@ const toggleToWatched = async () => {
 
   if (allToWatched.length && findMoveInArray(allToWatched)) {
     allToWatched = allToWatched.filter(el => el.id !== selectedFilm.id);
-    arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
+    arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched, userToken);
   } else {
     allToWatched.push(selectedFilm);
-    arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched);
+    arrayMoviesToWatched = await addAndDeleteToWatched(allToWatched, userToken);
   };
 
   if(!arrayMoviesToWatched) userIsNotAuthorized = true;
